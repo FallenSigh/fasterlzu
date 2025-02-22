@@ -11,8 +11,6 @@
 
 ## Images
 
-![img_2.png](img_2.png)
+<img src=images/img.png width=300>
+<img src=images/img-2.png width=300>
 
-![img.png](img.png)
-
-![img_1.png](img_1.png)
