@@ -1,16 +1,18 @@
-# fasterlzu
+# FasterLZU
 
-Lanzhou University Third-Party Client
+兰州大学第三方客户端
 
-## Getting Started
+更快、更丝滑
 
-This project is a starting point for a Flutter application.
+## Features
+- 课表 [√]
+- 校园卡 [√]
+- 桌面小组件 [x]
 
-A few resources to get you started if this is your first Flutter project:
+## Images
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![img_2.png](img_2.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![img.png](img.png)
+
+![img_1.png](img_1.png)
