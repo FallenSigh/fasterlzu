@@ -1,10 +1,14 @@
+import 'package:fasterlzu/app_config.dart';
 import 'package:fasterlzu/core/app/models/app_model.dart';
 import 'package:fasterlzu/core/logger/logger.dart';
+import 'package:fasterlzu/core/webview/providers/webview_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fasterlzu/core/app/repositories/app_repository.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:fasterlzu/core/app/providers/card_provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class CardPage extends ConsumerStatefulWidget {
   const CardPage({super.key});
@@ -24,7 +28,7 @@ class _CardPageState extends ConsumerState<CardPage> {
     if (qrCode != null && mounted && qrCode.code == 1) {
       bool isPolling = true;
       final orderStatusNotifier = ValueNotifier<GetOrderByCodeResponse?>(null);
-      
+
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -78,17 +82,32 @@ class _CardPageState extends ConsumerState<CardPage> {
       // 开始轮询订单状态
       while (mounted && isPolling) {
         try {
-          final response = await ref.read(cardProvider.notifier).getOrderByCode(qrCode.authNum!);
+          final response = await ref
+              .read(cardProvider.notifier)
+              .getOrderByCode(qrCode.authNum!);
           if (response != null && mounted) {
             orderStatusNotifier.value = response;
           }
-          log.d(response);
         } catch (e) {
           log.e('查询订单状态失败: $e');
         }
         await Future.delayed(const Duration(seconds: 1));
       }
     }
+  }
+
+  void _loadEasyTongApp() async {
+    final controller = ref.read(webViewControllerProvider);
+    final accNum = ref.read(appRepositoryProvider).accNum ?? '';
+    final token = ref.read(appRepositoryProvider).etToken ?? '';
+
+    controller.setNavigationDelegate(NavigationDelegate(
+      onPageFinished: (url) async {
+        await controller.runJavaScript("window.localStorage.setItem('AccNum', $accNum);");
+        await controller.runJavaScript('document.cookie = "etToken=$token; path=/;"');
+      }
+    ));
+    controller.loadRequest(Uri.parse(AppConfig.EasyTongWebApp));
   }
 
   @override
@@ -100,9 +119,17 @@ class _CardPageState extends ConsumerState<CardPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text('校园卡'),
-        actions: [IconButton(onPressed: (){
-          ref.read(cardProvider.notifier).refresh();
-        }, icon: Icon(Icons.refresh))],
+        actions: [
+          IconButton(onPressed: () {
+            _loadEasyTongApp();
+            context.push('/webview');
+          }, icon: Icon(Icons.open_in_browser)),
+          IconButton(
+              onPressed: () {
+                ref.read(cardProvider.notifier).refresh();
+              },
+              icon: Icon(Icons.refresh))
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: () => ref.read(cardProvider.notifier).refresh(),

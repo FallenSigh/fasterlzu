@@ -37,8 +37,21 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
+    dependencies {
+        implementation 'androidx.glance:glance-appwidget:LATEST-VERSION'
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.8'
+    }
 }
 
 flutter {
     source = "../.."
 }
+

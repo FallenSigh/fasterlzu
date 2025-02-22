@@ -2,6 +2,7 @@ import 'package:fasterlzu/pages/card_page.dart';
 import 'package:fasterlzu/pages/home_page.dart';
 import 'package:fasterlzu/pages/login_page.dart';
 import 'package:fasterlzu/pages/schedule_page.dart';
+import 'package:fasterlzu/pages/webview_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,7 +28,7 @@ final routerProvider = Provider<GoRouter>((ref){
       ),
       GoRoute(
           path: '/webview',
-          builder: (context, state) => CardPage()
+          builder: (context, state) => WebViewPage()
       )
     ]
   );

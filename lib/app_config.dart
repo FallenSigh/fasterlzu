@@ -6,6 +6,9 @@ class AppConfig {
   static const String appServiceBaseUrl = 'https://appservice.lzu.edu.cn';
   static const String appBaseUrl = 'http://app.lzu.edu.cn:8080';
 
+  static const String UA = 'Mozilla/5.0 (Linux; Android 12; SM-S7110 Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/101.0.4951.61 Mobile Safari/537.36 lzdx_ua JHZF_LZDXAPP';
+  static const String EasyTongWebApp = 'http://app.lzu.edu.cn:8080/easytong_webapp/#/home/index';
+
   static Map<String, String> appServiceApis = {
     'login': '/api/eusp-unify-terminal/app-user/login',
     'logout': '/api/eusp-unify-terminal/app-user/logout',
@@ -16,7 +19,8 @@ class AppConfig {
     'userImg': '/api/eusp-unify-terminal/app-user/userImg',
     'addSchedule': '/apigw/lzu-teaching-research/kcb/addorUpdateZdyKc',
     'delSchedule': '/apigw/lzu-teaching-research/kcb/deleZdyKc',
-    'getSt': '/api/eusp-unify-terminal/app-user/getSt'
+    'getSt': '/api/eusp-unify-terminal/app-user/getSt',
+    'getGrszsyyy': '/api/eusp-terminal-management/syyysz/v2/getGrszsyyy'
   };
 
   static Map<String, String> appApis = {
@@ -29,11 +33,11 @@ class AppConfig {
 
   static Map<String, String> appHeaders = {
     'Host': 'app.lzu.edu.cn:8080',
-    'User-Agent': 'Mozilla/5.0 (Linux; Android 12; SM-S7110 Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/101.0.4951.61 Mobile Safari/537.36 lzdx_ua JHZF_LZDXAPP',
+    'User-Agent': UA
   };
 
   static Map<String, String> appServiceHeaders = {
-    'User-Agent': 'Mozilla/5.0 (Linux; Android 12; SM-S7110 Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/101.0.4951.61 Mobile Safari/537.36 lzdx_ua JHZF_LZDXAPP',
+    'User-Agent': UA,
     'Transfer-Encrypt': 'true',
     'Host': 'appservice.lzu.edu.cn',
     'Connection': 'Keep-Alive',
