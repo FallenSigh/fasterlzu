@@ -1,0 +1,331 @@
+import 'package:fasterlzu/app_config.dart';
+import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
+import 'package:fasterlzu/core/schedule/providers/schedule_provider.dart';
+import 'package:fasterlzu/core/task/models/task_model.dart';
+import 'package:fasterlzu/core/task/providers/task_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+class MainPage extends ConsumerStatefulWidget {
+  const MainPage({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _MainPageState();
+}
+
+class _MainPageState extends ConsumerState<MainPage> {
+  final List<String> weekdays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+  final List<String> monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final scheduleState = ref.watch(scheduleProvider);
+    final taskState = ref.watch(taskProvider);
+    
+    final todayClasses = (scheduleState.schedule ?? [])
+        .where((c) => int.parse(c.skxql ?? '0') == DateTime.now().weekday)
+        .toList();
+
+    todayClasses.sort((ClassInfo a, ClassInfo b) {
+      return b.jc!.compareTo(a.jc!);
+    });
+
+    final tasks = taskState.tasks ?? [];
+    tasks.sort((Task a, Task b) {
+      return 1;
+    });
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${weekdays[DateTime.now().weekday - 1]} ${DateTime.now().day} ${monthNames[DateTime.now().month - 1]}',
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    _seeAllHeader("TODAY CLASSES", todayClasses.length, () {
+                      context.push('/schedule');
+                    }),
+                    const SizedBox(height: 10),
+                    ...todayClasses.map((course) => _courseItem(course)),
+                    const SizedBox(height: 20),
+                    
+                    _seeAllHeader("TASKS", tasks.length, (){}),
+                    SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: tasks
+                            .map((task) => _taskItem(task))
+                            .toList(),
+                      ),
+                    ),
+                    const SizedBox(height: 100)
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _seeAllHeader(String title, int number, GestureTapCallback onTap) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        RichText(
+          text: TextSpan(
+            text: title,
+            style: const TextStyle(
+              fontWeight: FontWeight.w900,
+              color: Colors.black,
+            ),
+            children: [
+              TextSpan(
+                text: "($number)",
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Material(
+          child: InkWell(
+            onTap: onTap,
+            child: Text(
+              "See all",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+                fontSize: 15,
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  String? _jcToTime(String jc) {
+    if (jc.length < 14) return null;
+    int start = jc.indexOf('1');
+    int end = jc.lastIndexOf('1');
+    if (start == -1 || end == -1) return null;
+    return '${AppConfig.classStartTimes[start]}\n${AppConfig.classEndTimes[end]}';
+  }
+
+  String? _jcToEndTime(String jc) {
+    if (jc.length < 14) return null;
+    int end = jc.lastIndexOf('1');
+    if (end == -1) return null;
+    return end != -1 ? AppConfig.classEndTimes[end] : '';
+  }
+
+  Widget _courseItem(ClassInfo classInfo) {
+    if (classInfo.jc == '00000000000000') return SizedBox.shrink();
+    DateTime now = DateTime.now();
+    final classTime = _jcToEndTime(classInfo.jc ?? '') ?? '';
+
+    DateTime targetTime = DateTime(now.year, now.month, now.day,
+        int.parse(classTime.split(":")[0]), int.parse(classTime.split(":")[1]));
+
+    if (targetTime.isBefore(now)) {
+      return SizedBox.shrink();
+    }
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 15),
+      height: 110,
+      decoration: BoxDecoration(
+        color: const Color(0xFFf9f9fc),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                classInfo.sksj ?? '',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Text(
+                _jcToTime(classInfo.jc ?? '') ?? '',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              )
+            ],
+          ),
+          Container(
+            width: 1,
+            color: Colors.grey.withOpacity(0.5),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 160,
+                  child: Text(
+                    classInfo.kcmc ?? '',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.location_on,
+                      color: Colors.grey,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 5),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width - 160,
+                      child: Text(
+                        classInfo.skjsl ?? '',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Colors.grey[300],
+                      child:
+                          Icon(Icons.person, size: 16, color: Colors.grey[600]),
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      classInfo.jsxm ?? '',
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _taskItem(Task task) {
+    return Container(
+      margin: const EdgeInsets.only(right: 15),
+      padding: const EdgeInsets.all(12),
+      height: 170,
+      width: 175,
+      decoration: BoxDecoration(
+        color: task.isUrgent
+            ? Colors.red.withOpacity(0.05)
+            : Colors.green.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Deadline",
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black26,
+            ),
+          ),
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 4,
+                backgroundColor: task.isUrgent ? Colors.red : Colors.green,
+              ),
+              const SizedBox(width: 5),
+              Text(
+                "${DateTime.parse(task.endTime).difference(DateTime.now()).inDays} days left",
+                style: const TextStyle(
+                  fontSize: 17,
+                  color: Colors.black54,
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            width: 130,
+            child: Text(
+              task.name,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.black54,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
