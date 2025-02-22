@@ -204,15 +204,18 @@ Map<String, dynamic> _$$UserInfoResponseImplToJson(
       'data': instance.data,
     };
 
-_$LogoutResponseImpl _$$LogoutResponseImplFromJson(Map<String, dynamic> json) =>
-    _$LogoutResponseImpl(
+_$StringDataResponseImpl _$$StringDataResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$StringDataResponseImpl(
       code: (json['code'] as num).toInt(),
       message: json['message'] as String,
+      data: json['data'] as String?,
     );
 
-Map<String, dynamic> _$$LogoutResponseImplToJson(
-        _$LogoutResponseImpl instance) =>
+Map<String, dynamic> _$$StringDataResponseImplToJson(
+        _$StringDataResponseImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'message': instance.message,
+      'data': instance.data,
     };

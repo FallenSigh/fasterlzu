@@ -42,19 +42,13 @@ class _MainPageState extends ConsumerState<MainPage> {
   @override
   Widget build(BuildContext context) {
     final scheduleState = ref.watch(scheduleProvider);
-    final taskState = ref.watch(taskProvider);
-    
+
     final todayClasses = (scheduleState.schedule ?? [])
         .where((c) => int.parse(c.skxql ?? '0') == DateTime.now().weekday)
         .toList();
 
     todayClasses.sort((ClassInfo a, ClassInfo b) {
       return b.jc!.compareTo(a.jc!);
-    });
-
-    final tasks = taskState.tasks ?? [];
-    tasks.sort((Task a, Task b) {
-      return 1;
     });
 
     return Scaffold(
@@ -88,19 +82,9 @@ class _MainPageState extends ConsumerState<MainPage> {
                     }),
                     const SizedBox(height: 10),
                     ...todayClasses.map((course) => _courseItem(course)),
+                    if (todayClasses.isEmpty) Text('今天没课了~'),
                     const SizedBox(height: 20),
-                    
-                    _seeAllHeader("TASKS", tasks.length, (){}),
-                    SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: tasks
-                            .map((task) => _taskItem(task))
-                            .toList(),
-                      ),
-                    ),
-                    const SizedBox(height: 100)
+
                   ],
                 ),
               )
@@ -207,7 +191,7 @@ class _MainPageState extends ConsumerState<MainPage> {
           ),
           Container(
             width: 1,
-            color: Colors.grey.withOpacity(0.5),
+            color: Colors.grey.withValues(alpha: 0.5),
           ),
           Padding(
             padding: const EdgeInsets.all(10),
@@ -280,8 +264,8 @@ class _MainPageState extends ConsumerState<MainPage> {
       width: 175,
       decoration: BoxDecoration(
         color: task.isUrgent
-            ? Colors.red.withOpacity(0.05)
-            : Colors.green.withOpacity(0.05),
+            ? Colors.red.withValues(alpha: 0.05)
+            : Colors.green.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(

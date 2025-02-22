@@ -24,6 +24,10 @@ final routerProvider = Provider<GoRouter>((ref){
       GoRoute(
           path: '/card',
           builder: (context, state) => CardPage()
+      ),
+      GoRoute(
+          path: '/webview',
+          builder: (context, state) => CardPage()
       )
     ]
   );

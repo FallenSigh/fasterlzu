@@ -77,4 +77,5 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = AuthState.error(e.message ?? '退出登录失败');
     }
   }
+
 }

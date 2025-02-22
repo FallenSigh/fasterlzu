@@ -24,12 +24,17 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
 
     Future.microtask(() async {
       final state = ref.read(scheduleProvider);
-      setState(() {
-        _currentPage = state.currentWeek - 1;
-        _pageController = PageController(initialPage: _currentPage);
-      });
+      final newPage = state.currentWeek - 1;
+
+      if (newPage != _currentPage) {
+        setState(() {
+          _currentPage = newPage;
+          _pageController.jumpToPage(_currentPage); // 直接跳转，不创建新 PageController
+        });
+      }
     });
   }
+
 
   @override
   void dispose() {

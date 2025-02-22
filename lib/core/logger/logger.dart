@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:logger/logger.dart';
 import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
 
 class AppLogger {
   static final AppLogger _instance = AppLogger._internal();
@@ -17,42 +19,80 @@ class AppLogger {
         lineLength: 120,
         colors: true, // 在控制台使用颜色
         printEmojis: true, // 使用表情符号
-        printTime: true, // 显示时间戳
       ),
-      // 在发布模式下只显示警告和错误
-      level: kDebugMode ? Level.trace : Level.warning,
+      output: MultiOutputLogger(), // 同时输出到控制台和文件
+      level: kDebugMode ? Level.trace : Level.warning, // 在发布模式下限制日志级别
     );
   }
 
   void t(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.t('[trace] {$message}', error: error, stackTrace: stackTrace);
+    _logger.t('[trace] $message', error: error, stackTrace: stackTrace);
   }
 
-  // 调试信息
   void d(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.d('[debug] {$message}', error: error, stackTrace: stackTrace);
+    _logger.d('[debug] $message', error: error, stackTrace: stackTrace);
   }
 
-  // 信息
   void i(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.i('[info] {$message}', error: error, stackTrace: stackTrace);
+    _logger.i('[info] $message', error: error, stackTrace: stackTrace);
   }
 
-  // 警告
   void w(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.w('[warning] {$message}', error: error, stackTrace: stackTrace);
+    _logger.w('[warning] $message', error: error, stackTrace: stackTrace);
   }
 
-  // 错误
   void e(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.e('[error] {$message}', error: error, stackTrace: stackTrace);
+    _logger.e('[error] $message', error: error, stackTrace: stackTrace);
   }
 
-  // 严重错误
   void f(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.f('[fatal] {$message}', error: error, stackTrace: stackTrace);
+    _logger.f('[fatal] $message', error: error, stackTrace: stackTrace);
   }
 }
 
 // 全局单例实例
 final log = AppLogger();
+
+/// **文件日志记录器**
+/// 这个类用于将日志写入文件
+class FileLogPrinter extends LogOutput {
+  File? _logFile; // 改成可空类型
+
+  FileLogPrinter() {
+    _initLogFile();
+  }
+
+  Future<void> _initLogFile() async {
+    final directory = await getApplicationDocumentsDirectory();
+    _logFile = File('${directory.path}/app_logs.txt');
+
+    if (!await _logFile!.exists()) {
+      await _logFile!.create();
+    }
+  }
+
+  @override
+  void output(OutputEvent event) async {
+    if (_logFile == null) {
+      debugPrint('Log file is not initialized yet.');
+      return;
+    }
+
+    final logMessage = event.lines.join('\n');
+    await _logFile!.writeAsString('$logMessage\n', mode: FileMode.append);
+  }
+}
+
+
+/// **多输出日志器**
+/// 这个类用于将日志同时输出到控制台和文件
+class MultiOutputLogger extends LogOutput {
+  final ConsoleOutput _consoleOutput = ConsoleOutput();
+  final FileLogPrinter _fileOutput = FileLogPrinter();
+
+  @override
+  void output(OutputEvent event) {
+    _consoleOutput.output(event); // 输出到控制台
+    _fileOutput.output(event); // 输出到文件
+  }
+}

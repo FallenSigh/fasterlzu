@@ -5,10 +5,10 @@ import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 
-final dioProvider = Provider<Dio>((ref) {
+final appServiceDioProvider = Provider<Dio>((ref) {
   final dio = Dio(BaseOptions(
-    baseUrl: AppConfig.baseUrl,
-    headers: AppConfig.headers,
+    baseUrl: AppConfig.appServiceBaseUrl,
+    headers: AppConfig.appServiceHeaders,
     connectTimeout: Duration(seconds: 3),
     receiveTimeout: Duration(seconds: 3),
     sendTimeout: Duration(seconds: 3),

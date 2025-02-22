@@ -1,7 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:fasterlzu/app_config.dart';
-import 'package:fasterlzu/core/api/api_client.dart';
+import 'package:fasterlzu/core/api/appservice_client.dart';
 import 'package:fasterlzu/core/auth/repositories/auth_repository.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/storage/schedule_storage.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final scheduleRepositoryProvider = Provider<ApiScheduleRepository>((ref){
   return ApiScheduleRepository(
-      dio: ref.watch(dioProvider),
+      dio: ref.watch(appServiceDioProvider),
       authRepository: ref.watch(authRepositoryProvider));
 });
 
@@ -24,7 +24,7 @@ class ApiScheduleRepository {
   Future<ScheduleResponse> getSchedule(int zc) async {
     final param = ScheduleRequest(zc: zc, qsbz: 0).toJson();
     final st = await _authRepository.gatewayToken;
-    final response = await _dio.get(AppConfig.apis['schedule']!, queryParameters: param,
+    final response = await _dio.get(AppConfig.appServiceApis['schedule']!, queryParameters: param,
     options: Options(headers: {
       'Authorization': st,
       'Content-Type': 'text/plain'
@@ -35,7 +35,7 @@ class ApiScheduleRepository {
 
   Future<XlxxResponse> getXlxx() async {
     final st = await _authRepository.gatewayToken;
-    final response = await _dio.post(AppConfig.apis['xlxx']!,
+    final response = await _dio.post(AppConfig.appServiceApis['xlxx']!,
         options: Options(headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization': st,
@@ -48,7 +48,7 @@ class ApiScheduleRepository {
     final st = await _authRepository.gatewayToken;
 
     _dio.options.headers.remove('Transfer-Encrypt');
-    final response = await _dio.post(AppConfig.apis['addSchedule']!,
+    final response = await _dio.post(AppConfig.appServiceApis['addSchedule']!,
       data: sc.toJson(),
       options: Options(headers: {
         'Authorization': st,
@@ -64,7 +64,7 @@ class ApiScheduleRepository {
     final st = await _authRepository.gatewayToken;
 
     _dio.options.headers.remove('Transfer-Encrypt');
-    final response = await _dio.post(AppConfig.apis['delSchedule']!,
+    final response = await _dio.post(AppConfig.appServiceApis['delSchedule']!,
       queryParameters: {'kch': kch},
         data: '{}',
       options: Options(headers: {

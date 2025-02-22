@@ -96,6 +96,7 @@ class ProfilePage extends ConsumerWidget {
           title: const Text('关于'),
           trailing: const Icon(Icons.chevron_right),
           onTap: () {
+
           },
         ),
       ],

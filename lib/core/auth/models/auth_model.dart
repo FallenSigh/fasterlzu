@@ -136,12 +136,16 @@ class UserInfoResponse with _$UserInfoResponse {
 }
 
 @freezed
-class LogoutResponse with _$LogoutResponse {
-  factory LogoutResponse({
+class StringDataResponse with _$StringDataResponse {
+  factory StringDataResponse({
     required int code,
-    required String message
-  }) = _LogoutResponse;
+    required String message,
+    required String? data
+  }) = _StringDataResponse;
 
-  factory LogoutResponse.fromJson(Map<String, dynamic> json) =>
-      _$LogoutResponseFromJson(json);
+  factory StringDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$StringDataResponseFromJson(json);
 }
+
+typedef LogoutResponse = StringDataResponse;
+typedef StResponse = StringDataResponse;

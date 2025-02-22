@@ -2388,51 +2388,53 @@ abstract class _UserInfoResponse implements UserInfoResponse {
       throw _privateConstructorUsedError;
 }
 
-LogoutResponse _$LogoutResponseFromJson(Map<String, dynamic> json) {
-  return _LogoutResponse.fromJson(json);
+StringDataResponse _$StringDataResponseFromJson(Map<String, dynamic> json) {
+  return _StringDataResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$LogoutResponse {
+mixin _$StringDataResponse {
   int get code => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  String? get data => throw _privateConstructorUsedError;
 
-  /// Serializes this LogoutResponse to a JSON map.
+  /// Serializes this StringDataResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of LogoutResponse
+  /// Create a copy of StringDataResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $LogoutResponseCopyWith<LogoutResponse> get copyWith =>
+  $StringDataResponseCopyWith<StringDataResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LogoutResponseCopyWith<$Res> {
-  factory $LogoutResponseCopyWith(
-          LogoutResponse value, $Res Function(LogoutResponse) then) =
-      _$LogoutResponseCopyWithImpl<$Res, LogoutResponse>;
+abstract class $StringDataResponseCopyWith<$Res> {
+  factory $StringDataResponseCopyWith(
+          StringDataResponse value, $Res Function(StringDataResponse) then) =
+      _$StringDataResponseCopyWithImpl<$Res, StringDataResponse>;
   @useResult
-  $Res call({int code, String message});
+  $Res call({int code, String message, String? data});
 }
 
 /// @nodoc
-class _$LogoutResponseCopyWithImpl<$Res, $Val extends LogoutResponse>
-    implements $LogoutResponseCopyWith<$Res> {
-  _$LogoutResponseCopyWithImpl(this._value, this._then);
+class _$StringDataResponseCopyWithImpl<$Res, $Val extends StringDataResponse>
+    implements $StringDataResponseCopyWith<$Res> {
+  _$StringDataResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LogoutResponse
+  /// Create a copy of StringDataResponse
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? code = null,
     Object? message = null,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       code: null == code
@@ -2443,38 +2445,43 @@ class _$LogoutResponseCopyWithImpl<$Res, $Val extends LogoutResponse>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$LogoutResponseImplCopyWith<$Res>
-    implements $LogoutResponseCopyWith<$Res> {
-  factory _$$LogoutResponseImplCopyWith(_$LogoutResponseImpl value,
-          $Res Function(_$LogoutResponseImpl) then) =
-      __$$LogoutResponseImplCopyWithImpl<$Res>;
+abstract class _$$StringDataResponseImplCopyWith<$Res>
+    implements $StringDataResponseCopyWith<$Res> {
+  factory _$$StringDataResponseImplCopyWith(_$StringDataResponseImpl value,
+          $Res Function(_$StringDataResponseImpl) then) =
+      __$$StringDataResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int code, String message});
+  $Res call({int code, String message, String? data});
 }
 
 /// @nodoc
-class __$$LogoutResponseImplCopyWithImpl<$Res>
-    extends _$LogoutResponseCopyWithImpl<$Res, _$LogoutResponseImpl>
-    implements _$$LogoutResponseImplCopyWith<$Res> {
-  __$$LogoutResponseImplCopyWithImpl(
-      _$LogoutResponseImpl _value, $Res Function(_$LogoutResponseImpl) _then)
+class __$$StringDataResponseImplCopyWithImpl<$Res>
+    extends _$StringDataResponseCopyWithImpl<$Res, _$StringDataResponseImpl>
+    implements _$$StringDataResponseImplCopyWith<$Res> {
+  __$$StringDataResponseImplCopyWithImpl(_$StringDataResponseImpl _value,
+      $Res Function(_$StringDataResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LogoutResponse
+  /// Create a copy of StringDataResponse
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? code = null,
     Object? message = null,
+    Object? data = freezed,
   }) {
-    return _then(_$LogoutResponseImpl(
+    return _then(_$StringDataResponseImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -2483,75 +2490,86 @@ class __$$LogoutResponseImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$LogoutResponseImpl implements _LogoutResponse {
-  _$LogoutResponseImpl({required this.code, required this.message});
+class _$StringDataResponseImpl implements _StringDataResponse {
+  _$StringDataResponseImpl(
+      {required this.code, required this.message, required this.data});
 
-  factory _$LogoutResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$LogoutResponseImplFromJson(json);
+  factory _$StringDataResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StringDataResponseImplFromJson(json);
 
   @override
   final int code;
   @override
   final String message;
+  @override
+  final String? data;
 
   @override
   String toString() {
-    return 'LogoutResponse(code: $code, message: $message)';
+    return 'StringDataResponse(code: $code, message: $message, data: $data)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LogoutResponseImpl &&
+            other is _$StringDataResponseImpl &&
             (identical(other.code, code) || other.code == code) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, code, message);
+  int get hashCode => Object.hash(runtimeType, code, message, data);
 
-  /// Create a copy of LogoutResponse
+  /// Create a copy of StringDataResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LogoutResponseImplCopyWith<_$LogoutResponseImpl> get copyWith =>
-      __$$LogoutResponseImplCopyWithImpl<_$LogoutResponseImpl>(
+  _$$StringDataResponseImplCopyWith<_$StringDataResponseImpl> get copyWith =>
+      __$$StringDataResponseImplCopyWithImpl<_$StringDataResponseImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LogoutResponseImplToJson(
+    return _$$StringDataResponseImplToJson(
       this,
     );
   }
 }
 
-abstract class _LogoutResponse implements LogoutResponse {
-  factory _LogoutResponse(
+abstract class _StringDataResponse implements StringDataResponse {
+  factory _StringDataResponse(
       {required final int code,
-      required final String message}) = _$LogoutResponseImpl;
+      required final String message,
+      required final String? data}) = _$StringDataResponseImpl;
 
-  factory _LogoutResponse.fromJson(Map<String, dynamic> json) =
-      _$LogoutResponseImpl.fromJson;
+  factory _StringDataResponse.fromJson(Map<String, dynamic> json) =
+      _$StringDataResponseImpl.fromJson;
 
   @override
   int get code;
   @override
   String get message;
+  @override
+  String? get data;
 
-  /// Create a copy of LogoutResponse
+  /// Create a copy of StringDataResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LogoutResponseImplCopyWith<_$LogoutResponseImpl> get copyWith =>
+  _$$StringDataResponseImplCopyWith<_$StringDataResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
