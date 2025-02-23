@@ -24,8 +24,8 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
-    ref.read(scheduleProvider);
     ref.read(authStateProvider);
+    ref.read(scheduleProvider);
   }
 
   @override

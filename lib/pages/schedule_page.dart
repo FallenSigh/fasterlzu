@@ -1,4 +1,5 @@
 import 'package:fasterlzu/app_config.dart';
+import 'package:fasterlzu/core/auth/providers/auth_provider.dart';
 import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/providers/schedule_provider.dart';
@@ -51,6 +52,10 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(authStateProvider, (previous, next){
+      ref.read(scheduleProvider.notifier).init();
+    });
+    
     // 监听状态变化
     ref.listen<ScheduleState>(scheduleProvider, (previous, current) {
       if (current.error != null) {

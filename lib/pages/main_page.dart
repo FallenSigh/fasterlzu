@@ -1,4 +1,5 @@
 import 'package:fasterlzu/app_config.dart';
+import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/providers/schedule_provider.dart';
 import 'package:fasterlzu/core/task/models/task_model.dart';
@@ -42,8 +43,7 @@ class _MainPageState extends ConsumerState<MainPage> {
   @override
   Widget build(BuildContext context) {
     final scheduleState = ref.watch(scheduleProvider);
-
-    final todayClasses = (scheduleState.schedule ?? [])
+    final todayClasses = (scheduleState.scheduleCurrentWeek ?? [])
         .where((c) => int.parse(c.skxql ?? '0') == DateTime.now().weekday)
         .toList();
 

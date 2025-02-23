@@ -1,9 +1,13 @@
+import 'package:fasterlzu/core/auth/providers/auth_provider.dart';
+import 'package:fasterlzu/core/auth/providers/auth_state.dart';
+import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/repositories/schedule_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final scheduleProvider = StateNotifierProvider<ScheduleNotifier, ScheduleState>((ref) {
   return ScheduleNotifier(
+    authState: ref.watch(authStateProvider),
     apiRepository: ref.watch(scheduleRepositoryProvider),
     cachedRepository: ref.watch(cachedScheduleRepositoryProvider),
   );
@@ -14,6 +18,7 @@ class ScheduleState {
   final String? error;
   final String? successMessage;
   final List<ClassInfo>? schedule;
+  final List<ClassInfo>? scheduleCurrentWeek;
   final XlxxData? xlxx;
   final int currentWeek;
 
@@ -22,6 +27,7 @@ class ScheduleState {
     this.error,
     this.successMessage,
     this.schedule,
+    this.scheduleCurrentWeek,
     this.xlxx,
     this.currentWeek = 1,
   });
@@ -31,6 +37,7 @@ class ScheduleState {
     String? error,
     String? successMessage,
     List<ClassInfo>? schedule,
+    List<ClassInfo>? scheduleCurrentWeek,
     XlxxData? xlxx,
     int? currentWeek,
   }) {
@@ -41,22 +48,26 @@ class ScheduleState {
       schedule: schedule ?? this.schedule,
       xlxx: xlxx ?? this.xlxx,
       currentWeek: currentWeek ?? this.currentWeek,
+      scheduleCurrentWeek: scheduleCurrentWeek ?? this.scheduleCurrentWeek
     );
   }
 }
 
 class ScheduleNotifier extends StateNotifier<ScheduleState> {
+  final AuthState _authState;
   final ApiScheduleRepository _apiRepository;
   final CachedScheduleRepository _cachedRepository;
 
   ScheduleNotifier({
+    required AuthState authState,
     required ApiScheduleRepository apiRepository,
     required CachedScheduleRepository cachedRepository,
-  })  : _apiRepository = apiRepository,
+  })  : _authState = authState,
+        _apiRepository = apiRepository,
         _cachedRepository = cachedRepository,
-        super(ScheduleState()) {_init();}
+        super(ScheduleState()) { init(); }
 
-  Future<void> _init() async {
+  Future<void> init() async {
     state = state.copyWith(isLoading: true);
     try {
       // 先尝试获取缓存的学期信息
@@ -66,11 +77,34 @@ class ScheduleNotifier extends StateNotifier<ScheduleState> {
         state = state.copyWith(xlxx: cachedXlxx);
         final currentWeek = int.parse(cachedXlxx.dqrqszzc ?? '1');
         await loadSchedule(currentWeek);
+        await loadScheduleCurrentWeek();
       } else {
         await refreshXlxx();
+        await loadScheduleCurrentWeek();
       }
     } catch (e) {
       state = state.copyWith(error: e.toString(), isLoading: false);
+    }
+  }
+
+  Future<void> loadScheduleCurrentWeek() async {
+    try {
+      int week = int.parse(state.xlxx!.dqrqszzc!);
+      final cachedSchedule = await _cachedRepository.getSchedule(week);
+      if (cachedSchedule != null) {
+        state = state.copyWith(scheduleCurrentWeek: cachedSchedule);
+        return;
+      }
+
+      final response = await _apiRepository.getSchedule(week);
+      if (response.code == 1) {
+        await _cachedRepository.saveSchedule(week, response.data ?? []);
+        state = state.copyWith(scheduleCurrentWeek: response.data);
+      } else {
+        state = state.copyWith(error: response.message);
+      }
+    } catch (e) {
+      state = state.copyWith(error: e.toString());
     }
   }
 
