@@ -2,8 +2,6 @@ import 'package:fasterlzu/app_config.dart';
 import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/providers/schedule_provider.dart';
-import 'package:fasterlzu/core/task/models/task_model.dart';
-import 'package:fasterlzu/core/task/providers/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -256,60 +254,4 @@ class _MainPageState extends ConsumerState<MainPage> {
     );
   }
 
-  Widget _taskItem(Task task) {
-    return Container(
-      margin: const EdgeInsets.only(right: 15),
-      padding: const EdgeInsets.all(12),
-      height: 170,
-      width: 175,
-      decoration: BoxDecoration(
-        color: task.isUrgent
-            ? Colors.red.withValues(alpha: 0.05)
-            : Colors.green.withValues(alpha: 0.05),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Deadline",
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.black26,
-            ),
-          ),
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 4,
-                backgroundColor: task.isUrgent ? Colors.red : Colors.green,
-              ),
-              const SizedBox(width: 5),
-              Text(
-                "${DateTime.parse(task.endTime).difference(DateTime.now()).inDays} days left",
-                style: const TextStyle(
-                  fontSize: 17,
-                  color: Colors.black54,
-                ),
-              )
-            ],
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: 130,
-            child: Text(
-              task.name,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.black54,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }
