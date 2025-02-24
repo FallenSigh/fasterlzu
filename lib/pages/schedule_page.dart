@@ -47,6 +47,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
     setState(() {
       _currentPage = page;
     });
+
     ref.read(scheduleProvider.notifier).loadSchedule(page + 1);
   }
 

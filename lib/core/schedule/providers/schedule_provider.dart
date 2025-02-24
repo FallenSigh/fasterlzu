@@ -83,6 +83,7 @@ class ScheduleNotifier extends StateNotifier<ScheduleState> {
         await loadScheduleCurrentWeek();
       }
     } catch (e) {
+      if (!mounted) return;
       state = state.copyWith(error: e.toString(), isLoading: false);
     }
   }
