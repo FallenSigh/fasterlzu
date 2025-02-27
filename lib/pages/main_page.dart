@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:fasterlzu/app_config.dart';
-import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/providers/schedule_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_widget/home_widget.dart';
 
 class MainPage extends ConsumerStatefulWidget {
   const MainPage({super.key});
@@ -38,16 +40,49 @@ class _MainPageState extends ConsumerState<MainPage> {
     'Dec'
   ];
 
+  void updateWidgetData(List<CourseInfo> courses) async {
+    final jsonData = courses
+        .map((c) => {
+              'name': c.kcmc ?? '',
+              'time': _jcToTime(c.jc ?? ''),
+              'classroom': c.skjsl ?? ''
+            })
+        .toList();
+
+    await HomeWidget.saveWidgetData<String>(
+      'courseData',
+      jsonEncode(jsonData),
+    );
+    await HomeWidget.updateWidget(
+        androidName: 'ScheduleAppWidget',
+        qualifiedAndroidName: 'com.fallensigh.fasterlzu.ScheduleAppWidget');
+  }
+
   @override
   Widget build(BuildContext context) {
     final scheduleState = ref.watch(scheduleProvider);
-    final todayClasses = (scheduleState.scheduleCurrentWeek ?? [])
-        .where((c) => int.parse(c.skxql ?? '0') == DateTime.now().weekday)
-        .toList();
+    final todayCourses = (scheduleState.scheduleCurrentWeek ?? [])
+        .where((c) => int.parse(c.skxql ?? '0') == DateTime.now().weekday);
 
-    todayClasses.sort((ClassInfo a, ClassInfo b) {
+    final onGoingCourses = todayCourses.where((c) {
+      DateTime now = DateTime.now();
+      final classTime = _jcToEndTime(c.jc ?? '') ?? '';
+
+      DateTime targetTime = DateTime(
+          now.year,
+          now.month,
+          now.day,
+          int.parse(classTime.split(":")[0]),
+          int.parse(classTime.split(":")[1]));
+
+      return targetTime.isBefore(now);
+    }).toList();
+
+    onGoingCourses.sort((CourseInfo a, CourseInfo b) {
       return b.jc!.compareTo(a.jc!);
     });
+
+    updateWidgetData(onGoingCourses);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -75,14 +110,13 @@ class _MainPageState extends ConsumerState<MainPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    _seeAllHeader("TODAY CLASSES", todayClasses.length, () {
+                    _seeAllHeader("TODAY CLASSES", onGoingCourses.length, () {
                       context.push('/schedule');
                     }),
                     const SizedBox(height: 10),
-                    ...todayClasses.map((course) => _courseItem(course)),
-                    if (todayClasses.isEmpty) Text('今天没课了~'),
+                    ...onGoingCourses.map((course) => _courseItem(course)),
+                    if (onGoingCourses.isEmpty) Text('今天没课了~'),
                     const SizedBox(height: 20),
-
                   ],
                 ),
               )
@@ -133,6 +167,7 @@ class _MainPageState extends ConsumerState<MainPage> {
   }
 
   String? _jcToTime(String jc) {
+    if (jc == "00000000000000") return "00:00\n00:00";
     if (jc.length < 14) return null;
     int start = jc.indexOf('1');
     int end = jc.lastIndexOf('1');
@@ -141,23 +176,24 @@ class _MainPageState extends ConsumerState<MainPage> {
   }
 
   String? _jcToEndTime(String jc) {
+    if (jc == "00000000000000") return "00:00";
     if (jc.length < 14) return null;
     int end = jc.lastIndexOf('1');
     if (end == -1) return null;
     return end != -1 ? AppConfig.classEndTimes[end] : '';
   }
 
-  Widget _courseItem(ClassInfo classInfo) {
-    if (classInfo.jc == '00000000000000') return SizedBox.shrink();
-    DateTime now = DateTime.now();
-    final classTime = _jcToEndTime(classInfo.jc ?? '') ?? '';
-
-    DateTime targetTime = DateTime(now.year, now.month, now.day,
-        int.parse(classTime.split(":")[0]), int.parse(classTime.split(":")[1]));
-
-    if (targetTime.isBefore(now)) {
-      return SizedBox.shrink();
-    }
+  Widget _courseItem(CourseInfo courseInfo) {
+    // if (classInfo.jc == '00000000000000') return SizedBox.shrink();
+    // DateTime now = DateTime.now();
+    // final classTime = _jcToEndTime(classInfo.jc ?? '') ?? '';
+    //
+    // DateTime targetTime = DateTime(now.year, now.month, now.day,
+    //     int.parse(classTime.split(":")[0]), int.parse(classTime.split(":")[1]));
+    //
+    // if (targetTime.isBefore(now)) {
+    //   return SizedBox.shrink();
+    // }
 
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
@@ -173,13 +209,13 @@ class _MainPageState extends ConsumerState<MainPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                classInfo.sksj ?? '',
+                courseInfo.sksj ?? '',
                 style: const TextStyle(
                   fontWeight: FontWeight.w800,
                 ),
               ),
               Text(
-                _jcToTime(classInfo.jc ?? '') ?? '',
+                _jcToTime(courseInfo.jc ?? '') ?? '',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
@@ -200,7 +236,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 160,
                   child: Text(
-                    classInfo.kcmc ?? '',
+                    courseInfo.kcmc ?? '',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontSize: 16),
@@ -217,7 +253,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width - 160,
                       child: Text(
-                        classInfo.skjsl ?? '',
+                        courseInfo.skjsl ?? '',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: const TextStyle(
@@ -238,7 +274,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      classInfo.jsxm ?? '',
+                      courseInfo.jsxm ?? '',
                       style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 15,
@@ -253,5 +289,4 @@ class _MainPageState extends ConsumerState<MainPage> {
       ),
     );
   }
-
 }

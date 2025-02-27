@@ -36,7 +36,6 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
     });
   }
 
-
   @override
   void dispose() {
     _pageController.dispose();
@@ -53,10 +52,10 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(authStateProvider, (previous, next){
+    ref.listen(authStateProvider, (previous, next) {
       ref.read(scheduleProvider.notifier).init();
     });
-    
+
     // 监听状态变化
     ref.listen<ScheduleState>(scheduleProvider, (previous, current) {
       if (current.error != null) {
@@ -218,10 +217,20 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                             (index) => DropdownMenuItem(
                                   value: index + 1,
                                   child: Text([
-                                    '1', '2', '3', '4',
-                                    '中1', '中2',
-                                    '5', '6', '7', '8',
-                                    '9', '10', '11', '12'
+                                    '1',
+                                    '2',
+                                    '3',
+                                    '4',
+                                    '中1',
+                                    '中2',
+                                    '5',
+                                    '6',
+                                    '7',
+                                    '8',
+                                    '9',
+                                    '10',
+                                    '11',
+                                    '12'
                                   ][index]),
                                 )),
                         onChanged: (value) => startSection = value ?? 1,
@@ -237,10 +246,20 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                             (index) => DropdownMenuItem(
                                   value: index + 1,
                                   child: Text([
-                                    '1', '2', '3', '4',
-                                    '中1', '中2',
-                                    '5', '6', '7', '8',
-                                    '9', '10', '11', '12'
+                                    '1',
+                                    '2',
+                                    '3',
+                                    '4',
+                                    '中1',
+                                    '中2',
+                                    '5',
+                                    '6',
+                                    '7',
+                                    '8',
+                                    '9',
+                                    '10',
+                                    '11',
+                                    '12'
                                   ][index]),
                                 )),
                         onChanged: (value) => endSection = value ?? 2,
@@ -328,8 +347,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
 
     try {
       // 解析学期开始日期
-      final startDate =
-          DateTime.parse(xlxx.ksrq ?? '');
+      final startDate = DateTime.parse(xlxx.ksrq ?? '');
       // 计算当前周的第一天（周一）
       final weekStart =
           startDate.add(Duration(days: 7 * (state.currentWeek - 1)));
@@ -365,17 +383,23 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                       children: [
                         Text(
                           weekdays[index],
-                          style: TextStyle(fontSize: 12,
-                              fontWeight: (dates[index] == today) ? FontWeight.bold : FontWeight.normal),
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: (dates[index] == today)
+                                  ? FontWeight.bold
+                                  : FontWeight.normal),
                         ),
                         const SizedBox(height: 2),
                         Text(
                           dates[index],
                           style: TextStyle(
-                            fontSize: 11,
-                            color: dates[index] == today ? Colors.black : Colors.grey[600],
-                            fontWeight: dates[index] == today ? FontWeight.bold : FontWeight.normal
-                          ),
+                              fontSize: 11,
+                              color: dates[index] == today
+                                  ? Colors.black
+                                  : Colors.grey[600],
+                              fontWeight: dates[index] == today
+                                  ? FontWeight.bold
+                                  : FontWeight.normal),
                         ),
                       ],
                     ),
@@ -385,12 +409,13 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
     );
   }
 
-  Widget _buildScheduleGrid(List<ClassInfo> schedule) {
+  Widget _buildScheduleGrid(List<CourseInfo> schedule) {
     final weekdays = [7, 1, 2, 3, 4, 5, 6];
     return Row(
       children: [
         _buildTimeColumn(),
-        ...List.generate(7, (index) => _buildDayColumn(weekdays[index], schedule)),
+        ...List.generate(
+            7, (index) => _buildDayColumn(weekdays[index], schedule)),
       ],
     );
   }
@@ -414,8 +439,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
     );
   }
 
-  Widget _buildDayColumn(int weekday, List<ClassInfo> schedule) {
-
+  Widget _buildDayColumn(int weekday, List<CourseInfo> schedule) {
     final dayClasses =
         schedule.where((c) => int.parse(c.skxql ?? '0') == weekday).toList();
 
@@ -434,7 +458,8 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
           if (index > 0) {
             final prevClasses = _getClassesForTimeSlot(dayClasses, index);
             if (prevClasses.isNotEmpty &&
-                prevClasses.first.kch == currentClass.kch && prevClasses.first.jc == currentClass.jc) {
+                prevClasses.first.kch == currentClass.kch &&
+                prevClasses.first.jc == currentClass.jc) {
               return Container();
             }
           }
@@ -445,11 +470,11 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
     );
   }
 
-  List<ClassInfo> _getClassesForTimeSlot(List<ClassInfo> classes, int slot) {
+  List<CourseInfo> _getClassesForTimeSlot(List<CourseInfo> classes, int slot) {
     return classes.where((c) {
       final jc = c.jc ?? '';
       if (jc.length < 14) return false;
-      
+
       // 将UI显示的节次映射到实际的jc字符串索引
       return jc[slot - 1] == '1';
     }).toList();
@@ -462,10 +487,10 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
     // 遍历jc字符串
     for (int i = 0; i < jc.length; i++) {
       if (jc[i] == '1') {
-        if (start == -1) start = i;  // 记录开始位置
-        span++;  // 累加连续的1的个数
+        if (start == -1) start = i; // 记录开始位置
+        span++; // 累加连续的1的个数
       } else if (start != -1) {
-        break;  // 遇到0就停止计数
+        break; // 遇到0就停止计数
       }
     }
 
@@ -477,23 +502,23 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
     return const Expanded(child: SizedBox());
   }
 
-  Widget _buildClassSlot(ClassInfo classInfo, int span) {
+  Widget _buildClassSlot(CourseInfo courseInfo, int span) {
     return Expanded(
       flex: span,
       child: GestureDetector(
-        onTap: () => _showClassDetail(context, classInfo),
+        onTap: () => _showClassDetail(context, courseInfo),
         child: Container(
           margin: const EdgeInsets.all(1),
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: _getClassColor(classInfo.kch ?? ''),
+            color: _getClassColor(courseInfo.kch ?? ''),
             borderRadius: BorderRadius.circular(4),
             border: Border.all(color: Colors.grey[300]!),
           ),
           child: ListView(
             children: [
               Text(
-                classInfo.kcmc ?? '',
+                courseInfo.kcmc ?? '',
                 style:
                     const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
                 maxLines: 3,
@@ -501,7 +526,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
               ),
               const SizedBox(height: 1),
               Text(
-                '${classInfo.jsxm ?? ''}\n${classInfo.skjsl ?? ''}',
+                '${courseInfo.jsxm ?? ''}\n${courseInfo.skjsl ?? ''}',
                 style: const TextStyle(fontSize: 9),
                 textAlign: TextAlign.center,
                 maxLines: 3,
@@ -514,7 +539,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
     );
   }
 
-  void _showClassDetail(BuildContext context, ClassInfo classInfo) {
+  void _showClassDetail(BuildContext context, CourseInfo courseInfo) {
     showDialog(
       context: context,
       builder: (context) => Dialog(
@@ -532,7 +557,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                 children: [
                   Expanded(
                     child: Text(
-                      classInfo.kcmc ?? '未知课程',
+                      courseInfo.kcmc ?? '未知课程',
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -548,12 +573,12 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                 ],
               ),
               const Divider(height: 24),
-              _buildDetailItem('教师', classInfo.jsxm ?? '未知'),
-              _buildDetailItem('教室', classInfo.skjsl ?? '未知'),
-              _buildDetailItem('周次', '第${classInfo.week ?? '?'}周'),
-              _buildDetailItem('节次', _formatJc(classInfo.jc ?? '')),
-              _buildDetailItem('课程号', classInfo.kch ?? '未知'),
-              _buildDetailItem('学分', classInfo.xf ?? '未知'),
+              _buildDetailItem('教师', courseInfo.jsxm ?? '未知'),
+              _buildDetailItem('教室', courseInfo.skjsl ?? '未知'),
+              _buildDetailItem('周次', '第${courseInfo.week ?? '?'}周'),
+              _buildDetailItem('节次', _formatJc(courseInfo.jc ?? '')),
+              _buildDetailItem('课程号', courseInfo.kch ?? '未知'),
+              _buildDetailItem('学分', courseInfo.xf ?? '未知'),
               const SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerRight,
@@ -564,14 +589,14 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                       onPressed: () => Navigator.pop(context),
                       child: const Text('关闭'),
                     ),
-                    if (classInfo.status == 1) ...[
+                    if (courseInfo.status == 1) ...[
                       const SizedBox(width: 8),
                       TextButton(
                         onPressed: () async {
                           Navigator.pop(context);
                           await ref
                               .read(scheduleProvider.notifier)
-                              .deleteSchedule(classInfo.kch!);
+                              .deleteSchedule(courseInfo.kch!);
                         },
                         child: Text(
                           '删除',

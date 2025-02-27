@@ -18,7 +18,12 @@ import androidx.glance.state.GlanceStateDefinition
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import HomeWidgetGlanceWidgetReceiver
+import android.content.ComponentName
+import android.content.Intent
 import androidx.compose.ui.unit.sp
+import androidx.glance.action.actionStartActivity
+import androidx.glance.action.clickable
+import androidx.glance.layout.Box
 import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
 import androidx.glance.layout.fillMaxWidth
@@ -34,7 +39,7 @@ data class Course (
     val teacher: String
 );
 
-class AppWidget : GlanceAppWidget() {
+class ScheduleAppWidget : GlanceAppWidget() {
 
     override val stateDefinition: GlanceStateDefinition<*>
         get() = HomeWidgetGlanceStateDefinition()
@@ -51,38 +56,51 @@ class AppWidget : GlanceAppWidget() {
         val json = prefs.getString("courseData", "[]");
         val courses = parseCourses(json ?: "[]");
 
-        Column(
-            modifier = GlanceModifier
-                .background(Color.White)
-                .padding(8.dp)
-                .fillMaxWidth()
-        ) {
-            Text(
-                text = "TODAY COURSES",
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = ColorProvider(Color.Black)
-                )
-            )
+       Box (
+           modifier = GlanceModifier.fillMaxWidth()
+               .clickable(androidx.glance.appwidget.action.actionStartActivity(
+                   Intent().apply {
+                       component = ComponentName(
+                           "com.fallensigh.fasterlzu",
+                           "com.fallensigh.fasterlzu.MainActivity"
+                       )
+                       putExtra("route", "/schedule")
+                   }
+               ))
+       ) {
+           Column(
+               modifier = GlanceModifier
+                   .background(Color.White)
+                   .padding(8.dp)
+                   .fillMaxWidth()
+           ) {
+               Text(
+                   text = "TODAY COURSES",
+                   style = TextStyle(
+                       fontSize = 18.sp,
+                       fontWeight = FontWeight.Bold,
+                       color = ColorProvider(Color.Black)
+                   )
+               )
 
-            Spacer(modifier = GlanceModifier.padding(4.dp))
+               Spacer(modifier = GlanceModifier.padding(4.dp))
 
-            if (courses.isEmpty()) {
-                Text(
-                    text = "今天已经没有课程了",
-                    style = TextStyle(
-                        color = ColorProvider(Color.Gray),
-                        fontSize = 14.sp
-                    )
-                )
-            } else {
-                courses.forEach { course ->
-                    CourseItem(course)
-                    Spacer(modifier = GlanceModifier.padding(4.dp))
-                }
-            }
-        }
+               if (courses.isEmpty()) {
+                   Text(
+                       text = "今天已经没有课程了",
+                       style = TextStyle(
+                           color = ColorProvider(Color.Gray),
+                           fontSize = 14.sp
+                       )
+                   )
+               } else {
+                   courses.forEach { course ->
+                       CourseItem(course)
+                       Spacer(modifier = GlanceModifier.padding(4.dp))
+                   }
+               }
+           }
+       }
     }
 
     @Composable
@@ -134,6 +152,6 @@ class AppWidget : GlanceAppWidget() {
     }
 }
 
-class HomeWidgetReceiver : HomeWidgetGlanceWidgetReceiver<AppWidget>() {
-    override val glanceAppWidget = AppWidget()
+class HomeWidgetReceiver : HomeWidgetGlanceWidgetReceiver<ScheduleAppWidget>() {
+    override val glanceAppWidget = ScheduleAppWidget()
 }
