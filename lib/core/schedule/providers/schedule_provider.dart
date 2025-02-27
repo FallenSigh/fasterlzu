@@ -17,8 +17,8 @@ class ScheduleState {
   final bool isLoading;
   final String? error;
   final String? successMessage;
-  final List<ClassInfo>? schedule;
-  final List<ClassInfo>? scheduleCurrentWeek;
+  final List<CourseInfo>? schedule;
+  final List<CourseInfo>? scheduleCurrentWeek;
   final XlxxData? xlxx;
   final int currentWeek;
 
@@ -36,8 +36,8 @@ class ScheduleState {
     bool? isLoading,
     String? error,
     String? successMessage,
-    List<ClassInfo>? schedule,
-    List<ClassInfo>? scheduleCurrentWeek,
+    List<CourseInfo>? schedule,
+    List<CourseInfo>? scheduleCurrentWeek,
     XlxxData? xlxx,
     int? currentWeek,
   }) {

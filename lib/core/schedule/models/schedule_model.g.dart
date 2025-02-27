@@ -56,8 +56,8 @@ Map<String, dynamic> _$$ScheduleRequestImplToJson(
       'qsbz': instance.qsbz,
     };
 
-_$ClassInfoImpl _$$ClassInfoImplFromJson(Map<String, dynamic> json) =>
-    _$ClassInfoImpl(
+_$CourseInfoImpl _$$CourseInfoImplFromJson(Map<String, dynamic> json) =>
+    _$CourseInfoImpl(
       kch: json['kch'] as String?,
       kcmc: json['kcmc'] as String?,
       jsxm: json['jsxm'] as String?,
@@ -79,7 +79,7 @@ _$ClassInfoImpl _$$ClassInfoImplFromJson(Map<String, dynamic> json) =>
       create_user_id: json['create_user_id'] as String?,
     );
 
-Map<String, dynamic> _$$ClassInfoImplToJson(_$ClassInfoImpl instance) =>
+Map<String, dynamic> _$$CourseInfoImplToJson(_$CourseInfoImpl instance) =>
     <String, dynamic>{
       'kch': instance.kch,
       'kcmc': instance.kcmc,
@@ -108,7 +108,7 @@ _$ScheduleResponseImpl _$$ScheduleResponseImplFromJson(
       code: (json['code'] as num).toInt(),
       message: json['message'] as String,
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => ClassInfo.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => CourseInfo.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

@@ -644,12 +644,12 @@ abstract class _ScheduleRequest implements ScheduleRequest {
       throw _privateConstructorUsedError;
 }
 
-ClassInfo _$ClassInfoFromJson(Map<String, dynamic> json) {
-  return _ClassInfo.fromJson(json);
+CourseInfo _$CourseInfoFromJson(Map<String, dynamic> json) {
+  return _CourseInfo.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ClassInfo {
+mixin _$CourseInfo {
 // 详细含义文件末尾
   String? get kch => throw _privateConstructorUsedError;
   String? get kcmc => throw _privateConstructorUsedError;
@@ -671,20 +671,21 @@ mixin _$ClassInfo {
   String? get create_time => throw _privateConstructorUsedError;
   String? get create_user_id => throw _privateConstructorUsedError;
 
-  /// Serializes this ClassInfo to a JSON map.
+  /// Serializes this CourseInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of ClassInfo
+  /// Create a copy of CourseInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ClassInfoCopyWith<ClassInfo> get copyWith =>
+  $CourseInfoCopyWith<CourseInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ClassInfoCopyWith<$Res> {
-  factory $ClassInfoCopyWith(ClassInfo value, $Res Function(ClassInfo) then) =
-      _$ClassInfoCopyWithImpl<$Res, ClassInfo>;
+abstract class $CourseInfoCopyWith<$Res> {
+  factory $CourseInfoCopyWith(
+          CourseInfo value, $Res Function(CourseInfo) then) =
+      _$CourseInfoCopyWithImpl<$Res, CourseInfo>;
   @useResult
   $Res call(
       {String? kch,
@@ -709,16 +710,16 @@ abstract class $ClassInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ClassInfoCopyWithImpl<$Res, $Val extends ClassInfo>
-    implements $ClassInfoCopyWith<$Res> {
-  _$ClassInfoCopyWithImpl(this._value, this._then);
+class _$CourseInfoCopyWithImpl<$Res, $Val extends CourseInfo>
+    implements $CourseInfoCopyWith<$Res> {
+  _$CourseInfoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ClassInfo
+  /// Create a copy of CourseInfo
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -825,11 +826,11 @@ class _$ClassInfoCopyWithImpl<$Res, $Val extends ClassInfo>
 }
 
 /// @nodoc
-abstract class _$$ClassInfoImplCopyWith<$Res>
-    implements $ClassInfoCopyWith<$Res> {
-  factory _$$ClassInfoImplCopyWith(
-          _$ClassInfoImpl value, $Res Function(_$ClassInfoImpl) then) =
-      __$$ClassInfoImplCopyWithImpl<$Res>;
+abstract class _$$CourseInfoImplCopyWith<$Res>
+    implements $CourseInfoCopyWith<$Res> {
+  factory _$$CourseInfoImplCopyWith(
+          _$CourseInfoImpl value, $Res Function(_$CourseInfoImpl) then) =
+      __$$CourseInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -855,14 +856,14 @@ abstract class _$$ClassInfoImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ClassInfoImplCopyWithImpl<$Res>
-    extends _$ClassInfoCopyWithImpl<$Res, _$ClassInfoImpl>
-    implements _$$ClassInfoImplCopyWith<$Res> {
-  __$$ClassInfoImplCopyWithImpl(
-      _$ClassInfoImpl _value, $Res Function(_$ClassInfoImpl) _then)
+class __$$CourseInfoImplCopyWithImpl<$Res>
+    extends _$CourseInfoCopyWithImpl<$Res, _$CourseInfoImpl>
+    implements _$$CourseInfoImplCopyWith<$Res> {
+  __$$CourseInfoImplCopyWithImpl(
+      _$CourseInfoImpl _value, $Res Function(_$CourseInfoImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ClassInfo
+  /// Create a copy of CourseInfo
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -887,7 +888,7 @@ class __$$ClassInfoImplCopyWithImpl<$Res>
     Object? create_time = freezed,
     Object? create_user_id = freezed,
   }) {
-    return _then(_$ClassInfoImpl(
+    return _then(_$CourseInfoImpl(
       kch: freezed == kch
           ? _value.kch
           : kch // ignore: cast_nullable_to_non_nullable
@@ -970,8 +971,8 @@ class __$$ClassInfoImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ClassInfoImpl implements _ClassInfo {
-  _$ClassInfoImpl(
+class _$CourseInfoImpl implements _CourseInfo {
+  _$CourseInfoImpl(
       {required this.kch,
       required this.kcmc,
       required this.jsxm,
@@ -992,8 +993,8 @@ class _$ClassInfoImpl implements _ClassInfo {
       required this.create_time,
       required this.create_user_id});
 
-  factory _$ClassInfoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ClassInfoImplFromJson(json);
+  factory _$CourseInfoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CourseInfoImplFromJson(json);
 
 // 详细含义文件末尾
   @override
@@ -1037,14 +1038,14 @@ class _$ClassInfoImpl implements _ClassInfo {
 
   @override
   String toString() {
-    return 'ClassInfo(kch: $kch, kcmc: $kcmc, jsxm: $jsxm, jc: $jc, skjsl: $skjsl, skxql: $skxql, week: $week, bs: $bs, xykh: $xykh, xn: $xn, xqm: $xqm, status: $status, color: $color, sksj: $sksj, xf: $xf, week_fb: $week_fb, kcrq: $kcrq, create_time: $create_time, create_user_id: $create_user_id)';
+    return 'CourseInfo(kch: $kch, kcmc: $kcmc, jsxm: $jsxm, jc: $jc, skjsl: $skjsl, skxql: $skxql, week: $week, bs: $bs, xykh: $xykh, xn: $xn, xqm: $xqm, status: $status, color: $color, sksj: $sksj, xf: $xf, week_fb: $week_fb, kcrq: $kcrq, create_time: $create_time, create_user_id: $create_user_id)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ClassInfoImpl &&
+            other is _$CourseInfoImpl &&
             (identical(other.kch, kch) || other.kch == kch) &&
             (identical(other.kcmc, kcmc) || other.kcmc == kcmc) &&
             (identical(other.jsxm, jsxm) || other.jsxm == jsxm) &&
@@ -1093,24 +1094,24 @@ class _$ClassInfoImpl implements _ClassInfo {
         create_user_id
       ]);
 
-  /// Create a copy of ClassInfo
+  /// Create a copy of CourseInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ClassInfoImplCopyWith<_$ClassInfoImpl> get copyWith =>
-      __$$ClassInfoImplCopyWithImpl<_$ClassInfoImpl>(this, _$identity);
+  _$$CourseInfoImplCopyWith<_$CourseInfoImpl> get copyWith =>
+      __$$CourseInfoImplCopyWithImpl<_$CourseInfoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ClassInfoImplToJson(
+    return _$$CourseInfoImplToJson(
       this,
     );
   }
 }
 
-abstract class _ClassInfo implements ClassInfo {
-  factory _ClassInfo(
+abstract class _CourseInfo implements CourseInfo {
+  factory _CourseInfo(
       {required final String? kch,
       required final String? kcmc,
       required final String? jsxm,
@@ -1129,10 +1130,10 @@ abstract class _ClassInfo implements ClassInfo {
       required final String? week_fb,
       required final String? kcrq,
       required final String? create_time,
-      required final String? create_user_id}) = _$ClassInfoImpl;
+      required final String? create_user_id}) = _$CourseInfoImpl;
 
-  factory _ClassInfo.fromJson(Map<String, dynamic> json) =
-      _$ClassInfoImpl.fromJson;
+  factory _CourseInfo.fromJson(Map<String, dynamic> json) =
+      _$CourseInfoImpl.fromJson;
 
 // 详细含义文件末尾
   @override
@@ -1174,11 +1175,11 @@ abstract class _ClassInfo implements ClassInfo {
   @override
   String? get create_user_id;
 
-  /// Create a copy of ClassInfo
+  /// Create a copy of CourseInfo
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ClassInfoImplCopyWith<_$ClassInfoImpl> get copyWith =>
+  _$$CourseInfoImplCopyWith<_$CourseInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1190,7 +1191,7 @@ ScheduleResponse _$ScheduleResponseFromJson(Map<String, dynamic> json) {
 mixin _$ScheduleResponse {
   int get code => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
-  List<ClassInfo>? get data => throw _privateConstructorUsedError;
+  List<CourseInfo>? get data => throw _privateConstructorUsedError;
 
   /// Serializes this ScheduleResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1208,7 +1209,7 @@ abstract class $ScheduleResponseCopyWith<$Res> {
           ScheduleResponse value, $Res Function(ScheduleResponse) then) =
       _$ScheduleResponseCopyWithImpl<$Res, ScheduleResponse>;
   @useResult
-  $Res call({int code, String message, List<ClassInfo>? data});
+  $Res call({int code, String message, List<CourseInfo>? data});
 }
 
 /// @nodoc
@@ -1242,7 +1243,7 @@ class _$ScheduleResponseCopyWithImpl<$Res, $Val extends ScheduleResponse>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<ClassInfo>?,
+              as List<CourseInfo>?,
     ) as $Val);
   }
 }
@@ -1255,7 +1256,7 @@ abstract class _$$ScheduleResponseImplCopyWith<$Res>
       __$$ScheduleResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int code, String message, List<ClassInfo>? data});
+  $Res call({int code, String message, List<CourseInfo>? data});
 }
 
 /// @nodoc
@@ -1287,7 +1288,7 @@ class __$$ScheduleResponseImplCopyWithImpl<$Res>
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<ClassInfo>?,
+              as List<CourseInfo>?,
     ));
   }
 }
@@ -1298,7 +1299,7 @@ class _$ScheduleResponseImpl implements _ScheduleResponse {
   _$ScheduleResponseImpl(
       {required this.code,
       required this.message,
-      required final List<ClassInfo>? data})
+      required final List<CourseInfo>? data})
       : _data = data;
 
   factory _$ScheduleResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -1308,9 +1309,9 @@ class _$ScheduleResponseImpl implements _ScheduleResponse {
   final int code;
   @override
   final String message;
-  final List<ClassInfo>? _data;
+  final List<CourseInfo>? _data;
   @override
-  List<ClassInfo>? get data {
+  List<CourseInfo>? get data {
     final value = _data;
     if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
@@ -1359,7 +1360,7 @@ abstract class _ScheduleResponse implements ScheduleResponse {
   factory _ScheduleResponse(
       {required final int code,
       required final String message,
-      required final List<ClassInfo>? data}) = _$ScheduleResponseImpl;
+      required final List<CourseInfo>? data}) = _$ScheduleResponseImpl;
 
   factory _ScheduleResponse.fromJson(Map<String, dynamic> json) =
       _$ScheduleResponseImpl.fromJson;
@@ -1369,7 +1370,7 @@ abstract class _ScheduleResponse implements ScheduleResponse {
   @override
   String get message;
   @override
-  List<ClassInfo>? get data;
+  List<CourseInfo>? get data;
 
   /// Create a copy of ScheduleResponse
   /// with the given fields replaced by the non-null parameter values.

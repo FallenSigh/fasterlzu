@@ -42,8 +42,8 @@ class ScheduleRequest with _$ScheduleRequest {
 }
 
 @freezed
-class ClassInfo with _$ClassInfo {
-  factory ClassInfo({
+class CourseInfo with _$CourseInfo {
+  factory CourseInfo({
     // 详细含义文件末尾
     required String? kch,
     required String? kcmc,
@@ -64,10 +64,10 @@ class ClassInfo with _$ClassInfo {
     required String? kcrq,
     required String? create_time,
     required String? create_user_id
-}) = _ClassInfo;
+}) = _CourseInfo;
 
-  factory ClassInfo.fromJson(Map<String, dynamic> json) =>
-      _$ClassInfoFromJson(json);
+  factory CourseInfo.fromJson(Map<String, dynamic> json) =>
+      _$CourseInfoFromJson(json);
 }
 
 
@@ -76,7 +76,7 @@ class ScheduleResponse with _$ScheduleResponse {
   factory ScheduleResponse({
     required int code,
     required String message,
-    required List<ClassInfo>? data
+    required List<CourseInfo>? data
 }) = _ScheduleResponse;
 
   factory ScheduleResponse.fromJson(Map<String, dynamic> json) =>

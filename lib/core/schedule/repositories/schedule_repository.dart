@@ -89,11 +89,11 @@ class CachedScheduleRepository {
 
   CachedScheduleRepository({required ScheduleStorage storage}) : _storage = storage;
 
-  Future<List<ClassInfo>?> getSchedule(int zc) async {
+  Future<List<CourseInfo>?> getSchedule(int zc) async {
     return _storage.getSchedule(zc);
   }
 
-  Future<void> saveSchedule(int zc, List<ClassInfo> schedule) async {
+  Future<void> saveSchedule(int zc, List<CourseInfo> schedule) async {
     await _storage.saveSchedule(zc, schedule);
   }
 

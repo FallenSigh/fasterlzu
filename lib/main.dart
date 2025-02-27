@@ -15,7 +15,6 @@ void main() async {
   Hive.init(dir.path);
   await Hive.openBox('userInfo');
   await Hive.openBox('schedule');
-  await Hive.openBox('task');
 
   FlutterNativeSplash.remove();
   runApp(ProviderScope(child: MyApp()));

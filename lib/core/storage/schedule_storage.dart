@@ -12,7 +12,7 @@ final scheduleStorageProvider = Provider<ScheduleStorage>((ref) {
 class ScheduleStorage {
   final box = Hive.box('schedule');
 
-  Future<void> saveSchedule(int zc, List<ClassInfo> schedule) async {
+  Future<void> saveSchedule(int zc, List<CourseInfo> schedule) async {
     try {
       final jsonList = schedule.map((classInfo) => classInfo.toJson()).toList();
       final jsonString = jsonEncode(jsonList);
@@ -27,14 +27,14 @@ class ScheduleStorage {
     await box.put('xlxx', jsonEncode(xlxx.toJson()));
   }
 
-  List<ClassInfo>? getSchedule(int zc) {
+  List<CourseInfo>? getSchedule(int zc) {
     try {
       final jsonString = box.get('schedule_$zc') as String?;
       if (jsonString == null) return null;
 
       final jsonList = jsonDecode(jsonString) as List;
       return jsonList
-          .map((item) => ClassInfo.fromJson(Map<String, dynamic>.from(item)))
+          .map((item) => CourseInfo.fromJson(Map<String, dynamic>.from(item)))
           .toList();
     } catch (e) {
       log.e('读取课程表数据失败', e);
