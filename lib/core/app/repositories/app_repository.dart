@@ -6,11 +6,8 @@ import 'package:fasterlzu/core/api/app_client.dart';
 import 'package:fasterlzu/core/app/models/app_model.dart';
 import 'package:fasterlzu/core/auth/repositories/auth_repository.dart';
 import 'package:fasterlzu/core/encryption/md5_crypto.dart';
-import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/storage/userinfo_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:logger/logger.dart';
 import 'package:intl/intl.dart';
 
 final appRepositoryProvider = Provider<AppRepository>((ref){

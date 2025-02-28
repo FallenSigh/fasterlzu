@@ -4,7 +4,6 @@ import 'package:fasterlzu/pages/main_page.dart';
 import 'package:fasterlzu/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
