@@ -1,0 +1,62 @@
+name: fasterlzu
+description: "Lanzhou University Third-Party App"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  qr_flutter: ^4.1.0
+  dio: ^5.8.0
+  hive: ^2.2.3
+  flutter_secure_storage: ^9.2.4
+  path_provider: ^2.1.5
+  flutter_riverpod: ^2.6.1
+  go_router: ^14.8.0
+  encrypt: ^5.0.3
+  logger: ^2.5.0
+  freezed: ^2.5.8
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+  flutter_native_splash: ^2.4.4
+  home_widget: ^0.7.0+1
+  intl: ^0.20.2
+  crypto: ^3.0.6
+  xml: ^6.5.0
+  webview_flutter: ^4.10.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.15
+  json_serializable: ^6.9.4
+
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/default_avatar.png
+    - assets/lzu/logo-blue_530x160.png
+    - assets/lzu/logo.png
+    - assets/lzu/branding.png
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  color: '#ffffff'
+  image: assets/lzu/logo-blue_530x160.png
+
+  android_12:
+    color: '#ffffff'
+    image: assets/lzu/logo.png
+    branding: assets/lzu/branding.png
+    icon_background_color: "#ffffff"
