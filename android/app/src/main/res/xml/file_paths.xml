@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 允许访问应用的私有文件目录 -->
+    <files-path name="shared_prefs" path="../shared_prefs" />
+    <!-- 其他路径（按需添加） -->
+    <cache-path name="cache" path="." />
+    <external-path name="external" path="." />
+</paths>

@@ -46,19 +46,20 @@ class _MainPageState extends ConsumerState<MainPage> {
         .map((c) => {
               'name': c.kcmc ?? '',
               'time': _jcToTime(c.jc ?? ''),
-              'classroom': c.skjsl ?? ''
+              'classroom': c.skjsl ?? '',
+              'teacher': c.jsxm ?? ''
             })
         .toList();
+
+
 
     await HomeWidget.saveWidgetData<String>(
       'courseData',
       jsonEncode(jsonData),
     );
-    bool? ok = await HomeWidget.updateWidget(
+    HomeWidget.updateWidget(
         androidName: 'HomeScreenAppWidget',
         qualifiedAndroidName: 'com.fallensigh.fasterlzu.HomeScreenAppWidget');
-
-    log.d(ok);
   }
 
   @override
@@ -85,7 +86,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       return b.jc!.compareTo(a.jc!);
     });
 
-    updateWidgetData(onGoingCourses);
+    updateWidgetData(todayCourses.toList());
 
     return Scaffold(
       body: SingleChildScrollView(
