@@ -18,7 +18,6 @@ import androidx.glance.text.TextStyle
 import android.content.ComponentName
 import android.content.Intent
 import androidx.compose.ui.unit.sp
-import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.layout.Box
 import androidx.glance.layout.Row
@@ -57,16 +56,7 @@ class HomeScreenAppWidget : GlanceAppWidget() {
         val courses = parseCourses(json ?: "[]");
 
         Box (
-            modifier = GlanceModifier.fillMaxWidth()
-                .clickable(androidx.glance.appwidget.action.actionStartActivity(
-                    Intent().apply {
-                        component = ComponentName(
-                            "com.fallensigh.fasterlzu",
-                            "com.fallensigh.fasterlzu.MainActivity"
-                        )
-                        putExtra("route", "/schedule")
-                    }
-                ))
+
         ) {
             Column(
                 modifier = GlanceModifier
@@ -142,10 +132,11 @@ class HomeScreenAppWidget : GlanceAppWidget() {
         }
     }
 
+    class CourseListTypeToken : TypeToken<List<Course>>()
+
     private fun parseCourses(json: String) : List<Course> {
         return try {
-            val type = object: TypeToken<List<Course>>() {}.type;
-            Gson().fromJson(json, type) ?: emptyList();
+            Gson().fromJson(json, CourseListTypeToken().type) ?: emptyList();
         } catch (e: Exception) {
             emptyList();
         }
