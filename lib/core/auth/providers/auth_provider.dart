@@ -17,7 +17,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     : _repository = repository, super(const AuthState.initial()) { init(); }
 
   Future<void> init() async {
-    state = const AuthState.loading();
+    state = const AuthState.loggingIn();
     try {
       final response = await _repository.cachedLogin();
       if (response != null && response.code == 1) {
