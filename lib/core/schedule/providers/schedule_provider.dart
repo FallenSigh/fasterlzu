@@ -1,12 +1,9 @@
-import 'package:fasterlzu/core/auth/providers/auth_provider.dart';
-import 'package:fasterlzu/core/auth/providers/auth_state.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/repositories/schedule_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final scheduleProvider = StateNotifierProvider<ScheduleNotifier, ScheduleState>((ref) {
   return ScheduleNotifier(
-    authState: ref.watch(authStateProvider),
     apiRepository: ref.watch(scheduleRepositoryProvider),
     cachedRepository: ref.watch(cachedScheduleRepositoryProvider),
   );
@@ -53,16 +50,13 @@ class ScheduleState {
 }
 
 class ScheduleNotifier extends StateNotifier<ScheduleState> {
-  final AuthState _authState;
   final ApiScheduleRepository _apiRepository;
   final CachedScheduleRepository _cachedRepository;
 
   ScheduleNotifier({
-    required AuthState authState,
     required ApiScheduleRepository apiRepository,
     required CachedScheduleRepository cachedRepository,
-  })  : _authState = authState,
-        _apiRepository = apiRepository,
+  })  : _apiRepository = apiRepository,
         _cachedRepository = cachedRepository,
         super(ScheduleState()) { init(); }
 
