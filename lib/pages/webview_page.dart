@@ -16,14 +16,18 @@ class WebViewPage extends ConsumerWidget {
 
         final controller = ref.read(webViewControllerProvider);
         if (await controller.canGoBack()) {
-          controller.goBack();
+          await controller.goBack();
         } else {
           context.pop();
         }
       },
       child: Scaffold(
-          appBar: AppBar(),
-          body: WebViewWidget(controller: ref.watch(webViewControllerProvider))),
+        appBar: AppBar(),
+        body: WebViewWidget(
+          controller: ref.watch(webViewControllerProvider),
+        ),
+      ),
     );
   }
+
 }

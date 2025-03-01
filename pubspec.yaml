@@ -31,6 +31,7 @@ dependencies:
   xml: ^6.5.0
   webview_flutter: ^4.10.0
   url_launcher: ^6.3.1
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
@@ -61,3 +62,9 @@ flutter_native_splash:
     image: assets/lzu/logo.png
     branding: assets/lzu/branding.png
     icon_background_color: "#ffffff"
+
+flutter_launcher_icons:
+  image_path: "assets/icon/icon.png"
+
+  android: "launcher_icon"
+  min_sdk_android: 21
