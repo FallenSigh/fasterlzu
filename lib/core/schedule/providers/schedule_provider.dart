@@ -65,7 +65,6 @@ class ScheduleNotifier extends StateNotifier<ScheduleState> {
     try {
       // 先尝试获取缓存的学期信息
       final cachedXlxx = await _cachedRepository.getXlxx();
-
       if (cachedXlxx != null) {
         state = state.copyWith(xlxx: cachedXlxx);
         final currentWeek = int.parse(cachedXlxx.dqrqszzc ?? '1');

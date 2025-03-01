@@ -52,7 +52,7 @@ class LoginPage extends ConsumerWidget {
   }
 
   Widget _buildLoginButton(AuthState state, WidgetRef ref) {
-    return state is Loading
+    return state is LoggingIn
         ? const CircularProgressIndicator()
         : ElevatedButton(
       onPressed: () {
