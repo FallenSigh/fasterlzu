@@ -1,130 +1,117 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:xml/xml.dart';
+
 part 'app_model.freezed.dart';
 part 'app_model.g.dart';
 
 @freezed
-class EtTokenResponse with _$EtTokenResponse{
-  factory EtTokenResponse({
-    required String msg,
-    required String? accNum,
-    required int code,
-    required String? token
-}) = _EtTokenResponse;
+class ServiceInfo with _$ServiceInfo {
+  factory ServiceInfo({
+    required String? service_info_id,
+    required String? service_name,
+    required String? app_icon,
+    required String? pc_icon,
+    required String? unint_id,
+    required int? app_type,
+    required String? service_type,
+    required String? service_type_str,
+    required String? android_main,
+    required String? ios_main,
+    required String? h5_url,
+    required String? h5_pcurl,
+    required String? version_id,
+    required int? is_recommend,
+    required String? start_time,
+    required String? end_time,
+    required int? service_sort,
+    required int? status,
+    required String? create_time,
+    required String? create_user_id,
+    required int? is_login,
+    required int? is_new,
+    required int? is_top,
+    required int? is_hot,
+    required int? is_pay,
+    required int? isfull_screen,
+    required int? is_ignore_login,
+    required String? cp_code,
+    required String? sign_key,
+    required String? app_id,
+    required String? lzu_sign_key,
+    required String? h5_service_url,
+    required String? app_icon_url,
+    required String? pc_icon_url,
+    required String? unint_name,
+    required String? role_str,
+    required String? terminal_str,
+    required String? terminal_ids,
+    required String? start_time_str,
+    required String? end_time_str,
+    required String? roles,
+    required String? role_ids,
+    required String? terminals,
+    required String? key_word,
+    required String? use_system,
+    required String? first_letter,
+    required String? introduce,
+    required String? condition,
+    required String? need_attention,
+    required String? contact_phone,
+    required String? oh_service_id,
+    required String? object_ids,
+    required String? object_ids_str,
+    required String? pc_show_type,
+    required String? has_collected,
+    required String? fee_scale,
+    required String? fee_scale_str,
+    required String? handle_method,
+    required String? handle_method_str,
+    required String? co_organizer,
+    required String? co_organizer_str,
+    required String? expected_period,
+    required String? expected_period_str,
+    required int? is_show_detail,
+    required int? process_img_source,
+    required String? process_img_url,
+    required String? pxyj,
+    required String? cjsj,
+    required List<String>? use_systems,
+    required String? oh_appid,
+    required String? can_consult,
+    required String? can_evaluate,
+    required String? monitor_roleid,
+    required String? maintainer_roleid,
+  }) = _ServiceInfo;
 
-  factory EtTokenResponse.fromJson(Map<String, dynamic> json) =>
-      _$EtTokenResponseFromJson(json);
+  factory ServiceInfo.fromJson(Map<String, dynamic> json) =>
+      _$ServiceInfoFromJson(json);
 }
 
 @freezed
-class GetAccInfoResponse with _$GetAccInfoResponse {
-  factory GetAccInfoResponse({
-    required int code,
-    required String msg,
-    required String? cardAccNum,
-    required String? epid
-}) = _GetAccInfoResponse;
+class AppType with _$AppType {
+  factory AppType({
+    required String? service_type_id,
+    required String? service_type_name,
+    required String? service_type_icon,
+    required String? service_type_icon_url,
+    required int? service_type_sort,
+    required int? status,
+    required String? create_time,
+    required String? create_user_id,
+    required List<ServiceInfo>? service_infos,
+  }) = _AppType;
 
-  factory GetAccInfoResponse.fromXml(String x) {
-    final xml = XmlDocument.parse(x);
-    return GetAccInfoResponse(
-      code: int.parse(xml.findAllElements('Code').first.innerText),
-      msg: xml.findAllElements('Msg').first.innerText,
-      cardAccNum: xml.findAllElements('CardAccNum').first.innerText,
-      epid: xml.findAllElements('EPID').first.innerText
-    );
-  }
-}
-@freezed
-class WalletInfo with _$WalletInfo {
-  factory WalletInfo({
-    required String cardName,
-    required String cardAccNum,
-    required String unit,
-    required String walletMoney,
-    required String walletName,
-    required String isWithdraw,
-    required String moneyMax,
-    required String monTemp,
-    required String monCard,
-    required String walletNum,
-  }) = _WalletInfo;
+  factory AppType.fromJson(Map<String, dynamic> json) =>
+      _$AppTypeFromJson(json);
 }
 
 @freezed
-class GetWalletMoneyResponse with _$GetWalletMoneyResponse {
-  factory GetWalletMoneyResponse({
+class DetailedAppResponse with _$DetailedAppResponse {
+  factory DetailedAppResponse({
     required int code,
-    required String msg,
-    required List<WalletInfo> wallets,
-  }) = _GetWalletMoneyResponse;
+    required String message,
+    required List<AppType>? data,
+  }) = _DetailedAppResponse;
 
-  factory GetWalletMoneyResponse.fromXml(String x) {
-    final xml = XmlDocument.parse(x);
-    final tables = xml.findElements('EasyTong').first.findElements('Table');
-    
-    return GetWalletMoneyResponse(
-      code: int.parse(xml.findElements('EasyTong').first.findElements('Code').first.innerText),
-      msg: xml.findElements('EasyTong').first.findElements('Msg').first.innerText,
-      wallets: tables.map((table) => WalletInfo(
-        cardName: table.findElements('CardName').first.innerText,
-        cardAccNum: table.findElements('CardAccNum').first.innerText,
-        unit: table.findElements('Unit').first.innerText,
-        walletMoney: table.findElements('WalletMoney').first.innerText,
-        walletName: table.findElements('WalletName').first.innerText,
-        isWithdraw: table.findElements('IsWithdraw').first.innerText,
-        moneyMax: table.findElements('MoneyMax').first.innerText,
-        monTemp: table.findElements('MonTemp').first.innerText,
-        monCard: table.findElements('MonCard').first.innerText,
-        walletNum: table.findElements('WalletNum').first.innerText,
-      )).toList(),
-    );
-  }
-}
-@freezed
-class GetH5QRCodeResponse with _$GetH5QRCodeResponse {
-  factory GetH5QRCodeResponse({
-    required String? authNum,
-    required String? cardAccNum,
-    required String? qRCode,
-    required int code,
-    required String msg,
-}) = _GetH5QRCodeResponse;
-
-  factory GetH5QRCodeResponse.fromJson(Map<String, dynamic> json) =>
-      _$GetH5QRCodeResponseFromJson(json);
-}
-@freezed
-class GetOrderByCodeResponse with _$GetOrderByCodeResponse {
-  factory GetOrderByCodeResponse({
-    required int code,
-    required String msg,
-    String? compareType,
-    String? dealTime,
-    String? discount,
-    String? managerFee,
-    String? needMoney,
-    String? realMoney,
-    String? status,
-    String? walletMoney,
-    String? walletName,
-  }) = _GetOrderByCodeResponse;
-
-  factory GetOrderByCodeResponse.fromXml(String x) {
-    final xml = XmlDocument.parse(x);
-    final root = xml.findElements('EasyTong').first;
-    return GetOrderByCodeResponse(
-      code: int.parse(root.findElements('Code').first.innerText),
-      msg: root.findElements('Msg').first.innerText,
-      compareType: root.findElements('CompareType').firstOrNull?.innerText,
-      dealTime: root.findElements('DealTime').firstOrNull?.innerText,
-      discount: root.findElements('Discount').firstOrNull?.innerText,
-      managerFee: root.findElements('ManagerFee').firstOrNull?.innerText,
-      needMoney: root.findElements('NeedMoney').firstOrNull?.innerText,
-      realMoney: root.findElements('RealMoney').firstOrNull?.innerText,
-      status: root.findElements('Status').firstOrNull?.innerText,
-      walletMoney: root.findElements('WalletMoney').firstOrNull?.innerText,
-      walletName: root.findElements('WalletName').firstOrNull?.innerText,
-    );
-  }
+  factory DetailedAppResponse.fromJson(Map<String, dynamic> json) =>
+      _$DetailedAppResponseFromJson(json);
 }

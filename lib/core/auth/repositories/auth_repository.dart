@@ -80,6 +80,7 @@ class AuthRepository {
       await _storage.write(
           key: '${currentUser}gateway_token', value: res.data!.gateway_token);
     }
+
     return res;
   }
 

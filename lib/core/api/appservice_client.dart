@@ -36,7 +36,7 @@ class EncryptInterceptor extends Interceptor {
         response.data = jsonDecode(response.data);
       } catch (e) {
         response.data = jsonDecode(AESCrypto.decrypt(response.data)!);
-        log.t('[Dio Interceptor] 解析原数据失败，尝试解析解码数据');
+        // log.t('[Dio Interceptor] 解析原数据失败，尝试解析解码数据');
       }
     }
 

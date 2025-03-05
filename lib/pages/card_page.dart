@@ -1,13 +1,13 @@
 import 'package:fasterlzu/app_config.dart';
-import 'package:fasterlzu/core/app/models/app_model.dart';
+import 'package:fasterlzu/core/easytong/models/easytong_model.dart';
 import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/webview/providers/webview_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fasterlzu/core/app/repositories/app_repository.dart';
+import 'package:fasterlzu/core/easytong/repositories/easytong_repository.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:fasterlzu/core/app/providers/card_provider.dart';
+import 'package:fasterlzu/core/easytong/providers/card_provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -99,8 +99,8 @@ class _CardPageState extends ConsumerState<CardPage> {
 
   void _loadEasyTongApp() async {
     final controller = ref.read(webViewControllerProvider);
-    final accNum = ref.read(appRepositoryProvider).accNum ?? '';
-    final token = ref.read(appRepositoryProvider).etToken ?? '';
+    final accNum = ref.read(easytongRepositoryProvider).accNum ?? '';
+    final token = ref.read(easytongRepositoryProvider).etToken ?? '';
 
     controller.setNavigationDelegate(NavigationDelegate(
       onPageFinished: (url) async {
