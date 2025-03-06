@@ -74,6 +74,7 @@ class _ServicePageState extends ConsumerState<ServicePage> {
     String url = service.h5_url ?? '';
     url = '$url?PersonID=$personID&st=$st&ticket=$st';
 
+    controller.clearCache();
     controller.loadRequest(Uri.parse(url));
 
     context.push('/webview');

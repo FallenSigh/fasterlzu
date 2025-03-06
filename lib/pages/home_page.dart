@@ -18,8 +18,8 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   int _selectedIndex = 0;
   final List _pages = [
-    ServicePage(),
     MainPage(),
+    ServicePage(),
     ProfilePage(),
   ];
 
@@ -46,11 +46,11 @@ class _HomePageState extends ConsumerState<HomePage> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.design_services),
+            icon: Icon(Icons.home),
             label: ''
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.design_services),
             label: ''
           ),
           BottomNavigationBarItem(

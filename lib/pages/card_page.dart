@@ -96,12 +96,14 @@ class _CardPageState extends ConsumerState<CardPage> {
       }
     }
   }
-
   void _loadEasyTongApp() async {
     final controller = ref.read(webViewControllerProvider);
     final accNum = ref.read(easytongRepositoryProvider).accNum ?? '';
     final token = ref.read(easytongRepositoryProvider).etToken ?? '';
-
+    
+    controller.clearCache();
+    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+    controller.setBackgroundColor(Colors.white);
     controller.setNavigationDelegate(NavigationDelegate(
       onPageFinished: (url) async {
         await controller.runJavaScript("window.localStorage.setItem('AccNum', $accNum);");
@@ -129,7 +131,6 @@ class _CardPageState extends ConsumerState<CardPage> {
     ));
     controller.loadRequest(Uri.parse(AppConfig.EasyTongWebApp));
   }
-
   @override
   Widget build(BuildContext context) {
     final cardState = ref.watch(cardProvider);
