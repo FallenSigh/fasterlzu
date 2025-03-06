@@ -7,7 +7,26 @@
 - 课表 📅 [√]
 - 校园卡 🎫 [√]
 - 桌面小组件 🖥️ [√]
-- 其他服务功能 [x]
+- 其他服务功能 [乄]
+
+## Build
+
+1. 下载安装flutter
+
+   参考`https://docs.flutter.dev/get-started/install`
+
+2. 克隆仓库到本地
+    ```
+    git clone https://github.com/FallenSigh/fasterlzu.git
+    cd fasterlzu
+    ```
+
+3. 使用flutter运行
+    ```
+    flutter run
+    ```
+
+4. 构建release版请自行添加签名密钥
 
 ## Images 🖼️
 <img src=images/img.png width=600>
