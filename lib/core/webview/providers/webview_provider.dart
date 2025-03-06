@@ -1,7 +1,7 @@
 import 'package:fasterlzu/app_config.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
@@ -11,23 +11,38 @@ final webViewControllerProvider = StateNotifierProvider<WebViewControllerNotifie
   return WebViewControllerNotifier(params);
 });
 
+NavigationRequestCallback createNavigationHandler(WebViewController controller) {
+  return (NavigationRequest request) async {
+    if (request.url.startsWith("https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb")) {
+      controller.loadRequest(Uri.parse(request.url), headers: {
+        "Referer": "https://paygray.xiaofubao.com",
+      });
+      return NavigationDecision.prevent;
+    } else if (request.url.startsWith("weixin://") || request.url.startsWith("alipays://")) {
+      try {
+        await launchUrl(Uri.parse(request.url), mode: LaunchMode.externalApplication);
+      } catch (e) {
+        log.e("无法打开微信或支付宝: ${e.toString()}");
+      }
+      return NavigationDecision.prevent;
+    }
+    return NavigationDecision.navigate;
+  };
+}
+
+
 class WebViewControllerNotifier extends StateNotifier<WebViewController> {
   final PlatformWebViewControllerCreationParams params;
-  // 用于控制 WebView 组件重建的 Key
-  UniqueKey _webViewKey = UniqueKey();
-
-  UniqueKey get webViewKey => _webViewKey;
   
   WebViewControllerNotifier(this.params)
       : super(WebViewController.fromPlatformCreationParams(params) 
           ..setUserAgent(AppConfig.UA)
           ..setJavaScriptMode(JavaScriptMode.unrestricted));
 
-  Future<void> resetWebView() async {
-    _webViewKey = UniqueKey();
-    state = WebViewController.fromPlatformCreationParams(params)
-      ..setUserAgent(AppConfig.UA)
-      ..setJavaScriptMode(JavaScriptMode.unrestricted);
+  void reset() {
+    state = WebViewController.fromPlatformCreationParams(params) 
+          ..setUserAgent(AppConfig.UA)
+          ..setJavaScriptMode(JavaScriptMode.unrestricted);
   }
 
   void loadUrl(String url) {

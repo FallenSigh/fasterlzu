@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -15,12 +14,12 @@ class WebViewPage extends ConsumerWidget {
     dynamic params;
     if (Platform.isAndroid) {
       params = AndroidWebViewWidgetCreationParams(
-      controller: ref.watch(webViewControllerProvider).platform as AndroidWebViewController,
-      displayWithHybridComposition: true
-    );
+        controller:
+            ref.watch(webViewControllerProvider).platform
+                as AndroidWebViewController,
+        displayWithHybridComposition: true,
+      );
     }
-
-    final webViewKey = ref.watch(webViewControllerProvider.notifier).webViewKey;
 
     return PopScope(
       canPop: false,
@@ -34,12 +33,11 @@ class WebViewPage extends ConsumerWidget {
           context.pop();
         }
       },
-      
+
       child: Scaffold(
         appBar: AppBar(),
-        body: WebViewWidget.fromPlatformCreationParams(key:webViewKey, params: params)
+        body: WebViewWidget.fromPlatformCreationParams(params: params),
       ),
     );
   }
-
 }

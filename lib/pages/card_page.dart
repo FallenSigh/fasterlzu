@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:fasterlzu/core/easytong/providers/card_provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CardPage extends ConsumerStatefulWidget {
   const CardPage({super.key});
@@ -97,36 +96,18 @@ class _CardPageState extends ConsumerState<CardPage> {
     }
   }
   void _loadEasyTongApp() async {
-    final controller = ref.read(webViewControllerProvider);
     final accNum = ref.read(easytongRepositoryProvider).accNum ?? '';
     final token = ref.read(easytongRepositoryProvider).etToken ?? '';
     
-    ref.read(webViewControllerProvider.notifier).resetWebView();
+    ref.read(webViewControllerProvider.notifier).reset();
+    final controller = ref.read(webViewControllerProvider);
 
     controller.setNavigationDelegate(NavigationDelegate(
       onPageStarted: (url) async {
         await controller.runJavaScript("window.localStorage.setItem('AccNum', $accNum);");
         await controller.runJavaScript('document.cookie = "etToken=$token; path=/;"');
       },
-      onNavigationRequest: (NavigationRequest request) async {
-        log.d(request.url);
-        if (request.url.startsWith("https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb")) {
-          controller.loadRequest(Uri.parse(request.url),
-          headers: {
-            "Referer": "https://paygray.xiaofubao.com",
-          });
-          return NavigationDecision.prevent;
-        } else if (request.url.startsWith("weixin://") || request.url.startsWith("alipays://")) {
-          try {
-            await launchUrl(Uri.parse(request.url),
-                mode: LaunchMode.externalApplication);
-          } catch (e) {
-            log.e("无法打开微信或支付宝: ${e.toString()}");
-          }
-          return NavigationDecision.prevent;
-        }
-        return NavigationDecision.navigate;
-      }
+      onNavigationRequest: createNavigationHandler(controller)
     ));
     
     controller.loadRequest(Uri.parse(AppConfig.EasyTongWebApp));

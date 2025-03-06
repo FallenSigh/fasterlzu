@@ -2,7 +2,6 @@ import 'package:fasterlzu/core/app/models/app_model.dart';
 import 'package:fasterlzu/core/app/providers/app_provider.dart';
 import 'package:fasterlzu/core/auth/repositories/auth_repository.dart';
 import 'package:fasterlzu/core/easytong/repositories/easytong_repository.dart';
-import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/webview/providers/webview_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,6 +18,10 @@ class ServicePage extends ConsumerStatefulWidget {
 }
 
 class _ServicePageState extends ConsumerState<ServicePage> {
+  Future<void> _refreshApps() async {
+    ref.read(appProvider.notifier).refresh();
+  }
+  
   @override
   Widget build(BuildContext context) {
     final appState = ref.watch(appProvider);
@@ -34,6 +37,12 @@ class _ServicePageState extends ConsumerState<ServicePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('应用列表'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () => _refreshApps(),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -56,21 +65,21 @@ class _ServicePageState extends ConsumerState<ServicePage> {
 
   void _handleItemTap(ServiceInfo service) async {
     final authRepository = ref.read(authRepositoryProvider);
-    final loginToken = await authRepository.loginToken;
-    final gatewayToken = await authRepository.gatewayToken;
+    // final loginToken = await authRepository.loginToken;
+    // final gatewayToken = await authRepository.gatewayToken;
     final st = await authRepository.getSt();
-    final etToken = ref.read(easytongRepositoryProvider).getEtToken();
+    final etToken = await ref.read(easytongRepositoryProvider).getEtToken();
     final personID = authRepository.currentUser;
-
-    ref.read(webViewControllerProvider.notifier).resetWebView();
     
-    final controller = ref.read(webViewControllerProvider);
+    ref.read(webViewControllerProvider.notifier).reset();
+    final controller = ref.watch(webViewControllerProvider);
     
     controller.setNavigationDelegate(NavigationDelegate(
       onPageStarted: (url) async {
         await controller.runJavaScript(
-          'document.cookie = "ehall_token=$gatewayToken;eusp_token=$gatewayToken;vehEticket_token=$etToken"');
+          'document.cookie = "vehEticket_token=$etToken"');
       },
+      onNavigationRequest: createNavigationHandler(controller)
     ));
 
     String url = service.h5_url ?? '';

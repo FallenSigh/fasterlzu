@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:fasterlzu/app_config.dart';
 import 'package:fasterlzu/core/encryption/aes_crypto.dart';
-import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 
