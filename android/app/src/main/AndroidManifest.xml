@@ -6,7 +6,8 @@
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:label="fasterlzu"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true">
 
         <receiver
             android:name=".HomeWidgetReceiver"

@@ -1,3 +1,4 @@
+import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/repositories/schedule_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,6 +62,7 @@ class ScheduleNotifier extends StateNotifier<ScheduleState> {
         super(ScheduleState()) { init(); }
 
   Future<void> init() async {
+    log.t("[ScheduleNotifier] initing");
     state = state.copyWith(isLoading: true);
     try {
       // 先尝试获取缓存的学期信息
