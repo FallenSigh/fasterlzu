@@ -62,10 +62,12 @@ class _ServicePageState extends ConsumerState<ServicePage> {
     final etToken = ref.read(easytongRepositoryProvider).getEtToken();
     final personID = authRepository.currentUser;
 
+    ref.read(webViewControllerProvider.notifier).resetWebView();
+    
     final controller = ref.read(webViewControllerProvider);
-
+    
     controller.setNavigationDelegate(NavigationDelegate(
-      onPageFinished: (url) async {
+      onPageStarted: (url) async {
         await controller.runJavaScript(
           'document.cookie = "ehall_token=$gatewayToken;eusp_token=$gatewayToken;vehEticket_token=$etToken"');
       },
@@ -74,7 +76,6 @@ class _ServicePageState extends ConsumerState<ServicePage> {
     String url = service.h5_url ?? '';
     url = '$url?PersonID=$personID&st=$st&ticket=$st';
 
-    controller.clearCache();
     controller.loadRequest(Uri.parse(url));
 
     context.push('/webview');
