@@ -1,7 +1,9 @@
+import 'package:fasterlzu/core/app/providers/app_provider.dart';
 import 'package:fasterlzu/core/auth/providers/auth_provider.dart';
 import 'package:fasterlzu/core/schedule/providers/schedule_provider.dart';
 import 'package:fasterlzu/pages/main_page.dart';
 import 'package:fasterlzu/pages/profile_page.dart';
+import 'package:fasterlzu/pages/service_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,6 +19,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   int _selectedIndex = 0;
   final List _pages = [
     MainPage(),
+    ServicePage(),
     ProfilePage(),
   ];
 
@@ -25,6 +28,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     super.initState();
     ref.read(authStateProvider);
     ref.read(scheduleProvider);
+    ref.read(appProvider);
   }
 
   @override
@@ -44,6 +48,10 @@ class _HomePageState extends ConsumerState<HomePage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
+            label: ''
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.design_services),
             label: ''
           ),
           BottomNavigationBarItem(

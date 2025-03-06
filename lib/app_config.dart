@@ -20,7 +20,8 @@ class AppConfig {
     'addSchedule': '/apigw/lzu-teaching-research/kcb/addorUpdateZdyKc',
     'delSchedule': '/apigw/lzu-teaching-research/kcb/deleZdyKc',
     'getSt': '/api/eusp-unify-terminal/app-user/getSt',
-    'getGrszsyyy': '/api/eusp-terminal-management/syyysz/v2/getGrszsyyy'
+    'getGrszsyyy': '/api/eusp-terminal-management/syyysz/v2/getGrszsyyy',
+    'getServiceInfoDetail': '/api/eusp-terminal-management/api/v2/getServiceInfoDetailByTerminalRole'
   };
 
   static Map<String, String> appApis = {

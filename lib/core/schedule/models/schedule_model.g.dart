@@ -30,9 +30,10 @@ _$XlxxResponseImpl _$$XlxxResponseImplFromJson(Map<String, dynamic> json) =>
     _$XlxxResponseImpl(
       code: (json['code'] as num).toInt(),
       message: json['message'] as String,
-      data: json['data'] == null
-          ? null
-          : XlxxData.fromJson(json['data'] as Map<String, dynamic>),
+      data:
+          json['data'] == null
+              ? null
+              : XlxxData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$XlxxResponseImplToJson(_$XlxxResponseImpl instance) =>
@@ -43,18 +44,15 @@ Map<String, dynamic> _$$XlxxResponseImplToJson(_$XlxxResponseImpl instance) =>
     };
 
 _$ScheduleRequestImpl _$$ScheduleRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ScheduleRequestImpl(
-      zc: (json['zc'] as num).toInt(),
-      qsbz: (json['qsbz'] as num).toInt(),
-    );
+  Map<String, dynamic> json,
+) => _$ScheduleRequestImpl(
+  zc: (json['zc'] as num).toInt(),
+  qsbz: (json['qsbz'] as num).toInt(),
+);
 
 Map<String, dynamic> _$$ScheduleRequestImplToJson(
-        _$ScheduleRequestImpl instance) =>
-    <String, dynamic>{
-      'zc': instance.zc,
-      'qsbz': instance.qsbz,
-    };
+  _$ScheduleRequestImpl instance,
+) => <String, dynamic>{'zc': instance.zc, 'qsbz': instance.qsbz};
 
 _$CourseInfoImpl _$$CourseInfoImplFromJson(Map<String, dynamic> json) =>
     _$CourseInfoImpl(
@@ -103,97 +101,97 @@ Map<String, dynamic> _$$CourseInfoImplToJson(_$CourseInfoImpl instance) =>
     };
 
 _$ScheduleResponseImpl _$$ScheduleResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ScheduleResponseImpl(
-      code: (json['code'] as num).toInt(),
-      message: json['message'] as String,
-      data: (json['data'] as List<dynamic>?)
+  Map<String, dynamic> json,
+) => _$ScheduleResponseImpl(
+  code: (json['code'] as num).toInt(),
+  message: json['message'] as String,
+  data:
+      (json['data'] as List<dynamic>?)
           ?.map((e) => CourseInfo.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
+);
 
 Map<String, dynamic> _$$ScheduleResponseImplToJson(
-        _$ScheduleResponseImpl instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'message': instance.message,
-      'data': instance.data,
-    };
+  _$ScheduleResponseImpl instance,
+) => <String, dynamic>{
+  'code': instance.code,
+  'message': instance.message,
+  'data': instance.data,
+};
 
 _$AddScheduleDataImpl _$$AddScheduleDataImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AddScheduleDataImpl(
-      kcmc: json['kcmc'] as String,
-      jsxm: json['jsxm'] as String,
-      xf: json['xf'] as String,
-      color: json['color'] as String,
-      xkjsl: json['xkjsl'] as String,
-      skxql: json['skxql'] as String,
-      week: json['week'] as String,
-      week_fb: json['week_fb'] as String,
-      jc: json['jc'] as String,
-      bs: json['bs'] as String,
-      skjc: json['skjc'] as String,
-    );
+  Map<String, dynamic> json,
+) => _$AddScheduleDataImpl(
+  kcmc: json['kcmc'] as String,
+  jsxm: json['jsxm'] as String,
+  xf: json['xf'] as String,
+  color: json['color'] as String,
+  xkjsl: json['xkjsl'] as String,
+  skxql: json['skxql'] as String,
+  week: json['week'] as String,
+  week_fb: json['week_fb'] as String,
+  jc: json['jc'] as String,
+  bs: json['bs'] as String,
+  skjc: json['skjc'] as String,
+);
 
 Map<String, dynamic> _$$AddScheduleDataImplToJson(
-        _$AddScheduleDataImpl instance) =>
-    <String, dynamic>{
-      'kcmc': instance.kcmc,
-      'jsxm': instance.jsxm,
-      'xf': instance.xf,
-      'color': instance.color,
-      'xkjsl': instance.xkjsl,
-      'skxql': instance.skxql,
-      'week': instance.week,
-      'week_fb': instance.week_fb,
-      'jc': instance.jc,
-      'bs': instance.bs,
-      'skjc': instance.skjc,
-    };
+  _$AddScheduleDataImpl instance,
+) => <String, dynamic>{
+  'kcmc': instance.kcmc,
+  'jsxm': instance.jsxm,
+  'xf': instance.xf,
+  'color': instance.color,
+  'xkjsl': instance.xkjsl,
+  'skxql': instance.skxql,
+  'week': instance.week,
+  'week_fb': instance.week_fb,
+  'jc': instance.jc,
+  'bs': instance.bs,
+  'skjc': instance.skjc,
+};
 
 _$AddScheduleRequestImpl _$$AddScheduleRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AddScheduleRequestImpl(
-      kclsit: (json['kclsit'] as List<dynamic>)
+  Map<String, dynamic> json,
+) => _$AddScheduleRequestImpl(
+  kclsit:
+      (json['kclsit'] as List<dynamic>)
           .map((e) => AddScheduleData.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
+);
 
 Map<String, dynamic> _$$AddScheduleRequestImplToJson(
-        _$AddScheduleRequestImpl instance) =>
-    <String, dynamic>{
-      'kclsit': instance.kclsit,
-    };
+  _$AddScheduleRequestImpl instance,
+) => <String, dynamic>{'kclsit': instance.kclsit};
 
 _$AddScheduleResponseImpl _$$AddScheduleResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AddScheduleResponseImpl(
-      code: (json['code'] as num).toInt(),
-      message: json['message'] as String,
-      data: json['data'] as String?,
-    );
+  Map<String, dynamic> json,
+) => _$AddScheduleResponseImpl(
+  code: (json['code'] as num).toInt(),
+  message: json['message'] as String,
+  data: json['data'] as String?,
+);
 
 Map<String, dynamic> _$$AddScheduleResponseImplToJson(
-        _$AddScheduleResponseImpl instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'message': instance.message,
-      'data': instance.data,
-    };
+  _$AddScheduleResponseImpl instance,
+) => <String, dynamic>{
+  'code': instance.code,
+  'message': instance.message,
+  'data': instance.data,
+};
 
 _$DelScheduleResponseImpl _$$DelScheduleResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DelScheduleResponseImpl(
-      code: (json['code'] as num).toInt(),
-      message: json['message'] as String,
-      data: json['data'] as String?,
-    );
+  Map<String, dynamic> json,
+) => _$DelScheduleResponseImpl(
+  code: (json['code'] as num).toInt(),
+  message: json['message'] as String,
+  data: json['data'] as String?,
+);
 
 Map<String, dynamic> _$$DelScheduleResponseImplToJson(
-        _$DelScheduleResponseImpl instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'message': instance.message,
-      'data': instance.data,
-    };
+  _$DelScheduleResponseImpl instance,
+) => <String, dynamic>{
+  'code': instance.code,
+  'message': instance.message,
+  'data': instance.data,
+};

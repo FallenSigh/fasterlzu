@@ -12,7 +12,8 @@ part of 'schedule_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 XlxxData _$XlxxDataFromJson(Map<String, dynamic> json) {
   return _XlxxData.fromJson(json);
@@ -42,13 +43,14 @@ abstract class $XlxxDataCopyWith<$Res> {
   factory $XlxxDataCopyWith(XlxxData value, $Res Function(XlxxData) then) =
       _$XlxxDataCopyWithImpl<$Res, XlxxData>;
   @useResult
-  $Res call(
-      {String? dqrqszzc,
-      String? zzx,
-      String? ksrq,
-      String? xqm,
-      String? xn,
-      String? xq});
+  $Res call({
+    String? dqrqszzc,
+    String? zzx,
+    String? ksrq,
+    String? xqm,
+    String? xn,
+    String? xq,
+  });
 }
 
 /// @nodoc
@@ -73,32 +75,41 @@ class _$XlxxDataCopyWithImpl<$Res, $Val extends XlxxData>
     Object? xn = freezed,
     Object? xq = freezed,
   }) {
-    return _then(_value.copyWith(
-      dqrqszzc: freezed == dqrqszzc
-          ? _value.dqrqszzc
-          : dqrqszzc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      zzx: freezed == zzx
-          ? _value.zzx
-          : zzx // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ksrq: freezed == ksrq
-          ? _value.ksrq
-          : ksrq // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xqm: freezed == xqm
-          ? _value.xqm
-          : xqm // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xn: freezed == xn
-          ? _value.xn
-          : xn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xq: freezed == xq
-          ? _value.xq
-          : xq // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            dqrqszzc:
+                freezed == dqrqszzc
+                    ? _value.dqrqszzc
+                    : dqrqszzc // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            zzx:
+                freezed == zzx
+                    ? _value.zzx
+                    : zzx // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            ksrq:
+                freezed == ksrq
+                    ? _value.ksrq
+                    : ksrq // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            xqm:
+                freezed == xqm
+                    ? _value.xqm
+                    : xqm // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            xn:
+                freezed == xn
+                    ? _value.xn
+                    : xn // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            xq:
+                freezed == xq
+                    ? _value.xq
+                    : xq // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -106,17 +117,19 @@ class _$XlxxDataCopyWithImpl<$Res, $Val extends XlxxData>
 abstract class _$$XlxxDataImplCopyWith<$Res>
     implements $XlxxDataCopyWith<$Res> {
   factory _$$XlxxDataImplCopyWith(
-          _$XlxxDataImpl value, $Res Function(_$XlxxDataImpl) then) =
-      __$$XlxxDataImplCopyWithImpl<$Res>;
+    _$XlxxDataImpl value,
+    $Res Function(_$XlxxDataImpl) then,
+  ) = __$$XlxxDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? dqrqszzc,
-      String? zzx,
-      String? ksrq,
-      String? xqm,
-      String? xn,
-      String? xq});
+  $Res call({
+    String? dqrqszzc,
+    String? zzx,
+    String? ksrq,
+    String? xqm,
+    String? xn,
+    String? xq,
+  });
 }
 
 /// @nodoc
@@ -124,8 +137,9 @@ class __$$XlxxDataImplCopyWithImpl<$Res>
     extends _$XlxxDataCopyWithImpl<$Res, _$XlxxDataImpl>
     implements _$$XlxxDataImplCopyWith<$Res> {
   __$$XlxxDataImplCopyWithImpl(
-      _$XlxxDataImpl _value, $Res Function(_$XlxxDataImpl) _then)
-      : super(_value, _then);
+    _$XlxxDataImpl _value,
+    $Res Function(_$XlxxDataImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of XlxxData
   /// with the given fields replaced by the non-null parameter values.
@@ -139,64 +153,73 @@ class __$$XlxxDataImplCopyWithImpl<$Res>
     Object? xn = freezed,
     Object? xq = freezed,
   }) {
-    return _then(_$XlxxDataImpl(
-      dqrqszzc: freezed == dqrqszzc
-          ? _value.dqrqszzc
-          : dqrqszzc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      zzx: freezed == zzx
-          ? _value.zzx
-          : zzx // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ksrq: freezed == ksrq
-          ? _value.ksrq
-          : ksrq // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xqm: freezed == xqm
-          ? _value.xqm
-          : xqm // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xn: freezed == xn
-          ? _value.xn
-          : xn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xq: freezed == xq
-          ? _value.xq
-          : xq // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$XlxxDataImpl(
+        dqrqszzc:
+            freezed == dqrqszzc
+                ? _value.dqrqszzc
+                : dqrqszzc // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        zzx:
+            freezed == zzx
+                ? _value.zzx
+                : zzx // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        ksrq:
+            freezed == ksrq
+                ? _value.ksrq
+                : ksrq // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        xqm:
+            freezed == xqm
+                ? _value.xqm
+                : xqm // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        xn:
+            freezed == xn
+                ? _value.xn
+                : xn // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        xq:
+            freezed == xq
+                ? _value.xq
+                : xq // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$XlxxDataImpl implements _XlxxData {
-  _$XlxxDataImpl(
-      {required this.dqrqszzc,
-      required this.zzx,
-      required this.ksrq,
-      required this.xqm,
-      required this.xn,
-      required this.xq});
+  _$XlxxDataImpl({
+    required this.dqrqszzc,
+    required this.zzx,
+    required this.ksrq,
+    required this.xqm,
+    required this.xn,
+    required this.xq,
+  });
 
   factory _$XlxxDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$XlxxDataImplFromJson(json);
 
   @override
   final String? dqrqszzc;
-// 当前日期周次
+  // 当前日期周次
   @override
   final String? zzx;
-// 总周次
+  // 总周次
   @override
   final String? ksrq;
-// 开始日期
+  // 开始日期
   @override
   final String? xqm;
-// 星期几
+  // 星期几
   @override
   final String? xn;
-// 学年
+  // 学年
   @override
   final String? xq;
 
@@ -234,20 +257,19 @@ class _$XlxxDataImpl implements _XlxxData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$XlxxDataImplToJson(
-      this,
-    );
+    return _$$XlxxDataImplToJson(this);
   }
 }
 
 abstract class _XlxxData implements XlxxData {
-  factory _XlxxData(
-      {required final String? dqrqszzc,
-      required final String? zzx,
-      required final String? ksrq,
-      required final String? xqm,
-      required final String? xn,
-      required final String? xq}) = _$XlxxDataImpl;
+  factory _XlxxData({
+    required final String? dqrqszzc,
+    required final String? zzx,
+    required final String? ksrq,
+    required final String? xqm,
+    required final String? xn,
+    required final String? xq,
+  }) = _$XlxxDataImpl;
 
   factory _XlxxData.fromJson(Map<String, dynamic> json) =
       _$XlxxDataImpl.fromJson;
@@ -296,8 +318,9 @@ mixin _$XlxxResponse {
 /// @nodoc
 abstract class $XlxxResponseCopyWith<$Res> {
   factory $XlxxResponseCopyWith(
-          XlxxResponse value, $Res Function(XlxxResponse) then) =
-      _$XlxxResponseCopyWithImpl<$Res, XlxxResponse>;
+    XlxxResponse value,
+    $Res Function(XlxxResponse) then,
+  ) = _$XlxxResponseCopyWithImpl<$Res, XlxxResponse>;
   @useResult
   $Res call({int code, String message, XlxxData? data});
 
@@ -323,20 +346,26 @@ class _$XlxxResponseCopyWithImpl<$Res, $Val extends XlxxResponse>
     Object? message = null,
     Object? data = freezed,
   }) {
-    return _then(_value.copyWith(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as XlxxData?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            code:
+                null == code
+                    ? _value.code
+                    : code // ignore: cast_nullable_to_non_nullable
+                        as int,
+            message:
+                null == message
+                    ? _value.message
+                    : message // ignore: cast_nullable_to_non_nullable
+                        as String,
+            data:
+                freezed == data
+                    ? _value.data
+                    : data // ignore: cast_nullable_to_non_nullable
+                        as XlxxData?,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of XlxxResponse
@@ -358,8 +387,9 @@ class _$XlxxResponseCopyWithImpl<$Res, $Val extends XlxxResponse>
 abstract class _$$XlxxResponseImplCopyWith<$Res>
     implements $XlxxResponseCopyWith<$Res> {
   factory _$$XlxxResponseImplCopyWith(
-          _$XlxxResponseImpl value, $Res Function(_$XlxxResponseImpl) then) =
-      __$$XlxxResponseImplCopyWithImpl<$Res>;
+    _$XlxxResponseImpl value,
+    $Res Function(_$XlxxResponseImpl) then,
+  ) = __$$XlxxResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int code, String message, XlxxData? data});
@@ -373,8 +403,9 @@ class __$$XlxxResponseImplCopyWithImpl<$Res>
     extends _$XlxxResponseCopyWithImpl<$Res, _$XlxxResponseImpl>
     implements _$$XlxxResponseImplCopyWith<$Res> {
   __$$XlxxResponseImplCopyWithImpl(
-      _$XlxxResponseImpl _value, $Res Function(_$XlxxResponseImpl) _then)
-      : super(_value, _then);
+    _$XlxxResponseImpl _value,
+    $Res Function(_$XlxxResponseImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of XlxxResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -385,28 +416,36 @@ class __$$XlxxResponseImplCopyWithImpl<$Res>
     Object? message = null,
     Object? data = freezed,
   }) {
-    return _then(_$XlxxResponseImpl(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as XlxxData?,
-    ));
+    return _then(
+      _$XlxxResponseImpl(
+        code:
+            null == code
+                ? _value.code
+                : code // ignore: cast_nullable_to_non_nullable
+                    as int,
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+        data:
+            freezed == data
+                ? _value.data
+                : data // ignore: cast_nullable_to_non_nullable
+                    as XlxxData?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$XlxxResponseImpl implements _XlxxResponse {
-  _$XlxxResponseImpl(
-      {required this.code, required this.message, required this.data});
+  _$XlxxResponseImpl({
+    required this.code,
+    required this.message,
+    required this.data,
+  });
 
   factory _$XlxxResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$XlxxResponseImplFromJson(json);
@@ -447,17 +486,16 @@ class _$XlxxResponseImpl implements _XlxxResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$XlxxResponseImplToJson(
-      this,
-    );
+    return _$$XlxxResponseImplToJson(this);
   }
 }
 
 abstract class _XlxxResponse implements XlxxResponse {
-  factory _XlxxResponse(
-      {required final int code,
-      required final String message,
-      required final XlxxData? data}) = _$XlxxResponseImpl;
+  factory _XlxxResponse({
+    required final int code,
+    required final String message,
+    required final XlxxData? data,
+  }) = _$XlxxResponseImpl;
 
   factory _XlxxResponse.fromJson(Map<String, dynamic> json) =
       _$XlxxResponseImpl.fromJson;
@@ -499,8 +537,9 @@ mixin _$ScheduleRequest {
 /// @nodoc
 abstract class $ScheduleRequestCopyWith<$Res> {
   factory $ScheduleRequestCopyWith(
-          ScheduleRequest value, $Res Function(ScheduleRequest) then) =
-      _$ScheduleRequestCopyWithImpl<$Res, ScheduleRequest>;
+    ScheduleRequest value,
+    $Res Function(ScheduleRequest) then,
+  ) = _$ScheduleRequestCopyWithImpl<$Res, ScheduleRequest>;
   @useResult
   $Res call({int zc, int qsbz});
 }
@@ -519,29 +558,32 @@ class _$ScheduleRequestCopyWithImpl<$Res, $Val extends ScheduleRequest>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? zc = null,
-    Object? qsbz = null,
-  }) {
-    return _then(_value.copyWith(
-      zc: null == zc
-          ? _value.zc
-          : zc // ignore: cast_nullable_to_non_nullable
-              as int,
-      qsbz: null == qsbz
-          ? _value.qsbz
-          : qsbz // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  $Res call({Object? zc = null, Object? qsbz = null}) {
+    return _then(
+      _value.copyWith(
+            zc:
+                null == zc
+                    ? _value.zc
+                    : zc // ignore: cast_nullable_to_non_nullable
+                        as int,
+            qsbz:
+                null == qsbz
+                    ? _value.qsbz
+                    : qsbz // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$ScheduleRequestImplCopyWith<$Res>
     implements $ScheduleRequestCopyWith<$Res> {
-  factory _$$ScheduleRequestImplCopyWith(_$ScheduleRequestImpl value,
-          $Res Function(_$ScheduleRequestImpl) then) =
-      __$$ScheduleRequestImplCopyWithImpl<$Res>;
+  factory _$$ScheduleRequestImplCopyWith(
+    _$ScheduleRequestImpl value,
+    $Res Function(_$ScheduleRequestImpl) then,
+  ) = __$$ScheduleRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int zc, int qsbz});
@@ -552,27 +594,29 @@ class __$$ScheduleRequestImplCopyWithImpl<$Res>
     extends _$ScheduleRequestCopyWithImpl<$Res, _$ScheduleRequestImpl>
     implements _$$ScheduleRequestImplCopyWith<$Res> {
   __$$ScheduleRequestImplCopyWithImpl(
-      _$ScheduleRequestImpl _value, $Res Function(_$ScheduleRequestImpl) _then)
-      : super(_value, _then);
+    _$ScheduleRequestImpl _value,
+    $Res Function(_$ScheduleRequestImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ScheduleRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? zc = null,
-    Object? qsbz = null,
-  }) {
-    return _then(_$ScheduleRequestImpl(
-      zc: null == zc
-          ? _value.zc
-          : zc // ignore: cast_nullable_to_non_nullable
-              as int,
-      qsbz: null == qsbz
-          ? _value.qsbz
-          : qsbz // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? zc = null, Object? qsbz = null}) {
+    return _then(
+      _$ScheduleRequestImpl(
+        zc:
+            null == zc
+                ? _value.zc
+                : zc // ignore: cast_nullable_to_non_nullable
+                    as int,
+        qsbz:
+            null == qsbz
+                ? _value.qsbz
+                : qsbz // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -614,13 +658,13 @@ class _$ScheduleRequestImpl implements _ScheduleRequest {
   @pragma('vm:prefer-inline')
   _$$ScheduleRequestImplCopyWith<_$ScheduleRequestImpl> get copyWith =>
       __$$ScheduleRequestImplCopyWithImpl<_$ScheduleRequestImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ScheduleRequestImplToJson(
-      this,
-    );
+    return _$$ScheduleRequestImplToJson(this);
   }
 }
 
@@ -650,7 +694,7 @@ CourseInfo _$CourseInfoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CourseInfo {
-// 详细含义文件末尾
+  // 详细含义文件末尾
   String? get kch => throw _privateConstructorUsedError;
   String? get kcmc => throw _privateConstructorUsedError;
   String? get jsxm => throw _privateConstructorUsedError;
@@ -684,29 +728,31 @@ mixin _$CourseInfo {
 /// @nodoc
 abstract class $CourseInfoCopyWith<$Res> {
   factory $CourseInfoCopyWith(
-          CourseInfo value, $Res Function(CourseInfo) then) =
-      _$CourseInfoCopyWithImpl<$Res, CourseInfo>;
+    CourseInfo value,
+    $Res Function(CourseInfo) then,
+  ) = _$CourseInfoCopyWithImpl<$Res, CourseInfo>;
   @useResult
-  $Res call(
-      {String? kch,
-      String? kcmc,
-      String? jsxm,
-      String? jc,
-      String? skjsl,
-      String? skxql,
-      String? week,
-      String? bs,
-      String? xykh,
-      String? xn,
-      int? xqm,
-      int? status,
-      String? color,
-      String? sksj,
-      String? xf,
-      String? week_fb,
-      String? kcrq,
-      String? create_time,
-      String? create_user_id});
+  $Res call({
+    String? kch,
+    String? kcmc,
+    String? jsxm,
+    String? jc,
+    String? skjsl,
+    String? skxql,
+    String? week,
+    String? bs,
+    String? xykh,
+    String? xn,
+    int? xqm,
+    int? status,
+    String? color,
+    String? sksj,
+    String? xf,
+    String? week_fb,
+    String? kcrq,
+    String? create_time,
+    String? create_user_id,
+  });
 }
 
 /// @nodoc
@@ -744,84 +790,106 @@ class _$CourseInfoCopyWithImpl<$Res, $Val extends CourseInfo>
     Object? create_time = freezed,
     Object? create_user_id = freezed,
   }) {
-    return _then(_value.copyWith(
-      kch: freezed == kch
-          ? _value.kch
-          : kch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      kcmc: freezed == kcmc
-          ? _value.kcmc
-          : kcmc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      jsxm: freezed == jsxm
-          ? _value.jsxm
-          : jsxm // ignore: cast_nullable_to_non_nullable
-              as String?,
-      jc: freezed == jc
-          ? _value.jc
-          : jc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      skjsl: freezed == skjsl
-          ? _value.skjsl
-          : skjsl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      skxql: freezed == skxql
-          ? _value.skxql
-          : skxql // ignore: cast_nullable_to_non_nullable
-              as String?,
-      week: freezed == week
-          ? _value.week
-          : week // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bs: freezed == bs
-          ? _value.bs
-          : bs // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xykh: freezed == xykh
-          ? _value.xykh
-          : xykh // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xn: freezed == xn
-          ? _value.xn
-          : xn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xqm: freezed == xqm
-          ? _value.xqm
-          : xqm // ignore: cast_nullable_to_non_nullable
-              as int?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as int?,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sksj: freezed == sksj
-          ? _value.sksj
-          : sksj // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xf: freezed == xf
-          ? _value.xf
-          : xf // ignore: cast_nullable_to_non_nullable
-              as String?,
-      week_fb: freezed == week_fb
-          ? _value.week_fb
-          : week_fb // ignore: cast_nullable_to_non_nullable
-              as String?,
-      kcrq: freezed == kcrq
-          ? _value.kcrq
-          : kcrq // ignore: cast_nullable_to_non_nullable
-              as String?,
-      create_time: freezed == create_time
-          ? _value.create_time
-          : create_time // ignore: cast_nullable_to_non_nullable
-              as String?,
-      create_user_id: freezed == create_user_id
-          ? _value.create_user_id
-          : create_user_id // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            kch:
+                freezed == kch
+                    ? _value.kch
+                    : kch // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            kcmc:
+                freezed == kcmc
+                    ? _value.kcmc
+                    : kcmc // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            jsxm:
+                freezed == jsxm
+                    ? _value.jsxm
+                    : jsxm // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            jc:
+                freezed == jc
+                    ? _value.jc
+                    : jc // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            skjsl:
+                freezed == skjsl
+                    ? _value.skjsl
+                    : skjsl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            skxql:
+                freezed == skxql
+                    ? _value.skxql
+                    : skxql // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            week:
+                freezed == week
+                    ? _value.week
+                    : week // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            bs:
+                freezed == bs
+                    ? _value.bs
+                    : bs // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            xykh:
+                freezed == xykh
+                    ? _value.xykh
+                    : xykh // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            xn:
+                freezed == xn
+                    ? _value.xn
+                    : xn // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            xqm:
+                freezed == xqm
+                    ? _value.xqm
+                    : xqm // ignore: cast_nullable_to_non_nullable
+                        as int?,
+            status:
+                freezed == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as int?,
+            color:
+                freezed == color
+                    ? _value.color
+                    : color // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            sksj:
+                freezed == sksj
+                    ? _value.sksj
+                    : sksj // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            xf:
+                freezed == xf
+                    ? _value.xf
+                    : xf // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            week_fb:
+                freezed == week_fb
+                    ? _value.week_fb
+                    : week_fb // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            kcrq:
+                freezed == kcrq
+                    ? _value.kcrq
+                    : kcrq // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            create_time:
+                freezed == create_time
+                    ? _value.create_time
+                    : create_time // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            create_user_id:
+                freezed == create_user_id
+                    ? _value.create_user_id
+                    : create_user_id // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -829,30 +897,32 @@ class _$CourseInfoCopyWithImpl<$Res, $Val extends CourseInfo>
 abstract class _$$CourseInfoImplCopyWith<$Res>
     implements $CourseInfoCopyWith<$Res> {
   factory _$$CourseInfoImplCopyWith(
-          _$CourseInfoImpl value, $Res Function(_$CourseInfoImpl) then) =
-      __$$CourseInfoImplCopyWithImpl<$Res>;
+    _$CourseInfoImpl value,
+    $Res Function(_$CourseInfoImpl) then,
+  ) = __$$CourseInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? kch,
-      String? kcmc,
-      String? jsxm,
-      String? jc,
-      String? skjsl,
-      String? skxql,
-      String? week,
-      String? bs,
-      String? xykh,
-      String? xn,
-      int? xqm,
-      int? status,
-      String? color,
-      String? sksj,
-      String? xf,
-      String? week_fb,
-      String? kcrq,
-      String? create_time,
-      String? create_user_id});
+  $Res call({
+    String? kch,
+    String? kcmc,
+    String? jsxm,
+    String? jc,
+    String? skjsl,
+    String? skxql,
+    String? week,
+    String? bs,
+    String? xykh,
+    String? xn,
+    int? xqm,
+    int? status,
+    String? color,
+    String? sksj,
+    String? xf,
+    String? week_fb,
+    String? kcrq,
+    String? create_time,
+    String? create_user_id,
+  });
 }
 
 /// @nodoc
@@ -860,8 +930,9 @@ class __$$CourseInfoImplCopyWithImpl<$Res>
     extends _$CourseInfoCopyWithImpl<$Res, _$CourseInfoImpl>
     implements _$$CourseInfoImplCopyWith<$Res> {
   __$$CourseInfoImplCopyWithImpl(
-      _$CourseInfoImpl _value, $Res Function(_$CourseInfoImpl) _then)
-      : super(_value, _then);
+    _$CourseInfoImpl _value,
+    $Res Function(_$CourseInfoImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CourseInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -888,115 +959,137 @@ class __$$CourseInfoImplCopyWithImpl<$Res>
     Object? create_time = freezed,
     Object? create_user_id = freezed,
   }) {
-    return _then(_$CourseInfoImpl(
-      kch: freezed == kch
-          ? _value.kch
-          : kch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      kcmc: freezed == kcmc
-          ? _value.kcmc
-          : kcmc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      jsxm: freezed == jsxm
-          ? _value.jsxm
-          : jsxm // ignore: cast_nullable_to_non_nullable
-              as String?,
-      jc: freezed == jc
-          ? _value.jc
-          : jc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      skjsl: freezed == skjsl
-          ? _value.skjsl
-          : skjsl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      skxql: freezed == skxql
-          ? _value.skxql
-          : skxql // ignore: cast_nullable_to_non_nullable
-              as String?,
-      week: freezed == week
-          ? _value.week
-          : week // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bs: freezed == bs
-          ? _value.bs
-          : bs // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xykh: freezed == xykh
-          ? _value.xykh
-          : xykh // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xn: freezed == xn
-          ? _value.xn
-          : xn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xqm: freezed == xqm
-          ? _value.xqm
-          : xqm // ignore: cast_nullable_to_non_nullable
-              as int?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as int?,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sksj: freezed == sksj
-          ? _value.sksj
-          : sksj // ignore: cast_nullable_to_non_nullable
-              as String?,
-      xf: freezed == xf
-          ? _value.xf
-          : xf // ignore: cast_nullable_to_non_nullable
-              as String?,
-      week_fb: freezed == week_fb
-          ? _value.week_fb
-          : week_fb // ignore: cast_nullable_to_non_nullable
-              as String?,
-      kcrq: freezed == kcrq
-          ? _value.kcrq
-          : kcrq // ignore: cast_nullable_to_non_nullable
-              as String?,
-      create_time: freezed == create_time
-          ? _value.create_time
-          : create_time // ignore: cast_nullable_to_non_nullable
-              as String?,
-      create_user_id: freezed == create_user_id
-          ? _value.create_user_id
-          : create_user_id // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$CourseInfoImpl(
+        kch:
+            freezed == kch
+                ? _value.kch
+                : kch // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        kcmc:
+            freezed == kcmc
+                ? _value.kcmc
+                : kcmc // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        jsxm:
+            freezed == jsxm
+                ? _value.jsxm
+                : jsxm // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        jc:
+            freezed == jc
+                ? _value.jc
+                : jc // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        skjsl:
+            freezed == skjsl
+                ? _value.skjsl
+                : skjsl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        skxql:
+            freezed == skxql
+                ? _value.skxql
+                : skxql // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        week:
+            freezed == week
+                ? _value.week
+                : week // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        bs:
+            freezed == bs
+                ? _value.bs
+                : bs // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        xykh:
+            freezed == xykh
+                ? _value.xykh
+                : xykh // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        xn:
+            freezed == xn
+                ? _value.xn
+                : xn // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        xqm:
+            freezed == xqm
+                ? _value.xqm
+                : xqm // ignore: cast_nullable_to_non_nullable
+                    as int?,
+        status:
+            freezed == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as int?,
+        color:
+            freezed == color
+                ? _value.color
+                : color // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        sksj:
+            freezed == sksj
+                ? _value.sksj
+                : sksj // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        xf:
+            freezed == xf
+                ? _value.xf
+                : xf // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        week_fb:
+            freezed == week_fb
+                ? _value.week_fb
+                : week_fb // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        kcrq:
+            freezed == kcrq
+                ? _value.kcrq
+                : kcrq // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        create_time:
+            freezed == create_time
+                ? _value.create_time
+                : create_time // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        create_user_id:
+            freezed == create_user_id
+                ? _value.create_user_id
+                : create_user_id // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$CourseInfoImpl implements _CourseInfo {
-  _$CourseInfoImpl(
-      {required this.kch,
-      required this.kcmc,
-      required this.jsxm,
-      required this.jc,
-      required this.skjsl,
-      required this.skxql,
-      required this.week,
-      required this.bs,
-      required this.xykh,
-      required this.xn,
-      required this.xqm,
-      required this.status,
-      required this.color,
-      required this.sksj,
-      required this.xf,
-      required this.week_fb,
-      required this.kcrq,
-      required this.create_time,
-      required this.create_user_id});
+  _$CourseInfoImpl({
+    required this.kch,
+    required this.kcmc,
+    required this.jsxm,
+    required this.jc,
+    required this.skjsl,
+    required this.skxql,
+    required this.week,
+    required this.bs,
+    required this.xykh,
+    required this.xn,
+    required this.xqm,
+    required this.status,
+    required this.color,
+    required this.sksj,
+    required this.xf,
+    required this.week_fb,
+    required this.kcrq,
+    required this.create_time,
+    required this.create_user_id,
+  });
 
   factory _$CourseInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$CourseInfoImplFromJson(json);
 
-// 详细含义文件末尾
+  // 详细含义文件末尾
   @override
   final String? kch;
   @override
@@ -1072,27 +1165,27 @@ class _$CourseInfoImpl implements _CourseInfo {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-        runtimeType,
-        kch,
-        kcmc,
-        jsxm,
-        jc,
-        skjsl,
-        skxql,
-        week,
-        bs,
-        xykh,
-        xn,
-        xqm,
-        status,
-        color,
-        sksj,
-        xf,
-        week_fb,
-        kcrq,
-        create_time,
-        create_user_id
-      ]);
+    runtimeType,
+    kch,
+    kcmc,
+    jsxm,
+    jc,
+    skjsl,
+    skxql,
+    week,
+    bs,
+    xykh,
+    xn,
+    xqm,
+    status,
+    color,
+    sksj,
+    xf,
+    week_fb,
+    kcrq,
+    create_time,
+    create_user_id,
+  ]);
 
   /// Create a copy of CourseInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -1104,38 +1197,37 @@ class _$CourseInfoImpl implements _CourseInfo {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CourseInfoImplToJson(
-      this,
-    );
+    return _$$CourseInfoImplToJson(this);
   }
 }
 
 abstract class _CourseInfo implements CourseInfo {
-  factory _CourseInfo(
-      {required final String? kch,
-      required final String? kcmc,
-      required final String? jsxm,
-      required final String? jc,
-      required final String? skjsl,
-      required final String? skxql,
-      required final String? week,
-      required final String? bs,
-      required final String? xykh,
-      required final String? xn,
-      required final int? xqm,
-      required final int? status,
-      required final String? color,
-      required final String? sksj,
-      required final String? xf,
-      required final String? week_fb,
-      required final String? kcrq,
-      required final String? create_time,
-      required final String? create_user_id}) = _$CourseInfoImpl;
+  factory _CourseInfo({
+    required final String? kch,
+    required final String? kcmc,
+    required final String? jsxm,
+    required final String? jc,
+    required final String? skjsl,
+    required final String? skxql,
+    required final String? week,
+    required final String? bs,
+    required final String? xykh,
+    required final String? xn,
+    required final int? xqm,
+    required final int? status,
+    required final String? color,
+    required final String? sksj,
+    required final String? xf,
+    required final String? week_fb,
+    required final String? kcrq,
+    required final String? create_time,
+    required final String? create_user_id,
+  }) = _$CourseInfoImpl;
 
   factory _CourseInfo.fromJson(Map<String, dynamic> json) =
       _$CourseInfoImpl.fromJson;
 
-// 详细含义文件末尾
+  // 详细含义文件末尾
   @override
   String? get kch;
   @override
@@ -1206,8 +1298,9 @@ mixin _$ScheduleResponse {
 /// @nodoc
 abstract class $ScheduleResponseCopyWith<$Res> {
   factory $ScheduleResponseCopyWith(
-          ScheduleResponse value, $Res Function(ScheduleResponse) then) =
-      _$ScheduleResponseCopyWithImpl<$Res, ScheduleResponse>;
+    ScheduleResponse value,
+    $Res Function(ScheduleResponse) then,
+  ) = _$ScheduleResponseCopyWithImpl<$Res, ScheduleResponse>;
   @useResult
   $Res call({int code, String message, List<CourseInfo>? data});
 }
@@ -1231,29 +1324,36 @@ class _$ScheduleResponseCopyWithImpl<$Res, $Val extends ScheduleResponse>
     Object? message = null,
     Object? data = freezed,
   }) {
-    return _then(_value.copyWith(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<CourseInfo>?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            code:
+                null == code
+                    ? _value.code
+                    : code // ignore: cast_nullable_to_non_nullable
+                        as int,
+            message:
+                null == message
+                    ? _value.message
+                    : message // ignore: cast_nullable_to_non_nullable
+                        as String,
+            data:
+                freezed == data
+                    ? _value.data
+                    : data // ignore: cast_nullable_to_non_nullable
+                        as List<CourseInfo>?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$ScheduleResponseImplCopyWith<$Res>
     implements $ScheduleResponseCopyWith<$Res> {
-  factory _$$ScheduleResponseImplCopyWith(_$ScheduleResponseImpl value,
-          $Res Function(_$ScheduleResponseImpl) then) =
-      __$$ScheduleResponseImplCopyWithImpl<$Res>;
+  factory _$$ScheduleResponseImplCopyWith(
+    _$ScheduleResponseImpl value,
+    $Res Function(_$ScheduleResponseImpl) then,
+  ) = __$$ScheduleResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int code, String message, List<CourseInfo>? data});
@@ -1263,9 +1363,10 @@ abstract class _$$ScheduleResponseImplCopyWith<$Res>
 class __$$ScheduleResponseImplCopyWithImpl<$Res>
     extends _$ScheduleResponseCopyWithImpl<$Res, _$ScheduleResponseImpl>
     implements _$$ScheduleResponseImplCopyWith<$Res> {
-  __$$ScheduleResponseImplCopyWithImpl(_$ScheduleResponseImpl _value,
-      $Res Function(_$ScheduleResponseImpl) _then)
-      : super(_value, _then);
+  __$$ScheduleResponseImplCopyWithImpl(
+    _$ScheduleResponseImpl _value,
+    $Res Function(_$ScheduleResponseImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ScheduleResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -1276,31 +1377,36 @@ class __$$ScheduleResponseImplCopyWithImpl<$Res>
     Object? message = null,
     Object? data = freezed,
   }) {
-    return _then(_$ScheduleResponseImpl(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: freezed == data
-          ? _value._data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<CourseInfo>?,
-    ));
+    return _then(
+      _$ScheduleResponseImpl(
+        code:
+            null == code
+                ? _value.code
+                : code // ignore: cast_nullable_to_non_nullable
+                    as int,
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+        data:
+            freezed == data
+                ? _value._data
+                : data // ignore: cast_nullable_to_non_nullable
+                    as List<CourseInfo>?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ScheduleResponseImpl implements _ScheduleResponse {
-  _$ScheduleResponseImpl(
-      {required this.code,
-      required this.message,
-      required final List<CourseInfo>? data})
-      : _data = data;
+  _$ScheduleResponseImpl({
+    required this.code,
+    required this.message,
+    required final List<CourseInfo>? data,
+  }) : _data = data;
 
   factory _$ScheduleResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ScheduleResponseImplFromJson(json);
@@ -1337,7 +1443,11 @@ class _$ScheduleResponseImpl implements _ScheduleResponse {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, code, message, const DeepCollectionEquality().hash(_data));
+    runtimeType,
+    code,
+    message,
+    const DeepCollectionEquality().hash(_data),
+  );
 
   /// Create a copy of ScheduleResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -1346,21 +1456,22 @@ class _$ScheduleResponseImpl implements _ScheduleResponse {
   @pragma('vm:prefer-inline')
   _$$ScheduleResponseImplCopyWith<_$ScheduleResponseImpl> get copyWith =>
       __$$ScheduleResponseImplCopyWithImpl<_$ScheduleResponseImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ScheduleResponseImplToJson(
-      this,
-    );
+    return _$$ScheduleResponseImplToJson(this);
   }
 }
 
 abstract class _ScheduleResponse implements ScheduleResponse {
-  factory _ScheduleResponse(
-      {required final int code,
-      required final String message,
-      required final List<CourseInfo>? data}) = _$ScheduleResponseImpl;
+  factory _ScheduleResponse({
+    required final int code,
+    required final String message,
+    required final List<CourseInfo>? data,
+  }) = _$ScheduleResponseImpl;
 
   factory _ScheduleResponse.fromJson(Map<String, dynamic> json) =
       _$ScheduleResponseImpl.fromJson;
@@ -1411,21 +1522,23 @@ mixin _$AddScheduleData {
 /// @nodoc
 abstract class $AddScheduleDataCopyWith<$Res> {
   factory $AddScheduleDataCopyWith(
-          AddScheduleData value, $Res Function(AddScheduleData) then) =
-      _$AddScheduleDataCopyWithImpl<$Res, AddScheduleData>;
+    AddScheduleData value,
+    $Res Function(AddScheduleData) then,
+  ) = _$AddScheduleDataCopyWithImpl<$Res, AddScheduleData>;
   @useResult
-  $Res call(
-      {String kcmc,
-      String jsxm,
-      String xf,
-      String color,
-      String xkjsl,
-      String skxql,
-      String week,
-      String week_fb,
-      String jc,
-      String bs,
-      String skjc});
+  $Res call({
+    String kcmc,
+    String jsxm,
+    String xf,
+    String color,
+    String xkjsl,
+    String skxql,
+    String week,
+    String week_fb,
+    String jc,
+    String bs,
+    String skjc,
+  });
 }
 
 /// @nodoc
@@ -1455,75 +1568,91 @@ class _$AddScheduleDataCopyWithImpl<$Res, $Val extends AddScheduleData>
     Object? bs = null,
     Object? skjc = null,
   }) {
-    return _then(_value.copyWith(
-      kcmc: null == kcmc
-          ? _value.kcmc
-          : kcmc // ignore: cast_nullable_to_non_nullable
-              as String,
-      jsxm: null == jsxm
-          ? _value.jsxm
-          : jsxm // ignore: cast_nullable_to_non_nullable
-              as String,
-      xf: null == xf
-          ? _value.xf
-          : xf // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: null == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String,
-      xkjsl: null == xkjsl
-          ? _value.xkjsl
-          : xkjsl // ignore: cast_nullable_to_non_nullable
-              as String,
-      skxql: null == skxql
-          ? _value.skxql
-          : skxql // ignore: cast_nullable_to_non_nullable
-              as String,
-      week: null == week
-          ? _value.week
-          : week // ignore: cast_nullable_to_non_nullable
-              as String,
-      week_fb: null == week_fb
-          ? _value.week_fb
-          : week_fb // ignore: cast_nullable_to_non_nullable
-              as String,
-      jc: null == jc
-          ? _value.jc
-          : jc // ignore: cast_nullable_to_non_nullable
-              as String,
-      bs: null == bs
-          ? _value.bs
-          : bs // ignore: cast_nullable_to_non_nullable
-              as String,
-      skjc: null == skjc
-          ? _value.skjc
-          : skjc // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            kcmc:
+                null == kcmc
+                    ? _value.kcmc
+                    : kcmc // ignore: cast_nullable_to_non_nullable
+                        as String,
+            jsxm:
+                null == jsxm
+                    ? _value.jsxm
+                    : jsxm // ignore: cast_nullable_to_non_nullable
+                        as String,
+            xf:
+                null == xf
+                    ? _value.xf
+                    : xf // ignore: cast_nullable_to_non_nullable
+                        as String,
+            color:
+                null == color
+                    ? _value.color
+                    : color // ignore: cast_nullable_to_non_nullable
+                        as String,
+            xkjsl:
+                null == xkjsl
+                    ? _value.xkjsl
+                    : xkjsl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            skxql:
+                null == skxql
+                    ? _value.skxql
+                    : skxql // ignore: cast_nullable_to_non_nullable
+                        as String,
+            week:
+                null == week
+                    ? _value.week
+                    : week // ignore: cast_nullable_to_non_nullable
+                        as String,
+            week_fb:
+                null == week_fb
+                    ? _value.week_fb
+                    : week_fb // ignore: cast_nullable_to_non_nullable
+                        as String,
+            jc:
+                null == jc
+                    ? _value.jc
+                    : jc // ignore: cast_nullable_to_non_nullable
+                        as String,
+            bs:
+                null == bs
+                    ? _value.bs
+                    : bs // ignore: cast_nullable_to_non_nullable
+                        as String,
+            skjc:
+                null == skjc
+                    ? _value.skjc
+                    : skjc // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AddScheduleDataImplCopyWith<$Res>
     implements $AddScheduleDataCopyWith<$Res> {
-  factory _$$AddScheduleDataImplCopyWith(_$AddScheduleDataImpl value,
-          $Res Function(_$AddScheduleDataImpl) then) =
-      __$$AddScheduleDataImplCopyWithImpl<$Res>;
+  factory _$$AddScheduleDataImplCopyWith(
+    _$AddScheduleDataImpl value,
+    $Res Function(_$AddScheduleDataImpl) then,
+  ) = __$$AddScheduleDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String kcmc,
-      String jsxm,
-      String xf,
-      String color,
-      String xkjsl,
-      String skxql,
-      String week,
-      String week_fb,
-      String jc,
-      String bs,
-      String skjc});
+  $Res call({
+    String kcmc,
+    String jsxm,
+    String xf,
+    String color,
+    String xkjsl,
+    String skxql,
+    String week,
+    String week_fb,
+    String jc,
+    String bs,
+    String skjc,
+  });
 }
 
 /// @nodoc
@@ -1531,8 +1660,9 @@ class __$$AddScheduleDataImplCopyWithImpl<$Res>
     extends _$AddScheduleDataCopyWithImpl<$Res, _$AddScheduleDataImpl>
     implements _$$AddScheduleDataImplCopyWith<$Res> {
   __$$AddScheduleDataImplCopyWithImpl(
-      _$AddScheduleDataImpl _value, $Res Function(_$AddScheduleDataImpl) _then)
-      : super(_value, _then);
+    _$AddScheduleDataImpl _value,
+    $Res Function(_$AddScheduleDataImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AddScheduleData
   /// with the given fields replaced by the non-null parameter values.
@@ -1551,70 +1681,84 @@ class __$$AddScheduleDataImplCopyWithImpl<$Res>
     Object? bs = null,
     Object? skjc = null,
   }) {
-    return _then(_$AddScheduleDataImpl(
-      kcmc: null == kcmc
-          ? _value.kcmc
-          : kcmc // ignore: cast_nullable_to_non_nullable
-              as String,
-      jsxm: null == jsxm
-          ? _value.jsxm
-          : jsxm // ignore: cast_nullable_to_non_nullable
-              as String,
-      xf: null == xf
-          ? _value.xf
-          : xf // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: null == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String,
-      xkjsl: null == xkjsl
-          ? _value.xkjsl
-          : xkjsl // ignore: cast_nullable_to_non_nullable
-              as String,
-      skxql: null == skxql
-          ? _value.skxql
-          : skxql // ignore: cast_nullable_to_non_nullable
-              as String,
-      week: null == week
-          ? _value.week
-          : week // ignore: cast_nullable_to_non_nullable
-              as String,
-      week_fb: null == week_fb
-          ? _value.week_fb
-          : week_fb // ignore: cast_nullable_to_non_nullable
-              as String,
-      jc: null == jc
-          ? _value.jc
-          : jc // ignore: cast_nullable_to_non_nullable
-              as String,
-      bs: null == bs
-          ? _value.bs
-          : bs // ignore: cast_nullable_to_non_nullable
-              as String,
-      skjc: null == skjc
-          ? _value.skjc
-          : skjc // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$AddScheduleDataImpl(
+        kcmc:
+            null == kcmc
+                ? _value.kcmc
+                : kcmc // ignore: cast_nullable_to_non_nullable
+                    as String,
+        jsxm:
+            null == jsxm
+                ? _value.jsxm
+                : jsxm // ignore: cast_nullable_to_non_nullable
+                    as String,
+        xf:
+            null == xf
+                ? _value.xf
+                : xf // ignore: cast_nullable_to_non_nullable
+                    as String,
+        color:
+            null == color
+                ? _value.color
+                : color // ignore: cast_nullable_to_non_nullable
+                    as String,
+        xkjsl:
+            null == xkjsl
+                ? _value.xkjsl
+                : xkjsl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        skxql:
+            null == skxql
+                ? _value.skxql
+                : skxql // ignore: cast_nullable_to_non_nullable
+                    as String,
+        week:
+            null == week
+                ? _value.week
+                : week // ignore: cast_nullable_to_non_nullable
+                    as String,
+        week_fb:
+            null == week_fb
+                ? _value.week_fb
+                : week_fb // ignore: cast_nullable_to_non_nullable
+                    as String,
+        jc:
+            null == jc
+                ? _value.jc
+                : jc // ignore: cast_nullable_to_non_nullable
+                    as String,
+        bs:
+            null == bs
+                ? _value.bs
+                : bs // ignore: cast_nullable_to_non_nullable
+                    as String,
+        skjc:
+            null == skjc
+                ? _value.skjc
+                : skjc // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AddScheduleDataImpl implements _AddScheduleData {
-  _$AddScheduleDataImpl(
-      {required this.kcmc,
-      required this.jsxm,
-      required this.xf,
-      required this.color,
-      required this.xkjsl,
-      required this.skxql,
-      required this.week,
-      required this.week_fb,
-      required this.jc,
-      required this.bs,
-      required this.skjc});
+  _$AddScheduleDataImpl({
+    required this.kcmc,
+    required this.jsxm,
+    required this.xf,
+    required this.color,
+    required this.xkjsl,
+    required this.skxql,
+    required this.week,
+    required this.week_fb,
+    required this.jc,
+    required this.bs,
+    required this.skjc,
+  });
 
   factory _$AddScheduleDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddScheduleDataImplFromJson(json);
@@ -1667,8 +1811,20 @@ class _$AddScheduleDataImpl implements _AddScheduleData {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, kcmc, jsxm, xf, color, xkjsl,
-      skxql, week, week_fb, jc, bs, skjc);
+  int get hashCode => Object.hash(
+    runtimeType,
+    kcmc,
+    jsxm,
+    xf,
+    color,
+    xkjsl,
+    skxql,
+    week,
+    week_fb,
+    jc,
+    bs,
+    skjc,
+  );
 
   /// Create a copy of AddScheduleData
   /// with the given fields replaced by the non-null parameter values.
@@ -1677,29 +1833,30 @@ class _$AddScheduleDataImpl implements _AddScheduleData {
   @pragma('vm:prefer-inline')
   _$$AddScheduleDataImplCopyWith<_$AddScheduleDataImpl> get copyWith =>
       __$$AddScheduleDataImplCopyWithImpl<_$AddScheduleDataImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AddScheduleDataImplToJson(
-      this,
-    );
+    return _$$AddScheduleDataImplToJson(this);
   }
 }
 
 abstract class _AddScheduleData implements AddScheduleData {
-  factory _AddScheduleData(
-      {required final String kcmc,
-      required final String jsxm,
-      required final String xf,
-      required final String color,
-      required final String xkjsl,
-      required final String skxql,
-      required final String week,
-      required final String week_fb,
-      required final String jc,
-      required final String bs,
-      required final String skjc}) = _$AddScheduleDataImpl;
+  factory _AddScheduleData({
+    required final String kcmc,
+    required final String jsxm,
+    required final String xf,
+    required final String color,
+    required final String xkjsl,
+    required final String skxql,
+    required final String week,
+    required final String week_fb,
+    required final String jc,
+    required final String bs,
+    required final String skjc,
+  }) = _$AddScheduleDataImpl;
 
   factory _AddScheduleData.fromJson(Map<String, dynamic> json) =
       _$AddScheduleDataImpl.fromJson;
@@ -1756,8 +1913,9 @@ mixin _$AddScheduleRequest {
 /// @nodoc
 abstract class $AddScheduleRequestCopyWith<$Res> {
   factory $AddScheduleRequestCopyWith(
-          AddScheduleRequest value, $Res Function(AddScheduleRequest) then) =
-      _$AddScheduleRequestCopyWithImpl<$Res, AddScheduleRequest>;
+    AddScheduleRequest value,
+    $Res Function(AddScheduleRequest) then,
+  ) = _$AddScheduleRequestCopyWithImpl<$Res, AddScheduleRequest>;
   @useResult
   $Res call({List<AddScheduleData> kclsit});
 }
@@ -1776,24 +1934,27 @@ class _$AddScheduleRequestCopyWithImpl<$Res, $Val extends AddScheduleRequest>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? kclsit = null,
-  }) {
-    return _then(_value.copyWith(
-      kclsit: null == kclsit
-          ? _value.kclsit
-          : kclsit // ignore: cast_nullable_to_non_nullable
-              as List<AddScheduleData>,
-    ) as $Val);
+  $Res call({Object? kclsit = null}) {
+    return _then(
+      _value.copyWith(
+            kclsit:
+                null == kclsit
+                    ? _value.kclsit
+                    : kclsit // ignore: cast_nullable_to_non_nullable
+                        as List<AddScheduleData>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AddScheduleRequestImplCopyWith<$Res>
     implements $AddScheduleRequestCopyWith<$Res> {
-  factory _$$AddScheduleRequestImplCopyWith(_$AddScheduleRequestImpl value,
-          $Res Function(_$AddScheduleRequestImpl) then) =
-      __$$AddScheduleRequestImplCopyWithImpl<$Res>;
+  factory _$$AddScheduleRequestImplCopyWith(
+    _$AddScheduleRequestImpl value,
+    $Res Function(_$AddScheduleRequestImpl) then,
+  ) = __$$AddScheduleRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<AddScheduleData> kclsit});
@@ -1803,23 +1964,25 @@ abstract class _$$AddScheduleRequestImplCopyWith<$Res>
 class __$$AddScheduleRequestImplCopyWithImpl<$Res>
     extends _$AddScheduleRequestCopyWithImpl<$Res, _$AddScheduleRequestImpl>
     implements _$$AddScheduleRequestImplCopyWith<$Res> {
-  __$$AddScheduleRequestImplCopyWithImpl(_$AddScheduleRequestImpl _value,
-      $Res Function(_$AddScheduleRequestImpl) _then)
-      : super(_value, _then);
+  __$$AddScheduleRequestImplCopyWithImpl(
+    _$AddScheduleRequestImpl _value,
+    $Res Function(_$AddScheduleRequestImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AddScheduleRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? kclsit = null,
-  }) {
-    return _then(_$AddScheduleRequestImpl(
-      kclsit: null == kclsit
-          ? _value._kclsit
-          : kclsit // ignore: cast_nullable_to_non_nullable
-              as List<AddScheduleData>,
-    ));
+  $Res call({Object? kclsit = null}) {
+    return _then(
+      _$AddScheduleRequestImpl(
+        kclsit:
+            null == kclsit
+                ? _value._kclsit
+                : kclsit // ignore: cast_nullable_to_non_nullable
+                    as List<AddScheduleData>,
+      ),
+    );
   }
 }
 
@@ -1827,7 +1990,7 @@ class __$$AddScheduleRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AddScheduleRequestImpl implements _AddScheduleRequest {
   _$AddScheduleRequestImpl({required final List<AddScheduleData> kclsit})
-      : _kclsit = kclsit;
+    : _kclsit = kclsit;
 
   factory _$AddScheduleRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddScheduleRequestImplFromJson(json);
@@ -1865,13 +2028,13 @@ class _$AddScheduleRequestImpl implements _AddScheduleRequest {
   @pragma('vm:prefer-inline')
   _$$AddScheduleRequestImplCopyWith<_$AddScheduleRequestImpl> get copyWith =>
       __$$AddScheduleRequestImplCopyWithImpl<_$AddScheduleRequestImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AddScheduleRequestImplToJson(
-      this,
-    );
+    return _$$AddScheduleRequestImplToJson(this);
   }
 }
 
@@ -1916,8 +2079,9 @@ mixin _$AddScheduleResponse {
 /// @nodoc
 abstract class $AddScheduleResponseCopyWith<$Res> {
   factory $AddScheduleResponseCopyWith(
-          AddScheduleResponse value, $Res Function(AddScheduleResponse) then) =
-      _$AddScheduleResponseCopyWithImpl<$Res, AddScheduleResponse>;
+    AddScheduleResponse value,
+    $Res Function(AddScheduleResponse) then,
+  ) = _$AddScheduleResponseCopyWithImpl<$Res, AddScheduleResponse>;
   @useResult
   $Res call({int code, String message, String? data});
 }
@@ -1941,29 +2105,36 @@ class _$AddScheduleResponseCopyWithImpl<$Res, $Val extends AddScheduleResponse>
     Object? message = null,
     Object? data = freezed,
   }) {
-    return _then(_value.copyWith(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            code:
+                null == code
+                    ? _value.code
+                    : code // ignore: cast_nullable_to_non_nullable
+                        as int,
+            message:
+                null == message
+                    ? _value.message
+                    : message // ignore: cast_nullable_to_non_nullable
+                        as String,
+            data:
+                freezed == data
+                    ? _value.data
+                    : data // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AddScheduleResponseImplCopyWith<$Res>
     implements $AddScheduleResponseCopyWith<$Res> {
-  factory _$$AddScheduleResponseImplCopyWith(_$AddScheduleResponseImpl value,
-          $Res Function(_$AddScheduleResponseImpl) then) =
-      __$$AddScheduleResponseImplCopyWithImpl<$Res>;
+  factory _$$AddScheduleResponseImplCopyWith(
+    _$AddScheduleResponseImpl value,
+    $Res Function(_$AddScheduleResponseImpl) then,
+  ) = __$$AddScheduleResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int code, String message, String? data});
@@ -1973,9 +2144,10 @@ abstract class _$$AddScheduleResponseImplCopyWith<$Res>
 class __$$AddScheduleResponseImplCopyWithImpl<$Res>
     extends _$AddScheduleResponseCopyWithImpl<$Res, _$AddScheduleResponseImpl>
     implements _$$AddScheduleResponseImplCopyWith<$Res> {
-  __$$AddScheduleResponseImplCopyWithImpl(_$AddScheduleResponseImpl _value,
-      $Res Function(_$AddScheduleResponseImpl) _then)
-      : super(_value, _then);
+  __$$AddScheduleResponseImplCopyWithImpl(
+    _$AddScheduleResponseImpl _value,
+    $Res Function(_$AddScheduleResponseImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AddScheduleResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -1986,28 +2158,36 @@ class __$$AddScheduleResponseImplCopyWithImpl<$Res>
     Object? message = null,
     Object? data = freezed,
   }) {
-    return _then(_$AddScheduleResponseImpl(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$AddScheduleResponseImpl(
+        code:
+            null == code
+                ? _value.code
+                : code // ignore: cast_nullable_to_non_nullable
+                    as int,
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+        data:
+            freezed == data
+                ? _value.data
+                : data // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AddScheduleResponseImpl implements _AddScheduleResponse {
-  _$AddScheduleResponseImpl(
-      {required this.code, required this.message, required this.data});
+  _$AddScheduleResponseImpl({
+    required this.code,
+    required this.message,
+    required this.data,
+  });
 
   factory _$AddScheduleResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddScheduleResponseImplFromJson(json);
@@ -2045,21 +2225,22 @@ class _$AddScheduleResponseImpl implements _AddScheduleResponse {
   @pragma('vm:prefer-inline')
   _$$AddScheduleResponseImplCopyWith<_$AddScheduleResponseImpl> get copyWith =>
       __$$AddScheduleResponseImplCopyWithImpl<_$AddScheduleResponseImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AddScheduleResponseImplToJson(
-      this,
-    );
+    return _$$AddScheduleResponseImplToJson(this);
   }
 }
 
 abstract class _AddScheduleResponse implements AddScheduleResponse {
-  factory _AddScheduleResponse(
-      {required final int code,
-      required final String message,
-      required final String? data}) = _$AddScheduleResponseImpl;
+  factory _AddScheduleResponse({
+    required final int code,
+    required final String message,
+    required final String? data,
+  }) = _$AddScheduleResponseImpl;
 
   factory _AddScheduleResponse.fromJson(Map<String, dynamic> json) =
       _$AddScheduleResponseImpl.fromJson;
@@ -2102,8 +2283,9 @@ mixin _$DelScheduleResponse {
 /// @nodoc
 abstract class $DelScheduleResponseCopyWith<$Res> {
   factory $DelScheduleResponseCopyWith(
-          DelScheduleResponse value, $Res Function(DelScheduleResponse) then) =
-      _$DelScheduleResponseCopyWithImpl<$Res, DelScheduleResponse>;
+    DelScheduleResponse value,
+    $Res Function(DelScheduleResponse) then,
+  ) = _$DelScheduleResponseCopyWithImpl<$Res, DelScheduleResponse>;
   @useResult
   $Res call({int code, String message, String? data});
 }
@@ -2127,29 +2309,36 @@ class _$DelScheduleResponseCopyWithImpl<$Res, $Val extends DelScheduleResponse>
     Object? message = null,
     Object? data = freezed,
   }) {
-    return _then(_value.copyWith(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            code:
+                null == code
+                    ? _value.code
+                    : code // ignore: cast_nullable_to_non_nullable
+                        as int,
+            message:
+                null == message
+                    ? _value.message
+                    : message // ignore: cast_nullable_to_non_nullable
+                        as String,
+            data:
+                freezed == data
+                    ? _value.data
+                    : data // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$DelScheduleResponseImplCopyWith<$Res>
     implements $DelScheduleResponseCopyWith<$Res> {
-  factory _$$DelScheduleResponseImplCopyWith(_$DelScheduleResponseImpl value,
-          $Res Function(_$DelScheduleResponseImpl) then) =
-      __$$DelScheduleResponseImplCopyWithImpl<$Res>;
+  factory _$$DelScheduleResponseImplCopyWith(
+    _$DelScheduleResponseImpl value,
+    $Res Function(_$DelScheduleResponseImpl) then,
+  ) = __$$DelScheduleResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int code, String message, String? data});
@@ -2159,9 +2348,10 @@ abstract class _$$DelScheduleResponseImplCopyWith<$Res>
 class __$$DelScheduleResponseImplCopyWithImpl<$Res>
     extends _$DelScheduleResponseCopyWithImpl<$Res, _$DelScheduleResponseImpl>
     implements _$$DelScheduleResponseImplCopyWith<$Res> {
-  __$$DelScheduleResponseImplCopyWithImpl(_$DelScheduleResponseImpl _value,
-      $Res Function(_$DelScheduleResponseImpl) _then)
-      : super(_value, _then);
+  __$$DelScheduleResponseImplCopyWithImpl(
+    _$DelScheduleResponseImpl _value,
+    $Res Function(_$DelScheduleResponseImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of DelScheduleResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -2172,28 +2362,36 @@ class __$$DelScheduleResponseImplCopyWithImpl<$Res>
     Object? message = null,
     Object? data = freezed,
   }) {
-    return _then(_$DelScheduleResponseImpl(
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$DelScheduleResponseImpl(
+        code:
+            null == code
+                ? _value.code
+                : code // ignore: cast_nullable_to_non_nullable
+                    as int,
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+        data:
+            freezed == data
+                ? _value.data
+                : data // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DelScheduleResponseImpl implements _DelScheduleResponse {
-  _$DelScheduleResponseImpl(
-      {required this.code, required this.message, required this.data});
+  _$DelScheduleResponseImpl({
+    required this.code,
+    required this.message,
+    required this.data,
+  });
 
   factory _$DelScheduleResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$DelScheduleResponseImplFromJson(json);
@@ -2231,21 +2429,22 @@ class _$DelScheduleResponseImpl implements _DelScheduleResponse {
   @pragma('vm:prefer-inline')
   _$$DelScheduleResponseImplCopyWith<_$DelScheduleResponseImpl> get copyWith =>
       __$$DelScheduleResponseImplCopyWithImpl<_$DelScheduleResponseImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DelScheduleResponseImplToJson(
-      this,
-    );
+    return _$$DelScheduleResponseImplToJson(this);
   }
 }
 
 abstract class _DelScheduleResponse implements DelScheduleResponse {
-  factory _DelScheduleResponse(
-      {required final int code,
-      required final String message,
-      required final String? data}) = _$DelScheduleResponseImpl;
+  factory _DelScheduleResponse({
+    required final int code,
+    required final String message,
+    required final String? data,
+  }) = _$DelScheduleResponseImpl;
 
   factory _DelScheduleResponse.fromJson(Map<String, dynamic> json) =
       _$DelScheduleResponseImpl.fromJson;

@@ -1,182 +1,62 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:fasterlzu/app_config.dart';
-import 'package:fasterlzu/core/api/app_client.dart';
+import 'package:fasterlzu/core/api/appservice_client.dart';
 import 'package:fasterlzu/core/app/models/app_model.dart';
+import 'package:fasterlzu/core/auth/providers/auth_provider.dart';
+import 'package:fasterlzu/core/auth/providers/auth_state.dart';
 import 'package:fasterlzu/core/auth/repositories/auth_repository.dart';
-import 'package:fasterlzu/core/encryption/md5_crypto.dart';
-import 'package:fasterlzu/core/storage/userinfo_storage.dart';
+import 'package:fasterlzu/core/encryption/aes_crypto.dart';
+import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
-final appRepositoryProvider = Provider<AppRepository>((ref){
-  return AppRepository(dio: ref.watch(appDioProvider), storage: ref.watch(userInfoStorageProvider), authProvider: ref.watch(authRepositoryProvider));
+final appRepositoryProvider = Provider<AppRepository>((ref) {
+  return AppRepository(
+    authState: ref.watch(authStateProvider),
+    dio: ref.watch(appServiceDioProvider),
+    authRepository: ref.watch(authRepositoryProvider),
+    // easytongRepository: ref.watch(easytongRepositoryProvider)
+  );
 });
 
 class AppRepository {
+  final AuthState _authState;
   final Dio _dio;
-  final UserInfoStorage _storage;
   final AuthRepository _authRepository;
 
-  String get currentUser => _authRepository.currentUser;
-  String? get etToken => _storage.box.get('EtToken');
-  String? get accNum => _storage.box.get('AccNum');
+  AppRepository({
+    required AuthState authState,
+    required Dio dio,
+    required AuthRepository authRepository,
+    // required EasytongRepository easytongRepository,
+  }) : _authState = authState,
+       _dio = dio,
+       _authRepository = authRepository;
 
-  AppRepository({required Dio dio,
-    required UserInfoStorage storage,
-    required AuthRepository authProvider})
-      : _dio = dio,
-        _storage = storage,
-        _authRepository = authProvider;
+  Future<DetailedAppResponse?> getServiceInfoDetail() async {
+    final token = await _authRepository.loginToken;
+    final data = AESCrypto.encrypt('terminalId=1&loginToken=${token ?? ''}');
 
-  Future<EtTokenResponse?> exchangeEtToken() async {
-    if (_authRepository.currentUser == '') return null;
+    final response = await _dio.post(
+      AppConfig.appServiceApis['getServiceInfoDetail']!,
+      data: data,
+      options: Options(
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      ),
+    );
 
-    String? st = await _authRepository.getSt();
-    if (st == null) return null;
-
-    String time = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
-    String data = 'Time=$time&St=$st&ContentType=application%2Fjson';
-
-    final response = await _dio.post(AppConfig.appApis['etToken']!, data: data,
-    options: Options(headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }));
-
-    final res = EtTokenResponse.fromJson(jsonDecode(response.data));
-
-    if (res.code == 1) {
-      _storage.box.put('AccNum', res.accNum);
-      _storage.box.put('EtToken', res.token);
-    }
+    final res = DetailedAppResponse.fromJson(response.data);
     return res;
   }
 
-  Future<String?> getEtToken() async {
-    if (etToken == null) {
-      exchangeEtToken();
+  Future<List<AppType>?> getApps() async {
+    try {
+      final res = await getServiceInfoDetail();
+      if (res != null && res.code == 1) {
+        return res.data;
+      }
+    } catch (e) {
+      log.e("[AppProvider] failed to get apps; ${e.toString()}");
     }
-    return etToken;
+    return null;
   }
-
-  Future<String?> getAccNum() async {
-    if (accNum == null) {
-      exchangeEtToken();
-    }
-    return accNum;
-  }
-
-  Future<GetWalletMoneyResponse?> getWalletMoney() async {
-    final token = await getEtToken();
-    if (token == null) return null;
-
-    String time = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
-    Map<String, String> data = {
-      'AccNum': await getAccNum() ?? '',
-      'EPID': (await _storage.box.get('epid'))!,
-      'Time': time
-    };
-
-    final String sign = MD5Crypto.sign(data);
-    data['Sign'] = sign;
-    data['ContentType'] = 'application%2Fjson';
-    String queryString = Uri(queryParameters: data).query;
-    final response = await _dio.post(AppConfig.appApis['GetWalletMoney']!,
-        options: Options(headers: {
-          'Authorization': token,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }), data: queryString);
-    
-    GetWalletMoneyResponse r = GetWalletMoneyResponse.fromXml(response.data);
-    return r;
-  }
-
-  Future<GetAccInfoResponse?> getAccInfo() async {
-    final token = await getEtToken();
-    if (token == null) return null;
-
-    String time = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
-    Map<String, String> data = {
-      'AccNum': await getAccNum() ?? '',
-      'Time': time
-    };
-
-    final String sign = MD5Crypto.sign(data);
-    data['Sign'] = sign;
-    data['ContentType'] = 'application/json';
-    String queryString = Uri(queryParameters: data).query;
-
-    final response = await _dio.post(AppConfig.appApis['GetAccInfo']!,
-        options: Options(headers: {
-          'Authorization': token,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }), data: queryString);
-
-    GetAccInfoResponse r = GetAccInfoResponse.fromXml(response.data);
-
-    if (r.code == 1) {
-      _storage.box.put('CardAccNum', r.cardAccNum);
-      _storage.box.put('epid', r.epid);
-    }
-
-    return r;
-  }
-
-  Future<GetH5QRCodeResponse?> getH5QRCode() async {
-    final token = await getEtToken();
-    if (token == null) return null;
-
-    String time = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
-    Map<String, String> data = {
-      'AccNum': await getAccNum() ?? '',
-      'Time': time
-    };
-
-    final String sign = MD5Crypto.sign(data);
-    data['Sign'] = sign;
-    data['ContentType'] = 'application/json';
-    String queryString = Uri(queryParameters: data).query;
-
-    final response = await _dio.post(AppConfig.appApis['qrCode']!,
-        options: Options(headers: {
-          'Authorization': token,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }), data: queryString);
-    GetH5QRCodeResponse r = GetH5QRCodeResponse.fromJson(jsonDecode(response.data));
-
-    if (r.code == 1) {
-      _storage.box.put('CardAccNum', r.cardAccNum);
-    }
-
-    return r;
-  }
-
-  Future<GetOrderByCodeResponse?> getOrderByCode(String authCode) async {
-    final token = await getEtToken();
-    if (token == null) return null;
-
-    String time = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
-    Map<String, String> data = {
-      'AccNum': await getAccNum() ?? '',
-      'AuthCode': authCode,
-      'CardAccNum': _storage.box.get('CardAccNum'),
-      'Time': time
-    };
-
-    final String sign = MD5Crypto.sign(data);
-    data['Sign'] = sign;
-    data['ContentType'] = 'application/json';
-    String queryString = Uri(queryParameters: data).query;
-
-    final response = await _dio.post(AppConfig.appApis['GetOrderByCode']!,
-        options: Options(headers: {
-          'Authorization': token,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }), data: queryString);
-
-    GetOrderByCodeResponse r = GetOrderByCodeResponse.fromXml(response.data);
-    return r;
-  }
-
 }
