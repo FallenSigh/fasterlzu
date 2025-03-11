@@ -85,7 +85,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       return b.jc!.compareTo(a.jc!);
     });
 
-    updateWidgetData(todayCourses.toList());
+    updateWidgetData(onGoingCourses.toList());
 
     return Scaffold(
       body: SingleChildScrollView(
