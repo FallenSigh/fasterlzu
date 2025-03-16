@@ -84,7 +84,9 @@ class ScheduleNotifier extends StateNotifier<ScheduleState> {
 
   Future<void> loadScheduleCurrentWeek() async {
     try {
+      await refreshXlxx();
       int week = int.parse(state.xlxx!.dqrqszzc!);
+      log.t('cw: $week');
       final cachedSchedule = await _cachedRepository.getSchedule(week);
       if (cachedSchedule != null) {
         state = state.copyWith(scheduleCurrentWeek: cachedSchedule);
