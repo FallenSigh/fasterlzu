@@ -27,6 +27,8 @@
     ```
 
 4. 构建release版请自行添加签名密钥
-
+   ```
+   flutter build apk --split-per-abi --obfuscate  --split-debug-info=/build/symbols
+   ```
 ## Images 🖼️
 <img src=images/img.png width=600>
