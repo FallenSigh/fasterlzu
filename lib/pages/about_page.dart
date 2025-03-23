@@ -1,7 +1,8 @@
+import 'package:fasterlzu/app_config.dart';
+import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({super.key});
@@ -12,7 +13,6 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   late Future<PackageInfo> _packageInfo;
-  static const String repo = 'https://github.com/fallensigh/fasterlzu';
   static const String what_can_i_say = '开发 FasterLZU 的初衷是为了解决我在使用兰州大学官方App时遇到的两个痛点：'
       '\n1. 课表加载速度过慢'
       '\n2. 校园卡界面响应迟缓'
@@ -66,9 +66,9 @@ class _AboutPageState extends State<AboutPage> {
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
-                      onTap: () => _launchURL(repo),
+                      onTap: () => _launchURL(AppConfig.repoUrl),
                       child: const Text(
-                        repo,
+                        AppConfig.repoUrl,
                         style: TextStyle(fontSize: 16, color: Colors.blue),
                       ),
                     ),
@@ -93,10 +93,11 @@ class _AboutPageState extends State<AboutPage> {
 
   // 打开链接
   void _launchURL(String url) async {
-    if (await canLaunchUrlString(url)) {
-      await launchUrlString(url);
-    } else {
-      throw '无法打开链接: $url';
+    final uri = Uri.parse(url);
+    try {
+      launchUrl(uri);
+    } catch (e) {
+      log.e('unable to launchUrl: $url');
     }
   }
 }
