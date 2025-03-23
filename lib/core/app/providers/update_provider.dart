@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:fasterlzu/app_config.dart';
 import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,7 +55,6 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
   UpdateNotifier() : super(UpdateState());
 
   final _dio = Dio();
-  final _githubApiUrl = 'https://api.github.com/repos/fallensigh/fasterlzu/releases/latest';
 
   Future<void> checkForUpdates(BuildContext context) async {
     try {
@@ -62,10 +62,10 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
       final packageInfo = await PackageInfo.fromPlatform();
       final currentVersion = Version.parse(packageInfo.version);
 
-      final response = await _dio.get(_githubApiUrl);
+      final response = await _dio.get(AppConfig.githubApiUrl);
       final data = response.data;
       final latestVersion = Version.parse(data['tag_name'].toString().replaceAll('v', ''));
-     
+
       if (latestVersion > currentVersion) {
         String? apkAssetUrl;
         for (final asset in data['assets']) {

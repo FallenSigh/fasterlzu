@@ -4,6 +4,8 @@ class AppConfig {
 
   static const String appName = 'FasterLZU';
   static const String repoUrl = 'https://github.com/fallensigh/fasterlzu';
+  static const String githubApiUrl = 'https://api.github.com/repos/fallensigh/fasterlzu/releases/latest';
+  static const String giteeApiUrl = 'https://gitee.com/api/v5/repos/fallensigh/fasterlzu/releases/latest';
 
   static const String appServiceBaseUrl = 'https://appservice.lzu.edu.cn';
   static const String appBaseUrl = 'http://app.lzu.edu.cn:8080';
