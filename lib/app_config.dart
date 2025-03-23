@@ -3,6 +3,8 @@ class AppConfig {
   static const String md5Key = 'ok15we1@oid8x5afd@';
 
   static const String appName = 'FasterLZU';
+  static const String repoUrl = 'https://github.com/fallensigh/fasterlzu';
+
   static const String appServiceBaseUrl = 'https://appservice.lzu.edu.cn';
   static const String appBaseUrl = 'http://app.lzu.edu.cn:8080';
 
