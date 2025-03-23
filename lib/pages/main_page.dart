@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:fasterlzu/app_config.dart';
 import 'package:fasterlzu/core/app/providers/update_provider.dart';
-import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/providers/schedule_provider.dart';
 import 'package:flutter/material.dart';

@@ -1,13 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:fasterlzu/app_config.dart';
 import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
@@ -58,14 +55,16 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
 
   Future<void> checkForUpdates(BuildContext context) async {
     try {
+      log.t('checking updates');
       state = state.copyWith(isChecking: true);
       final packageInfo = await PackageInfo.fromPlatform();
       final currentVersion = Version.parse(packageInfo.version);
 
-      final response = await _dio.get(AppConfig.githubApiUrl);
+      final response = await _dio.get(AppConfig.giteeRepoUrl);
       final data = response.data;
       final latestVersion = Version.parse(data['tag_name'].toString().replaceAll('v', ''));
 
+      log.d('latest: $latestVersion, curr: $currentVersion');
       if (latestVersion > currentVersion) {
         String? apkAssetUrl;
         for (final asset in data['assets']) {
@@ -111,11 +110,14 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => context.pop(),
             child: const Text('稍后再说'),
           ),
           TextButton(
-            onPressed: () => _startDownload(context),
+            onPressed: () {
+              launchUrl(Uri.parse(AppConfig.giteeRepoUrl + '/releases/latest'));
+              context.pop();
+              },
             child: const Text('立即更新'),
           ),
         ],
@@ -123,41 +125,5 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
     );
   }
 
-  Future<void> _startDownload(BuildContext context) async {
-    try {
-      state = state.copyWith(isDownloading: true);
-      final dir = await getExternalStorageDirectory();
-      if (dir == null) return;
 
-      final savePath = '${dir.path}/fasterlzu_update.apk';
-      await _dio.download(
-        state.downloadUrl!,
-        savePath,
-        onReceiveProgress: (received, total) {
-          if (total != -1) {
-            state = state.copyWith(
-              downloadProgress: received / total,
-            );
-          }
-        },
-      );
-
-      if (Platform.isAndroid) {
-        final uri = Uri.file(savePath);
-        await launchUrl(
-          uri,
-          mode: LaunchMode.externalApplication,
-        );
-      }
-    } catch (e) {
-      log.e('Error downloading update: $e');
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('下载更新失败，请稍后重试')),
-        );
-      }
-    } finally {
-      state = state.copyWith(isDownloading: false);
-    }
-  }
 }

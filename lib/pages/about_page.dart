@@ -66,9 +66,9 @@ class _AboutPageState extends State<AboutPage> {
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
-                      onTap: () => _launchURL(AppConfig.repoUrl),
+                      onTap: () => _launchURL(AppConfig.githubRepoUrl),
                       child: const Text(
-                        AppConfig.repoUrl,
+                        AppConfig.githubRepoUrl,
                         style: TextStyle(fontSize: 16, color: Colors.blue),
                       ),
                     ),

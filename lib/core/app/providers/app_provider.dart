@@ -25,7 +25,7 @@ class AppProvider extends StateNotifier<AppState> {
 
   Future<void> refresh() async {
     final apps = await _appRepository.getApps();
-    if (apps != null) {
+    if (apps != null && mounted) {
       state = AppState.copyWith(apps: apps);
     }
   }

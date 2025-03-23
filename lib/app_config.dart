@@ -3,7 +3,8 @@ class AppConfig {
   static const String md5Key = 'ok15we1@oid8x5afd@';
 
   static const String appName = 'FasterLZU';
-  static const String repoUrl = 'https://github.com/fallensigh/fasterlzu';
+  static const String githubRepoUrl = 'https://github.com/fallensigh/fasterlzu';
+  static const String giteeRepoUrl = 'https://gitee.com/fallensigh/fasterlzu';
   static const String githubApiUrl = 'https://api.github.com/repos/fallensigh/fasterlzu/releases/latest';
   static const String giteeApiUrl = 'https://gitee.com/api/v5/repos/fallensigh/fasterlzu/releases/latest';
 
