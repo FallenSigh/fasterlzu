@@ -60,8 +60,9 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
       final packageInfo = await PackageInfo.fromPlatform();
       final currentVersion = Version.parse(packageInfo.version);
 
-      final response = await _dio.get(AppConfig.giteeRepoUrl);
+      final response = await _dio.get(AppConfig.giteeApiUrl);
       final data = response.data;
+
       final latestVersion = Version.parse(data['tag_name'].toString().replaceAll('v', ''));
 
       log.d('latest: $latestVersion, curr: $currentVersion');
