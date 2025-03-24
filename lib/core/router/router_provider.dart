@@ -1,3 +1,4 @@
+import 'package:fasterlzu/pages/about_page.dart';
 import 'package:fasterlzu/pages/card_page.dart';
 import 'package:fasterlzu/pages/home_page.dart';
 import 'package:fasterlzu/pages/login_page.dart';
@@ -29,6 +30,10 @@ final routerProvider = Provider<GoRouter>((ref){
       GoRoute(
           path: '/webview',
           builder: (context, state) => WebViewPage()
+      ),
+      GoRoute(
+          path: '/about',
+          builder: (context, state) => AboutPage()
       )
     ]
   );
