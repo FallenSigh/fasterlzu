@@ -6,7 +6,7 @@
 ## Features ✨
 - 课表 📅 [√]
 - 校园卡 🎫 [√]
-- 桌面小组件 🖥️ [√]
+- 桌面小组件 🖥️ [乄]
 - 其他服务功能 [乄]
 
 ## Build
@@ -30,5 +30,11 @@
    ```
    flutter build apk --split-per-abi --obfuscate  --split-debug-info=/build/symbols
    ```
+
+## Bugs
+
+- 支付宝支付无法调整
+- 部分app无法认证
+
 ## Images 🖼️
-<img src=images/img.png width=600>
+<img src=images/img.jpg width=600>
