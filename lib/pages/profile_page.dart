@@ -88,7 +88,7 @@ class ProfilePage extends ConsumerWidget {
           title: const Text('设置'),
           trailing: const Icon(Icons.chevron_right),
           onTap: () {
-
+            context.push('/settings');
           },
         ),
         const Divider(),

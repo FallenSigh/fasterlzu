@@ -3,15 +3,17 @@ import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fasterlzu/core/updater/update_provider.dart';
 
-class AboutPage extends StatefulWidget {
+class AboutPage extends ConsumerStatefulWidget {
   const AboutPage({super.key});
 
   @override
-  _AboutPageState createState() => _AboutPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AboutPageState();
 }
 
-class _AboutPageState extends State<AboutPage> {
+class _AboutPageState extends ConsumerState<AboutPage> {
   late Future<PackageInfo> _packageInfo;
   static const String what_can_i_say = '开发 FasterLZU 的初衷是为了解决我在使用兰州大学官方App时遇到的两个痛点：'
       '\n1. 课表加载速度过慢'
@@ -59,6 +61,13 @@ class _AboutPageState extends State<AboutPage> {
                     const Text(
                       what_can_i_say,
                       style: TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        ref.read(updateProvider.notifier).checkForUpdates(context);
+                      },
+                      child: const Text('检查更新'),
                     ),
                     const SizedBox(height: 16),
                     const Text(
