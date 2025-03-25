@@ -3,6 +3,7 @@ import 'package:fasterlzu/pages/card_page.dart';
 import 'package:fasterlzu/pages/home_page.dart';
 import 'package:fasterlzu/pages/login_page.dart';
 import 'package:fasterlzu/pages/schedule_page.dart';
+import 'package:fasterlzu/pages/settings_page.dart';
 import 'package:fasterlzu/pages/webview_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -34,6 +35,10 @@ final routerProvider = Provider<GoRouter>((ref){
       GoRoute(
           path: '/about',
           builder: (context, state) => AboutPage()
+      ),
+      GoRoute(
+          path: '/settings',
+          builder: (context, state) => SettingsPage()
       )
     ]
   );
