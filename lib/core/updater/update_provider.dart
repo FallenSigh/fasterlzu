@@ -4,7 +4,6 @@ import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/settings/models/settings_model.dart';
 import 'package:fasterlzu/core/settings/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_update/flutter_app_update.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -20,16 +19,12 @@ class UpdateState {
   final String? latestVersion;
   final String? downloadUrl;
   final String? releaseNotes;
-  final double downloadProgress;
-  final bool isDownloading;
 
   UpdateState({
     this.isChecking = false,
     this.latestVersion,
     this.downloadUrl,
     this.releaseNotes,
-    this.downloadProgress = 0.0,
-    this.isDownloading = false,
   });
 
   UpdateState copyWith({
@@ -37,16 +32,12 @@ class UpdateState {
     String? latestVersion,
     String? downloadUrl,
     String? releaseNotes,
-    double? downloadProgress,
-    bool? isDownloading,
   }) {
     return UpdateState(
       isChecking: isChecking ?? this.isChecking,
       latestVersion: latestVersion ?? this.latestVersion,
       downloadUrl: downloadUrl ?? this.downloadUrl,
       releaseNotes: releaseNotes ?? this.releaseNotes,
-      downloadProgress: downloadProgress ?? this.downloadProgress,
-      isDownloading: isDownloading ?? this.isDownloading,
     );
   }
 }
@@ -71,20 +62,13 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
 
       Response? response;
 
-      String url1 = AppConfig.githubApiUrl;
-      String url2 = AppConfig.giteeApiUrl;
-      if (_settings.preferGitee) {
-        (url1, url2) = (url2, url1);
-      }
-
       try {
-        response = await _dio.get(url1);
+        response = await _dio.get(AppConfig.githubApiUrl);
       } catch (e) {
-        log.w('$url1请求失败，尝试使用$url2: $e');
-        response = await _dio.get(url2);
+        log.w('github API请求失败: $e');
       }
 
-      final data = response.data;
+      final data = response!.data;
       final latestVersion = Version.parse(
         data['tag_name'].toString().replaceAll('v', ''),
       );
@@ -107,16 +91,8 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
             releaseNotes: data['body'],
             isChecking: false,
           );
-
-          log.d('start download ${state.downloadUrl}');
-          UpdateModel model = UpdateModel(
-            state.downloadUrl ?? '',
-            'fasterlzu.apk',
-            'ic_launcher',
-            '',
-          );
-          log.d('installing');
-          AzhonAppUpdate.update(model);
+          log.d('showing dialog');
+          _showUpdateDialog(context);
         }
       } else {
         state = state.copyWith(isChecking: false);
@@ -143,5 +119,52 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
     }
   }
 
- 
+  void _showUpdateDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('发现新版本'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('最新版本: ${state.latestVersion}'),
+                  const SizedBox(height: 8),
+                  const Text(
+                    '更新内容:',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    state.releaseNotes ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+                TextButton(
+                  onPressed: () => context.pop(),
+                  child: const Text('稍后再说'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    final url = state.downloadUrl;
+                    if (url != null) {
+                      launchUrl(Uri.parse(url));
+                    } else {
+                      launchUrl(
+                        Uri.parse(AppConfig.githubRepoUrl + '/releases/latest'),
+                      );
+                    }
+                  },
+                  child: const Text('前往Github下载'),
+                ),
+              ],
+          ),
+    );
+  }
 }

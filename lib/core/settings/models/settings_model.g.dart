@@ -7,13 +7,7 @@ part of 'settings_model.dart';
 // **************************************************************************
 
 _$SettingsImpl _$$SettingsImplFromJson(Map<String, dynamic> json) =>
-    _$SettingsImpl(
-      autoCheckUpdate: json['autoCheckUpdate'] as bool? ?? true,
-      preferGitee: json['preferGitee'] as bool? ?? true,
-    );
+    _$SettingsImpl(autoCheckUpdate: json['autoCheckUpdate'] as bool? ?? true);
 
 Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) =>
-    <String, dynamic>{
-      'autoCheckUpdate': instance.autoCheckUpdate,
-      'preferGitee': instance.preferGitee,
-    };
+    <String, dynamic>{'autoCheckUpdate': instance.autoCheckUpdate};

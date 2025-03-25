@@ -28,9 +28,4 @@ class SettingsNotifier extends StateNotifier<Settings> {
     final newSettings = state.copyWith(autoCheckUpdate: !state.autoCheckUpdate);
     await updateSettings(newSettings);
   }
-
-  Future<void> togglePreferGitee() async {
-    final newSettings = state.copyWith(preferGitee: !state.preferGitee);
-    await updateSettings(newSettings);
-  }
 }

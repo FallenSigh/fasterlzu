@@ -24,14 +24,6 @@ class SettingsPage extends ConsumerWidget {
               onChanged: (value) => settingsNotifier.toggleAutoCheckUpdate(),
             ),
           ),
-          ListTile(
-            title: const Text('优先使用GitHub源'),
-            subtitle: const Text('切换更新源（GitHub/Gitee）'),
-            trailing: Switch(
-              value: settings.preferGitee,
-              onChanged: (value) => settingsNotifier.togglePreferGitee(),
-            ),
-          ),
         ],
       ),
     );

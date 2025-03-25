@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fasterlzu/app_config.dart';
+import 'package:fasterlzu/core/settings/providers/settings_provider.dart';
 import 'package:fasterlzu/core/updater/update_provider.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/providers/schedule_provider.dart';
@@ -21,7 +22,9 @@ class _MainPageState extends ConsumerState<MainPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      ref.read(updateProvider.notifier).checkForUpdates(context);
+      if (ref.read(settingsProvider).autoCheckUpdate) {
+        ref.read(updateProvider.notifier).checkForUpdates(context);
+      }
     });
   }
   final List<String> weekdays = [

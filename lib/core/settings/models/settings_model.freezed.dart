@@ -22,7 +22,6 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Settings {
   bool get autoCheckUpdate => throw _privateConstructorUsedError;
-  bool get preferGitee => throw _privateConstructorUsedError;
 
   /// Serializes this Settings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +38,7 @@ abstract class $SettingsCopyWith<$Res> {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
       _$SettingsCopyWithImpl<$Res, Settings>;
   @useResult
-  $Res call({bool autoCheckUpdate, bool preferGitee});
+  $Res call({bool autoCheckUpdate});
 }
 
 /// @nodoc
@@ -56,18 +55,13 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? autoCheckUpdate = null, Object? preferGitee = null}) {
+  $Res call({Object? autoCheckUpdate = null}) {
     return _then(
       _value.copyWith(
             autoCheckUpdate:
                 null == autoCheckUpdate
                     ? _value.autoCheckUpdate
                     : autoCheckUpdate // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            preferGitee:
-                null == preferGitee
-                    ? _value.preferGitee
-                    : preferGitee // ignore: cast_nullable_to_non_nullable
                         as bool,
           )
           as $Val,
@@ -84,7 +78,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
   ) = __$$SettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool autoCheckUpdate, bool preferGitee});
+  $Res call({bool autoCheckUpdate});
 }
 
 /// @nodoc
@@ -100,18 +94,13 @@ class __$$SettingsImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? autoCheckUpdate = null, Object? preferGitee = null}) {
+  $Res call({Object? autoCheckUpdate = null}) {
     return _then(
       _$SettingsImpl(
         autoCheckUpdate:
             null == autoCheckUpdate
                 ? _value.autoCheckUpdate
                 : autoCheckUpdate // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        preferGitee:
-            null == preferGitee
-                ? _value.preferGitee
-                : preferGitee // ignore: cast_nullable_to_non_nullable
                     as bool,
       ),
     );
@@ -121,7 +110,7 @@ class __$$SettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SettingsImpl implements _Settings {
-  const _$SettingsImpl({this.autoCheckUpdate = true, this.preferGitee = true});
+  const _$SettingsImpl({this.autoCheckUpdate = true});
 
   factory _$SettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SettingsImplFromJson(json);
@@ -129,13 +118,10 @@ class _$SettingsImpl implements _Settings {
   @override
   @JsonKey()
   final bool autoCheckUpdate;
-  @override
-  @JsonKey()
-  final bool preferGitee;
 
   @override
   String toString() {
-    return 'Settings(autoCheckUpdate: $autoCheckUpdate, preferGitee: $preferGitee)';
+    return 'Settings(autoCheckUpdate: $autoCheckUpdate)';
   }
 
   @override
@@ -144,14 +130,12 @@ class _$SettingsImpl implements _Settings {
         (other.runtimeType == runtimeType &&
             other is _$SettingsImpl &&
             (identical(other.autoCheckUpdate, autoCheckUpdate) ||
-                other.autoCheckUpdate == autoCheckUpdate) &&
-            (identical(other.preferGitee, preferGitee) ||
-                other.preferGitee == preferGitee));
+                other.autoCheckUpdate == autoCheckUpdate));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, autoCheckUpdate, preferGitee);
+  int get hashCode => Object.hash(runtimeType, autoCheckUpdate);
 
   /// Create a copy of Settings
   /// with the given fields replaced by the non-null parameter values.
@@ -168,18 +152,13 @@ class _$SettingsImpl implements _Settings {
 }
 
 abstract class _Settings implements Settings {
-  const factory _Settings({
-    final bool autoCheckUpdate,
-    final bool preferGitee,
-  }) = _$SettingsImpl;
+  const factory _Settings({final bool autoCheckUpdate}) = _$SettingsImpl;
 
   factory _Settings.fromJson(Map<String, dynamic> json) =
       _$SettingsImpl.fromJson;
 
   @override
   bool get autoCheckUpdate;
-  @override
-  bool get preferGitee;
 
   /// Create a copy of Settings
   /// with the given fields replaced by the non-null parameter values.
