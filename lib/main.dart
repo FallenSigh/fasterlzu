@@ -35,16 +35,8 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    _checkAutoUpdate();
   }
-
-  Future<void> _checkAutoUpdate() async {
-    final settings = await ref.read(settingsStorageProvider).getSettings();
-    if (settings.autoCheckUpdate) {
-      ref.read(updateProvider.notifier).checkForUpdates(context, showErrorDialog: false);
-    }
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
