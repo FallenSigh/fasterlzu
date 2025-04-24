@@ -17,13 +17,13 @@ class AppConfig {
   static Map<String, String> appServiceApis = {
     'login': '/api/eusp-unify-terminal/app-user/login',
     'logout': '/api/eusp-unify-terminal/app-user/logout',
-    'schedule': '/apigw/lzu-teaching-research/kcb/getZdyCourse',
-    'xlxx': '/apigw/lzu-teaching-research/kcb/getXlxx',
+    'schedule': '/api/lzu-teaching-research/kcb/getZdyCourse',
+    'xlxx': '/api/lzu-teaching-research/kcb/getXlxx',
     'st': '/api/eusp-unify-terminal/app-user/getSt',
     'userInfo': '/api/eusp-unify-terminal/app-user/userInfo',
     'userImg': '/api/eusp-unify-terminal/app-user/userImg',
-    'addSchedule': '/apigw/lzu-teaching-research/kcb/addorUpdateZdyKc',
-    'delSchedule': '/apigw/lzu-teaching-research/kcb/deleZdyKc',
+    'addSchedule': '/api/lzu-teaching-research/kcb/addorUpdateZdyKc',
+    'delSchedule': '/api/lzu-teaching-research/kcb/deleZdyKc',
     'getSt': '/api/eusp-unify-terminal/app-user/getSt',
     'getGrszsyyy': '/api/eusp-terminal-management/syyysz/v2/getGrszsyyy',
     'getServiceInfoDetail': '/api/eusp-terminal-management/api/v2/getServiceInfoDetailByTerminalRole'
