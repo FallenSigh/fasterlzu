@@ -31,6 +31,7 @@ class CardNotifier extends StateNotifier<AsyncValue<GetWalletMoneyResponse?>> {
   Future<void> refresh() async {
     state = const AsyncValue.loading();
     try {
+      await _repository.refresh();
       await _repository.getAccInfo();
       final walletInfo = await _repository.getWalletMoney();
       state = AsyncValue.data(walletInfo);
