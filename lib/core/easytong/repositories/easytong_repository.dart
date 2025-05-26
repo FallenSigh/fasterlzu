@@ -75,6 +75,10 @@ class EasytongRepository {
     return accNum;
   }
 
+  Future<void> refresh() async {
+    exchangeEtToken();
+  }
+
   Future<GetWalletMoneyResponse?> getWalletMoney() async {
     final token = await getEtToken();
     if (token == null) return null;
