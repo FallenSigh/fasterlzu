@@ -364,7 +364,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
   }
 
   Widget _buildWeekHeader() {
-    final weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+    final weekdays = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
     final dates = _getWeekDates();
     final now = DateTime.now();
     final today = '${now.month}/${now.day}';
@@ -410,7 +410,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
   }
 
   Widget _buildScheduleGrid(List<CourseInfo> schedule) {
-    final weekdays = [7, 1, 2, 3, 4, 5, 6];
+    final weekdays = [1, 2, 3, 4, 5, 6, 7];
     return Row(
       children: [
         _buildTimeColumn(),
@@ -664,21 +664,41 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
     return '第${sections.join(", ")}节';
   }
 
-  Color _getClassColor(String kch) {
-    final colors = [
-      Colors.blue[100]!,
-      Colors.green[100]!,
-      Colors.orange[100]!,
-      Colors.purple[100]!,
-      Colors.pink[100]!,
-      Colors.teal[100]!,
-      Colors.amber[100]!,
-      Colors.indigo[100]!,
-    ];
+  final Map<String, Color> _classColorMap = {};
 
-    int hashCode = kch.hashCode.abs();
-    return colors[hashCode % colors.length];
+  Color _getClassColor(String kch) {
+    if (_classColorMap.containsKey(kch)) {
+      return _classColorMap[kch]!;
+    }
+    // 颜色池（>20个）
+    final colors = [
+      Colors.blue,
+      Colors.green,
+      Colors.orange,
+      Colors.purple,
+      Colors.pink,
+      Colors.teal,
+      Colors.amber,
+      Colors.indigo,
+      Colors.red,
+      Colors.brown,
+      Colors.cyan,
+      Colors.lime,
+      Colors.lightBlue,
+      Colors.deepOrange,
+      Colors.deepPurple,
+      Colors.yellow,
+      Colors.grey,
+      Colors.blueGrey,
+      Colors.lightGreen,
+      Colors.indigoAccent,
+    ].map((c) => c[200]!).toList();
+
+    // 按已有数量取颜色
+    _classColorMap[kch] = colors[_classColorMap.length % colors.length];
+    return _classColorMap[kch]!;
   }
+
 
   String _formatCurrentDate() {
     final now = DateTime.now();
