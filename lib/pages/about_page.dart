@@ -40,8 +40,8 @@ class _AboutPageState extends ConsumerState<AboutPage> {
               PackageInfo packageInfo = snapshot.data!;
               return Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: ListView(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       'FasterLZU',
