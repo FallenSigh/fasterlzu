@@ -67,7 +67,7 @@ class _ServicePageState extends ConsumerState<ServicePage> {
     final authRepository = ref.read(authRepositoryProvider);
     // final loginToken = await authRepository.loginToken;
     // final gatewayToken = await authRepository.gatewayToken;
-    final st = await authRepository.getSt();
+    final st = await authRepository.getSt(service.service_info_id!);
     final etToken = await ref.read(easytongRepositoryProvider).getEtToken();
     final personID = authRepository.currentUser;
     
