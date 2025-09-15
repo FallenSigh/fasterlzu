@@ -81,7 +81,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                         style: TextStyle(fontSize: 16, color: Colors.blue),
                       ),
                     ),
-                    const Spacer(),
+                    const SizedBox(height: 24),
                     const Text(
                       'CopyRight 2025 FallenSigh. 保留所有权利。',
                       style: TextStyle(fontSize: 14, color: Colors.grey),
