@@ -131,11 +131,11 @@ class AuthRepository {
     return res;
   }
 
-  Future<StResponse> refreshSt() async {
+  Future<StResponse> refreshSt([String service_id = '']) async {
     final param = {
       'loginToken': await loginToken,
-      'serviceId': '',
-      'service': 'https://gateway.lzu.edu.cn:9000/auth/token/logout'
+      'serviceId': service_id,
+      'service': ''
     };
 
     final response = await _dio.get(AppConfig.appServiceApis['getSt']!,
@@ -148,9 +148,9 @@ class AuthRepository {
     return res;
   }
 
-  Future<String?> getSt() async {
+  Future<String?> getSt([String service_id = '']) async {
     try {
-      final res = await refreshSt();
+      final res = await refreshSt(service_id);
       if (res.code == 1) return res.data;
     } catch (e) {
       log.e(e);
