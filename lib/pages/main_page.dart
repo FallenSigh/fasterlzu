@@ -21,11 +21,43 @@ class _MainPageState extends ConsumerState<MainPage> {
   @override
   void initState() {
     super.initState();
+    // 课表数据变化时同步桌面小组件(替代原先在 build 中的每次调用)
+    // 注意:initState 中必须用 listenManual(build 之外 ref.listen 会断言失败)
+    ref.listenManual<ScheduleState>(scheduleProvider, (previous, next) {
+      if (next.scheduleCurrentWeek != null) {
+        updateWidgetData(_computeOngoingCourses(next).toList());
+      }
+    });
     Future.microtask(() {
       if (ref.read(settingsProvider).autoCheckUpdate) {
         AutoUpdater.checkForUpdatesSilent();
       }
     });
+  }
+
+  /// 计算"当前正在上/即将上"的课程(从 schedule 状态派生)
+  List<CourseInfo> _computeOngoingCourses(ScheduleState state) {
+    final todayCourses = (state.scheduleCurrentWeek ?? [])
+        .where((c) => int.parse(c.skxql ?? '0') == DateTime.now().weekday);
+
+    final onGoingCourses = todayCourses.where((c) {
+      DateTime now = DateTime.now();
+      final classTime = _jcToEndTime(c.jc ?? '') ?? '';
+
+      DateTime targetTime = DateTime(
+          now.year,
+          now.month,
+          now.day,
+          int.parse(classTime.split(":")[0]),
+          int.parse(classTime.split(":")[1]));
+
+      return !targetTime.isBefore(now);
+    }).toList();
+
+    onGoingCourses.sort((CourseInfo a, CourseInfo b) {
+      return b.jc!.compareTo(a.jc!);
+    });
+    return onGoingCourses;
   }
   final List<String> weekdays = [
     'Monday',
@@ -75,28 +107,7 @@ class _MainPageState extends ConsumerState<MainPage> {
   @override
   Widget build(BuildContext context) {
     final scheduleState = ref.watch(scheduleProvider);
-    final todayCourses = (scheduleState.scheduleCurrentWeek ?? [])
-        .where((c) => int.parse(c.skxql ?? '0') == DateTime.now().weekday);
-
-    final onGoingCourses = todayCourses.where((c) {
-      DateTime now = DateTime.now();
-      final classTime = _jcToEndTime(c.jc ?? '') ?? '';
-
-      DateTime targetTime = DateTime(
-          now.year,
-          now.month,
-          now.day,
-          int.parse(classTime.split(":")[0]),
-          int.parse(classTime.split(":")[1]));
-
-      return !targetTime.isBefore(now);
-    }).toList();
-
-    onGoingCourses.sort((CourseInfo a, CourseInfo b) {
-      return b.jc!.compareTo(a.jc!);
-    });
-
-    updateWidgetData(onGoingCourses.toList());
+    final onGoingCourses = _computeOngoingCourses(scheduleState);
 
     return Scaffold(
       body: SingleChildScrollView(

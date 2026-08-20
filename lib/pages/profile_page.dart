@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:fasterlzu/core/app/providers/app_provider.dart';
 import 'package:fasterlzu/core/auth/providers/auth_provider.dart';
 import 'package:fasterlzu/core/auth/providers/auth_state.dart';
 import 'package:fasterlzu/core/auth/providers/user_provider.dart';
+import 'package:fasterlzu/core/easytong/providers/card_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -157,7 +159,10 @@ class ProfilePage extends ConsumerWidget {
     );
 
     if (result == true) {
-      ref.read(authStateProvider.notifier).logout();
+      await ref.read(authStateProvider.notifier).logout();
+      // 登出收敛:清理应用列表与校园卡缓存,避免串账号
+      ref.read(appProvider.notifier).clear();
+      ref.read(cardProvider.notifier).clear();
     }
   }
 }

@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fasterlzu/app_config.dart';
 import 'package:fasterlzu/core/api/appservice_client.dart';
-import 'package:fasterlzu/core/auth/providers/auth_provider.dart';
-import 'package:fasterlzu/core/auth/providers/auth_state.dart';
 import 'package:fasterlzu/core/auth/repositories/auth_repository.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/storage/schedule_storage.dart';
@@ -10,24 +8,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final scheduleRepositoryProvider = Provider<ApiScheduleRepository>((ref) {
   return ApiScheduleRepository(
-    authState: ref.watch(authStateProvider),
     dio: ref.watch(appServiceDioProvider),
     authRepository: ref.watch(authRepositoryProvider),
   );
 });
 
 class ApiScheduleRepository {
-  // 保证auth在schedule之前加载
-  final AuthState _authState;
   final Dio _dio;
   final AuthRepository _authRepository;
 
   ApiScheduleRepository({
-    required AuthState authState,
     required Dio dio,
     required AuthRepository authRepository,
-  }) : _authState = authState,
-       _dio = dio,
+  }) : _dio = dio,
        _authRepository = authRepository;
 
   Future<ScheduleResponse> getSchedule(int zc) async {

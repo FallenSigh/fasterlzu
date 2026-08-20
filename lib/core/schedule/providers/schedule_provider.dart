@@ -1,3 +1,4 @@
+import 'package:fasterlzu/core/auth/repositories/auth_repository.dart';
 import 'package:fasterlzu/core/logger/logger.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/repositories/schedule_repository.dart';
@@ -7,6 +8,7 @@ final scheduleProvider = StateNotifierProvider<ScheduleNotifier, ScheduleState>(
   return ScheduleNotifier(
     apiRepository: ref.watch(scheduleRepositoryProvider),
     cachedRepository: ref.watch(cachedScheduleRepositoryProvider),
+    authRepository: ref.watch(authRepositoryProvider),
   );
 });
 
@@ -53,16 +55,26 @@ class ScheduleState {
 class ScheduleNotifier extends StateNotifier<ScheduleState> {
   final ApiScheduleRepository _apiRepository;
   final CachedScheduleRepository _cachedRepository;
+  final AuthRepository _authRepository;
 
   ScheduleNotifier({
     required ApiScheduleRepository apiRepository,
     required CachedScheduleRepository cachedRepository,
+    required AuthRepository authRepository,
   })  : _apiRepository = apiRepository,
         _cachedRepository = cachedRepository,
+        _authRepository = authRepository,
         super(ScheduleState()) { init(); }
 
   Future<void> init() async {
     log.t("[ScheduleNotifier] initing");
+    // 未登录时不加载课表(避免无效网络请求)
+    final token = await _authRepository.gatewayToken;
+    if (token == null || token.isEmpty) {
+      log.t("[ScheduleNotifier] 未登录,跳过课表加载");
+      state = state.copyWith(isLoading: false);
+      return;
+    }
     state = state.copyWith(isLoading: true);
     try {
       // 先尝试获取缓存的学期信息
@@ -84,7 +96,8 @@ class ScheduleNotifier extends StateNotifier<ScheduleState> {
 
   Future<void> loadScheduleCurrentWeek() async {
     try {
-      await refreshXlxx();
+      // xlxx 已在 init 中加载(缓存或 refreshXlxx),无需重复刷新
+      if (state.xlxx == null || state.xlxx!.dqrqszzc == null) return;
       int week = int.parse(state.xlxx!.dqrqszzc!);
       log.t('cw: $week');
       final cachedSchedule = await _cachedRepository.getSchedule(week);

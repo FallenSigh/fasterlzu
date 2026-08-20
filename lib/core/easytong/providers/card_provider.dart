@@ -48,4 +48,9 @@ class CardNotifier extends StateNotifier<AsyncValue<GetWalletMoneyResponse?>> {
   Future<GetOrderByCodeResponse?> getOrderByCode(String authNum) async {
     return await _repository.getOrderByCode(authNum);
   }
+
+  /// 登出时重置状态(easytong 持久化数据由 auth logout 的 userInfoStorage.clear() 清理)
+  void clear() {
+    state = const AsyncValue.loading();
+  }
 }
