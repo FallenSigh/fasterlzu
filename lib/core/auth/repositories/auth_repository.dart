@@ -24,9 +24,26 @@ class AuthRepository {
   final UserInfoStorage _userInfoStorage;
   String currentUser;
 
+  // 内存缓存 token,避免频繁读 secure storage(原生通道慢,getter 被高频调用)
+  String? _loginTokenCache;
+  String? _gatewayTokenCache;
+
   FlutterSecureStorage get storage => _storage;
-  Future<String?> get loginToken => _storage.read(key: '${currentUser}login_token');
-  Future<String?> get gatewayToken => _storage.read(key: '${currentUser}gateway_token');
+  Future<String?> get loginToken async {
+    final cached = _loginTokenCache;
+    if (cached != null) return cached;
+    final t = await _storage.read(key: '${currentUser}login_token');
+    _loginTokenCache = t;
+    return t;
+  }
+
+  Future<String?> get gatewayToken async {
+    final cached = _gatewayTokenCache;
+    if (cached != null) return cached;
+    final t = await _storage.read(key: '${currentUser}gateway_token');
+    _gatewayTokenCache = t;
+    return t;
+  }
 
   AuthRepository(
       {required Dio dio,
@@ -55,6 +72,8 @@ class AuthRepository {
       await _storage.write(
           key: '${username}gateway_token', value: res.data!.gateway_token);
       currentUser = username;
+      _loginTokenCache = res.data!.login_token;
+      _gatewayTokenCache = res.data!.gateway_token;
     }
 
     return res;
@@ -79,6 +98,8 @@ class AuthRepository {
           key: '${currentUser}login_token', value: res.data!.login_token);
       await _storage.write(
           key: '${currentUser}gateway_token', value: res.data!.gateway_token);
+      _loginTokenCache = res.data!.login_token;
+      _gatewayTokenCache = res.data!.gateway_token;
     }
 
     return res;
@@ -96,6 +117,8 @@ class AuthRepository {
     if (res.code == 1) {
       _storage.deleteAll();
       currentUser = '';
+      _loginTokenCache = null;
+      _gatewayTokenCache = null;
       _userInfoStorage.clear();
     }
 
