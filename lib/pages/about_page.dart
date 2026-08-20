@@ -15,10 +15,6 @@ class AboutPage extends ConsumerStatefulWidget {
 
 class _AboutPageState extends ConsumerState<AboutPage> {
   late Future<PackageInfo> _packageInfo;
-  static const String what_can_i_say = '开发 FasterLZU 的初衷是为了解决我在使用兰州大学官方App时遇到的两个痛点：'
-      '\n1. 课表加载速度过慢'
-      '\n2. 校园卡界面响应迟缓'
-      '\n我希望通过这款软件能够有效解决这些痛点，提升大家的使用体验。这也是我第一次开发移动端应用，因此在实现过程中可能存在一些不足之处。如果你发现任何问题，欢迎通过 GitHub 提交 Issues 或 Pull Requests，或者直接通过邮箱与我联系：fallensigh@gmail.com';
 
   @override
   void initState() {
@@ -51,16 +47,6 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                     Text(
                       '版本号: ${packageInfo.version}',
                       style: const TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      '开发者有话说',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      what_can_i_say,
-                      style: TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(
