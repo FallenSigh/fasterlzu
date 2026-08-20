@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fasterlzu/core/updater/update_provider.dart';
+import 'package:releasehub_updater/autoupdater.dart';
 
 class AboutPage extends ConsumerStatefulWidget {
   const AboutPage({super.key});
@@ -65,7 +65,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                     const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: () {
-                        ref.read(updateProvider.notifier).checkForUpdates(context);
+                        AutoUpdater.checkForUpdates();
                       },
                       child: const Text('检查更新'),
                     ),

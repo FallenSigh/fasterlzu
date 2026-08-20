@@ -7,9 +7,11 @@ import 'package:fasterlzu/pages/settings_page.dart';
 import 'package:fasterlzu/pages/webview_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:releasehub_updater/autoupdater.dart';
 
 final routerProvider = Provider<GoRouter>((ref){
   return GoRouter(
+    navigatorKey: AutoUpdater.navigatorKey,
     initialLocation: '/home',
     routes: [
       GoRoute(

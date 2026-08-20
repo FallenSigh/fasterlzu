@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:fasterlzu/app_config.dart';
 import 'package:fasterlzu/core/settings/providers/settings_provider.dart';
-import 'package:fasterlzu/core/updater/update_provider.dart';
 import 'package:fasterlzu/core/schedule/models/schedule_model.dart';
 import 'package:fasterlzu/core/schedule/providers/schedule_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_widget/home_widget.dart';
+import 'package:releasehub_updater/autoupdater.dart';
 
 class MainPage extends ConsumerStatefulWidget {
   const MainPage({super.key});
@@ -23,7 +23,7 @@ class _MainPageState extends ConsumerState<MainPage> {
     super.initState();
     Future.microtask(() {
       if (ref.read(settingsProvider).autoCheckUpdate) {
-        ref.read(updateProvider.notifier).checkForUpdates(context);
+        AutoUpdater.checkForUpdatesSilent();
       }
     });
   }
