@@ -63,36 +63,45 @@ class EasytongRepository {
 
   Future<String?> getEtToken() async {
     if (etToken == null) {
-      exchangeEtToken();
+      await exchangeEtToken();
     }
     return etToken;
   }
 
   Future<String?> getAccNum() async {
     if (accNum == null) {
-      exchangeEtToken();
+      await exchangeEtToken();
     }
     return accNum;
   }
 
   Future<void> refresh() async {
-    exchangeEtToken();
+    await exchangeEtToken();
   }
 
   Future<GetWalletMoneyResponse?> getWalletMoney() async {
     final token = await getEtToken();
     if (token == null) return null;
 
+    // 无 EPID 时先获取账户信息（对齐 HarmonyOS）
+    final epidRaw = await _storage.box.get('epid');
+    String? epid = epidRaw?.toString();
+    if (epid == null || epid.isEmpty) {
+      await getAccInfo();
+      final fresh = await _storage.box.get('epid');
+      epid = fresh?.toString();
+    }
+
     String time = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
     Map<String, String> data = {
       'AccNum': await getAccNum() ?? '',
-      'EPID': (await _storage.box.get('epid'))!,
+      'EPID': epid ?? '',
       'Time': time,
     };
 
-    final String sign = MD5Crypto.sign(data);
+    final String sign = MD5Crypto.sign(data, token);
     data['Sign'] = sign;
-    data['ContentType'] = 'application%2Fjson';
+    data['ContentType'] = 'application/json';
     String queryString = Uri(queryParameters: data).query;
     final response = await _dio.post(
       AppConfig.appApis['GetWalletMoney']!,
@@ -119,7 +128,7 @@ class EasytongRepository {
       'Time': time,
     };
 
-    final String sign = MD5Crypto.sign(data);
+    final String sign = MD5Crypto.sign(data, token);
     data['Sign'] = sign;
     data['ContentType'] = 'application/json';
     String queryString = Uri(queryParameters: data).query;
@@ -155,7 +164,7 @@ class EasytongRepository {
       'Time': time,
     };
 
-    final String sign = MD5Crypto.sign(data);
+    final String sign = MD5Crypto.sign(data, token);
     data['Sign'] = sign;
     data['ContentType'] = 'application/json';
     String queryString = Uri(queryParameters: data).query;
@@ -193,7 +202,7 @@ class EasytongRepository {
       'Time': time,
     };
 
-    final String sign = MD5Crypto.sign(data);
+    final String sign = MD5Crypto.sign(data, token);
     data['Sign'] = sign;
     data['ContentType'] = 'application/json';
     String queryString = Uri(queryParameters: data).query;
