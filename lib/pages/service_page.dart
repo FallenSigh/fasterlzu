@@ -1,5 +1,7 @@
 import 'package:fasterlzu/core/app/models/app_model.dart';
 import 'package:fasterlzu/core/app/providers/app_provider.dart';
+import 'package:fasterlzu/core/auth/providers/auth_provider.dart';
+import 'package:fasterlzu/core/auth/providers/auth_state.dart';
 import 'package:fasterlzu/core/auth/repositories/auth_repository.dart';
 import 'package:fasterlzu/core/easytong/repositories/easytong_repository.dart';
 import 'package:fasterlzu/core/webview/providers/webview_provider.dart';
@@ -14,34 +16,108 @@ class ServicePage extends ConsumerStatefulWidget {
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _ServicePageState();
-
 }
 
 class _ServicePageState extends ConsumerState<ServicePage> {
   Future<void> _refreshApps() async {
     ref.read(appProvider.notifier).refresh();
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authStateProvider);
     final appState = ref.watch(appProvider);
-    
-    if (appState.apps == null) return Scaffold();
 
-    final appTypes = appState.apps;
-    final allServices = appTypes!
-      .map((app) => app.service_infos ?? []) // 提取 service_infos，若为空则用空列表代替
-      .expand((infos) => infos) // 展开嵌套列表
-      .toList();
+    // 未登录:提示先登录(不请求网络、不展示缓存)
+    if (authState is! Authenticated) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('应用列表')),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.lock_outline, size: 48, color: Colors.grey.shade400),
+              const SizedBox(height: 12),
+              Text(
+                '请先登录后查看应用',
+                style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
+              ),
+              const SizedBox(height: 16),
+              FilledButton(
+                onPressed: () => context.push('/login'),
+                child: const Text('去登录'),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // 已登录但无数据:自动加载(缓存命中秒开,否则网络请求)
+    if (appState.apps == null && !appState.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          ref.read(appProvider.notifier).load();
+        }
+      });
+    }
+
+    if (appState.apps == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('应用列表'),
+          actions: [
+            IconButton(icon: const Icon(Icons.refresh), onPressed: _refreshApps),
+          ],
+        ),
+        body: Center(
+          child: appState.isLoading
+              ? const CircularProgressIndicator()
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.error_outline,
+                        size: 48, color: Colors.grey.shade400),
+                    const SizedBox(height: 12),
+                    const Text('加载失败,请检查网络',
+                        style: TextStyle(color: Colors.grey)),
+                    const SizedBox(height: 16),
+                    FilledButton(
+                      onPressed: _refreshApps,
+                      child: const Text('重试'),
+                    ),
+                  ],
+                ),
+        ),
+      );
+    }
+
+    final appTypes = appState.apps!;
+    final allServices = appTypes
+        .map((app) => app.service_infos ?? []) // 提取 service_infos，若为空则用空列表代替
+        .expand((infos) => infos) // 展开嵌套列表
+        .toList();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('应用列表'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () => _refreshApps(),
-          ),
+          if (appState.isLoading)
+            const Padding(
+              padding: EdgeInsets.only(right: 8),
+              child: Center(
+                child: SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: _refreshApps,
+            ),
         ],
       ),
       body: Padding(
@@ -70,10 +146,10 @@ class _ServicePageState extends ConsumerState<ServicePage> {
     final st = await authRepository.getSt(service.service_info_id!);
     final etToken = await ref.read(easytongRepositoryProvider).getEtToken();
     final personID = authRepository.currentUser;
-    
+
     ref.read(webViewControllerProvider.notifier).reset();
     final controller = ref.watch(webViewControllerProvider);
-    
+
     controller.setNavigationDelegate(NavigationDelegate(
       onPageStarted: (url) async {
         await controller.runJavaScript(
@@ -141,4 +217,3 @@ class _ServiceItem extends StatelessWidget {
     );
   }
 }
-
