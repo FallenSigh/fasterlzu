@@ -4,9 +4,12 @@ class AppConfig {
 
   static const String appName = 'FasterLZU';
   static const String githubRepoUrl = 'https://github.com/fallensigh/fasterlzu';
-  static const String giteeRepoUrl = 'https://gitee.com/fallensigh/fasterlzu';
-  static const String githubApiUrl = 'https://api.github.com/repos/fallensigh/fasterlzu/releases/latest';
-  static const String giteeApiUrl = 'https://gitee.com/api/v5/repos/fallensigh/fasterlzu/releases/latest';
+
+  // ---- ReleaseHub 自更新配置 ----
+  static const String releasehubBaseUrl = 'https://fasterlzu.fallensigh.top';
+  static const String releasehubProjectSlug = 'fasterlzu';
+  static const String releasehubChannel = 'stable';
+  static const String releasehubApiKey = 'REMOVED';
 
   static const String appServiceBaseUrl = 'https://appservice.lzu.edu.cn';
   static const String appBaseUrl = 'http://app.lzu.edu.cn:8080';
