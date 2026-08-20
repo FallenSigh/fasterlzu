@@ -5,4 +5,6 @@
     <!-- 其他路径（按需添加） -->
     <cache-path name="cache" path="." />
     <external-path name="external" path="." />
+    <external-path name="external_files" path="." />
+    <external-files-path name="external_files_path" path="." />
 </paths>
